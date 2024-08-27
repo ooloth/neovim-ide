@@ -37,8 +37,8 @@ return {
       go_out_plus = 'H',
       reset = '<BS>',
       show_help = '?',
-      synchronize = '<cr>',
-      -- synchronize = '=',
+      synchronize = '<C-y>',
+      -- synchronize = '<cr>',
       trim_left = '<',
       trim_right = '>',
     },
@@ -53,7 +53,6 @@ return {
       max_number = 2, -- Maximum number of windows to show side by side
       preview = true,
       width_focus = 40,
-      -- width_nofocus = 35,
       width_preview = 100,
     },
   },
