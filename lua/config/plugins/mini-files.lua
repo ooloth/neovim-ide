@@ -1,3 +1,8 @@
+-- see: https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-files.txt#L444-L446
+local hide_junk = function(fs_entry)
+  return not vim.startswith(fs_entry.name, '.DS_Store')
+end
+
 return {
   'echasnovski/mini.files',
   dependencies = {
@@ -15,10 +20,17 @@ return {
   },
   opts = {
     -- see: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-files.md#default-config
+
+    -- Customization of shown content
+    content = {
+      filter = hide_junk, -- predicate for which file system entries to show
+      prefix = nil, -- what prefix to show to the left of file system entry
+      sort = nil, -- in which order to show file system entries
+    },
+
     -- Use `''` (empty string) to not create one.
     mappings = {
       close = '<esc>',
-      -- close = 'q',
       go_in = '',
       go_in_plus = 'l', -- close mini.files when opening a file
       go_out = 'h',
@@ -33,16 +45,14 @@ return {
 
     -- General options
     options = {
-      -- Whether to delete permanently or move into module-specific trash
-      permanent_delete = true,
-      -- Whether to use for editing directories
-      use_as_default_explorer = true,
+      permanent_delete = true, -- whether to delete permanently or move into module-specific trash
+      use_as_default_explorer = true, -- whether to use for editing directories
     },
 
     windows = {
       max_number = 2, -- Maximum number of windows to show side by side
       preview = true,
-      width_focus = 35,
+      width_focus = 40,
       -- width_nofocus = 35,
       width_preview = 100,
     },
