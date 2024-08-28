@@ -1,6 +1,4 @@
--- TODO: remove timoutlen delay when pressing <esc> inside lazygit (make it feel sluggish); <esc><esc> is my "go to normal mode in a terminal" mapping, so I think that's the conflict
 -- TODO: toggle maximized for scratch terminal? if I use wintype=split, can I just use the normal leader-em? otherwise: https://github.com/voldikss/vim-floaterm/issues/57
--- TODO: FloatermNew yazi (more/less ergonomic than mini.files?)
 -- TODO: https://github.com/voldikss/vim-floaterm?tab=readme-ov-file#advanced-topics
 
 vim.g.floaterm_borderchars = ''
