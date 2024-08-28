@@ -24,35 +24,31 @@ local state = {
 
 local options = {
   lazygit = {
-    '--silent',
     '--height=' .. state.lazygit.height.default,
-    '--width=1.0',
     '--name=lazygit',
+    '--width=1.0',
     'lazygit',
   },
   scratch = {
-    '--silent',
     '--borderchars=─',
     '--height=' .. state.scratch.height.default,
-    '--width=1.0',
-    '--position=bottom',
     '--name=scratch',
+    '--position=bottom',
+    '--width=1.0',
   },
 }
 
 -- see: https://github.com/voldikss/vim-floaterm/issues/409#issuecomment-2049837814
 local function toggle_if_running_else_create(name)
-  if vim.fn['floaterm#terminal#get_bufnr'](name) < 0 then
-    vim.cmd.FloatermNew(options[name])
-    vim.cmd.FloatermToggle(name)
-  else
-    vim.cmd.FloatermToggle(name)
+  local is_running = vim.fn['floaterm#terminal#get_bufnr'](name) >= 0
 
-    -- reapply options as a way to get the original height back after maximizing
-    if vim.fn['floaterm#terminal#get_bufnr'](name) >= 0 then
-      vim.cmd.FloatermUpdate(options[name])
-    end
+  if not is_running then
+    vim.cmd.FloatermNew(options[name])
+    return
   end
+
+  vim.cmd.FloatermToggle(name) -- toggle visibility
+  vim.cmd.FloatermUpdate(options[name]) -- reapply initial options to restore initial dimensions after maximizing
 end
 
 local function toggle_maximized(name)
@@ -72,19 +68,16 @@ return {
   'voldikss/vim-floaterm',
   event = 'VeryLazy',
   cmd = 'FloatermNew',
-    -- stylua: ignore
-    keys = {
-      { '<leader>gg', function() toggle_if_running_else_create('lazygit') end, desc = 'Lazygit' },
-      { '<c-g>', function() toggle_if_running_else_create('lazygit') end, desc = 'Lazygit' },
-      { '<c-g>', mode = 't', '<cmd>FloatermHide<cr>', desc = 'Hide Lazygit' },
-      { '<c-t>', function() toggle_if_running_else_create('scratch') end, desc = 'Open scratch terminal' }, -- TODO: toggle most recent terminal instead?
-      { '<c-t>', mode = 't', '<cmd>FloatermHide<cr>', desc = 'Hide terminal' },
-      { '<c-z>', mode = 't', function() toggle_maximized('scratch') end, desc = 'Toggle maximized terminal' }, 
-    },
+  -- stylua: ignore
+  keys = {
+    { '<leader>gg', function() toggle_if_running_else_create('lazygit') end, desc = 'Lazygit' },
+    { '<c-g>', function() toggle_if_running_else_create('lazygit') end, desc = 'Lazygit' },
+    { '<c-t>', function() toggle_if_running_else_create('scratch') end, desc = 'Open scratch terminal' }, -- TODO: toggle most recent terminal instead?
+    { '<c-g>', mode = 't', '<cmd>FloatermHide<cr>', desc = 'Hide Lazygit' },
+    { '<c-t>', mode = 't', '<cmd>FloatermHide<cr>', desc = 'Hide terminal' },
+    { '<c-z>', mode = 't', function() toggle_maximized('scratch') end, desc = 'Toggle maximized terminal' }, 
+  },
   init = function()
-    -- at startup, start hidden terminals so they're ready to appear instantly (https://github.com/voldikss/vim-floaterm?tab=readme-ov-file#commands)
-    vim.cmd.FloatermNew(options['lazygit'])
-    vim.cmd.FloatermNew(options['scratch'])
 
     -- set float border to catppuccin mocha "surface1" color (used for split borders)
     vim.cmd [[ hi FloatermBorder guifg=#45475a ]]
