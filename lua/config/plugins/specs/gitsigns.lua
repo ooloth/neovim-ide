@@ -28,6 +28,8 @@ return {
     map('n', '<leader>gD', function() gs.diffthis '~' end, 'Diff against ~')
     map('n', '<leader>gtb', gs.toggle_current_line_blame, 'Line blame')
     map('n', '<leader>gtd', gs.toggle_deleted, 'Deleted lines')
+    -- make hunks available as text objects
+    map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<cr>', 'Select hunk')
     end,
   },
 }
