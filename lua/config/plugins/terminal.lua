@@ -1,6 +1,6 @@
 local set = vim.keymap.set
 
-set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter normal mode' }) -- FIXME: causes a timeoutlen delay closing floaterm buffers; exclude them from this handy shortcut?
+set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter normal mode' })
 set('t', '<c-h>', '<cmd>wincmd h<cr>', { desc = 'Go to left window' })
 set('t', '<c-j>', '<cmd>wincmd j<cr>', { desc = 'Go to lower window' })
 set('t', '<c-k>', '<cmd>wincmd k<cr>', { desc = 'Go to upper window' })
