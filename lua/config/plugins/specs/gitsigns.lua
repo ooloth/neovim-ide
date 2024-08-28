@@ -24,6 +24,8 @@ return {
 
     -- stylua: ignore start
     map('n', '<leader>gb', function() gs.blame_line { full = true } end, 'Blame (full)')
+    map('n', '<leader>gd', gs.diffthis, 'Diff against index')
+    map('n', '<leader>gD', function() gs.diffthis '~' end, 'Diff against ~')
     map('n', '<leader>gtb', gs.toggle_current_line_blame, 'Line blame')
     map('n', '<leader>gtd', gs.toggle_deleted, 'Deleted lines')
     end,
