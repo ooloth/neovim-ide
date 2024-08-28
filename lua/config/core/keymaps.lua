@@ -10,118 +10,30 @@ local set = vim.keymap.set
 set({ 'n', 'v' }, ',', ':') -- enter command mode with , instead of :
 set({ 'n', 'v' }, ':', ',') -- navigate f and t results using ;/: (like n/N for / results)
 
--- line beginning + end
-set({ 'n', 'v' }, '<S-h>', '^', { silent = true })
-set({ 'n', 'v' }, '<S-l>', '$', { silent = true })
-
--- clear search highlights
-set('n', '<esc>', '<cmd>nohlsearch<CR><Esc>', { silent = true })
-
 ------------------
 -- ALPHABETICAL --
 ------------------
 
--- "changes"
-set('n', ']c', 'g,', { desc = 'Next change' }) -- go to next change with g;
-set('n', '[c', 'g;', { desc = 'Prev change' }) -- go to next change with g;
-set('n', 'g;', 'g,', { desc = 'Next change' }) -- go to next change with g;
-set('n', 'g:', 'g;', { desc = 'Prev change' }) -- go to previous change with g;
-
 -- "debugger" (see dap.lua)
-
--- "editor" (buffer)
--- WARN: don't add c-[] maps here (one is Esc, the other navigates help keywords)
-set('n', '<tab>', '<cmd>bnext<cr>', { desc = 'Next editor' })
-set('n', '<s-tab>', '<cmd>bprevious<cr>', { desc = 'Prev editor' })
-set('n', '<leader>`', '<cmd>e#<cr>', { desc = 'Other editor' }) -- switch to last buffer
-set('n', '<leader>ed', '<cmd>bd<cr>', { desc = 'Close editor' }) -- switch to last buffer
-set('n', '<leader>ee', '<cmd>e#<cr>', { desc = 'Other editor' }) -- switch to last buffer
--- Close all buffers except the current one (like leader-wo does for windows):
--- https://stackoverflow.com/a/42071865/8802485
-set('n', '<leader>eo', '<cmd>%bd|e#<cr>', { desc = 'Only keep this editor' })
-
 -- "git" (see git.lua)
--- set({ 'n', 'v' }, '<leader>gg', '<cmd>FloatermNew lazygit<cr>', { desc = 'Lazygit' })
-
 -- "help" (see telescope.lua)
-
 -- "inspect" / "info"
 -- highlights under cursor
 set('n', '<leader>ic', vim.show_pos, { desc = 'Inspect Pos' })
-
--- "jumps" (see telescope.lua)
--- "keymaps" (see telescope.lua)
 -- "lazy" / "LSP" (see lsp.lua)
 -- "mason" (see lsp.lua)
--- "null-ls" (see lsp.lua)
-
--- "open"
-set('n', 'gl', '<cmd>lopen<cr>', { desc = 'Location list' })
-set('n', 'gq', '<cmd>botright copen<cr>', { desc = 'Quickfix list' })
-set('n', '<leader>ol', '<cmd>lopen<cr>', { desc = 'Location list' }) -- use ]l + [l to navigate
-set('n', '<leader>oq', '<cmd>copen<cr>', { desc = 'Quickfix list' }) -- use ]q + [q to navigate
-set('n', '<leader>on', ':ene <BAR> startinsert<cr>', { desc = 'New file' })
--- '<leader>ot' = 'Terminal' (see vim-floaterm.lua)
-
 -- "pin" (see mini-bufremove.lua + bufferline.lua)
-
--- "quit"
-set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- "replace" (see spectre.lua + lsp.lua)
 
 -- "save"
 set('n', '<leader><space>', '<cmd>w<cr>', { desc = 'Save' })
 
--- "tab"
-set('n', ']<tab>', '<cmd>tabnext<cr>', { desc = 'Next tab' })
-set('n', '[<tab>', '<cmd>tabprevious<cr>', { desc = 'Next tab' })
-set('n', '<leader><tab><tab>', '<cmd>tabnew<cr>', { desc = 'New tab' })
-set('n', '<leader><tab>]', '<cmd>tabnext<cr>', { desc = 'Next tab' })
-set('n', '<leader><tab>n', '<cmd>tabnext<cr>', { desc = 'Next tab' })
-set('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Prev tab' })
-set('n', '<leader><tab>p', '<cmd>tabprevious<cr>', { desc = 'Prev tab' })
-set('n', '<leader><tab>o', '<cmd>tabonly<cr>', { desc = 'Close other tabs' })
-set('n', '<leader><tab>d', '<cmd>tabclose<cr>', { desc = 'Close tab' })
-set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First tab' })
-set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last tab' })
-
 -- "ui"
 -- "v"
-
--- "window"
--- TODO: map all <c-w> commands?
-set('n', '<leader>\\', '<c-w>v', { desc = 'Split right' })
-set('n', '<leader>w\\', '<c-w>v', { desc = 'Split right' })
-set('n', '<leader>-', '<c-w>s', { desc = 'Split below' })
-set('n', '<leader>w-', '<c-w>s', { desc = 'Split below' })
-set('n', '<leader>=', '<c-w>=', { desc = 'Resize equally' })
-set('n', '<leader>w=', '<c-w>=', { desc = 'Resize equally' })
-set('n', '<leader>[', '<cmd>vertical resize -3<cr>', { desc = 'Reduce size' })
-set('n', '<leader>w[', '<cmd>vertical resize -3<cr>', { desc = 'Reduce size' })
-set('n', '<leader>]', '<cmd>vertical resize +3<cr>', { desc = 'Increase size' })
-set('n', '<leader>w]', '<cmd>vertical resize +3<cr>', { desc = 'Increase size' })
-set('n', '<leader>wd', '<c-w>c', { desc = 'Delete Window', remap = true })
-set('n', '<leader>wh', '<c-w>h', { desc = 'Go left one window' })
-set('n', '<leader>wj', '<c-w>j', { desc = 'Go down one window' })
-set('n', '<leader>wk', '<c-w>k', { desc = 'Go up one window' })
-set('n', '<leader>wl', '<c-w>l', { desc = 'Go right one window' })
--- TODO: "leader-wm" = toggle maximize window (see vim-maximizer.lua}
--- set("n", "<leader>wm", function() LazyVim.toggle.maximize() end, { desc = "Maximize Toggle" })
-set('n', '<leader>wo', '<c-w>o', { desc = 'Only keep this one' })
-set('n', '<leader>wt', '<cmd>tab split<cr>', { desc = 'Open in new tab' })
-set('n', '<leader>ww', '<c-w>p', { desc = 'Other Window', remap = true })
--- TODO: "leader-ww" = pick window (see nvim-window-picker.lua)?
-
 -- "x" ("diagnostics")
 -- "y"
 -- "z"
-
--- better up/down
-set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
-set({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
-set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
-set({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
 
 -- Resize window using <ctrl> arrow keys
 set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
@@ -176,6 +88,7 @@ set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 
 -- new file
 set('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
+set('n', '<leader>on', ':ene <BAR> startinsert<cr>', { desc = 'New file' })
 
 set('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
 set('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
