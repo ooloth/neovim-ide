@@ -81,7 +81,7 @@ return {
           i = {
             -- optionally select/deselect multiple files with <Tab>/<S-Tab>, then open all with <CR>
             ['<CR>'] = select_one_or_multi, -- still opens just one file if no multi-selection
-            ['<esc>'] = actions.close,
+            -- ['<esc>'] = actions.close,
             ['<C-j>'] = actions.move_selection_next,
             ['<C-k>'] = actions.move_selection_previous,
             ['<C-h>'] = actions.cycle_history_prev,
