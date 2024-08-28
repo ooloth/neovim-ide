@@ -78,22 +78,31 @@ return {
     { '<c-z>', mode = 't', function() toggle_maximized('scratch') end, desc = 'Toggle maximized terminal' }, 
   },
   init = function()
+    -- Set float border to catppuccin mocha "surface1" color (used for split borders)
+    vim.api.nvim_set_hl(0, 'FloatermBorder', { fg = '#45475a' })
 
-    -- set float border to catppuccin mocha "surface1" color (used for split borders)
-    vim.cmd [[ hi FloatermBorder guifg=#45475a ]]
-
-    -- TODO: check if floaterm is open first (e.g. don't do this when creating tmux splits)
-    -- automatically resize floating window if vim is resized
-    -- see: https://github.com/voldikss/vim-floaterm/issues/296#issuecomment-1098841533
-    vim.cmd [[ autocmd VimResized * FloatermUpdate ]]
-
+    -- Remove ESC keymap in lazygit terminal
     vim.api.nvim_create_autocmd('User', {
       pattern = { 'FloatermOpen' },
       callback = function()
-        -- local bufname = vim.fn.expand('%')
+        local bufname = vim.fn.expand '%'
+
+        -- Switch to normal mode with ESC...
         vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
-        if string.find(vim.fn.expand '%', 'lazygit') then
+
+        -- unless this is lazygit (which uses ESC internally)
+        if string.find(bufname, 'lazygit') then
           vim.keymap.del('t', '<esc>')
+        end
+      end,
+    })
+
+    -- Automatically resize floating window if vim is resized
+    -- see: https://github.com/voldikss/vim-floaterm/issues/296#issuecomment-1098841533
+    vim.api.nvim_create_autocmd('VimResized', {
+      callback = function()
+        if vim.bo.filetype == 'floaterm' then
+          vim.cmd.FloatermUpdate()
         end
       end,
     })
