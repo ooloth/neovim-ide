@@ -98,9 +98,9 @@ return {
       pattern = { 'FloatermOpen' },
       callback = function()
         -- local bufname = vim.fn.expand('%')
-        vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
+        vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
         if string.find(vim.fn.expand '%', 'lazygit') then
-          vim.keymap.del('t', '<esc><esc>')
+          vim.keymap.del('t', '<esc>')
         end
       end,
     })
