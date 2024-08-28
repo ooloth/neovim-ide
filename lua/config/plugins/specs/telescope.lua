@@ -144,7 +144,7 @@ return {
     vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = 'Commands (plugin)' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Diagnostics' })
     -- stylua: ignore
-    vim.keymap.set('n', '<leader>se', function() builtin.buffers { cwd_only = true, ignore_current_buffer = true } end, { desc = 'Existing buffers' })
+    vim.keymap.set('n', '<leader>se', function() builtin.buffers { cwd_only = true } end, { desc = 'Editors' })
     -- stylua: ignore
     vim.keymap.set('n', '<leader>sf', function() extensions.smart_open.smart_open { cwd_only = true } end, { desc = 'Files' })
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Help' })
