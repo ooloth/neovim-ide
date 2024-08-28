@@ -58,7 +58,7 @@ local function toggle_if_running_else_create(name)
 end
 
 local function toggle_maximized(name)
-  local current_term_name = vim.fn['floaterm#config#get'](vim.fn.bufnr('%'), 'name')
+  local current_term_name = vim.fn['floaterm#config#get'](vim.fn.bufnr '%', 'name')
 
   if name == current_term_name then
     -- if current_term_name ~= 'lazygit' then
@@ -89,26 +89,22 @@ return {
     vim.cmd.FloatermNew(options['scratch'])
 
     -- set float border to catppuccin mocha "surface1" color (used for split borders)
-    vim.cmd([[ hi FloatermBorder guifg=#45475a ]])
+    vim.cmd [[ hi FloatermBorder guifg=#45475a ]]
 
     -- TODO: check if floaterm is open first (e.g. don't do this when creating tmux splits)
     -- automatically resize floating window if vim is resized
     -- see: https://github.com/voldikss/vim-floaterm/issues/296#issuecomment-1098841533
-    vim.cmd([[ autocmd VimResized * FloatermUpdate ]])
+    vim.cmd [[ autocmd VimResized * FloatermUpdate ]]
 
-    -- TODO: find an ergonomic way to quit Lazygit without stopping its process?
-    -- TODO: just get used to closing with <c-t> as I do with the scratch terminal and did in VS Code?
-    -- FIXME: what follows interferes with typing "q" in commit messages...
-    -- see: https://github.com/voldikss/vim-floaterm?tab=readme-ov-file#autocmd
-    -- see: https://neovim.discourse.group/t/new-nvim-create-autocmd-for-user-custom-event-setup/2325
-    -- vim.api.nvim_create_autocmd('User', {
-    --   pattern = { 'FloatermOpen' },
-    --   callback = function()
-    --     -- local bufname = vim.fn.expand('%')
-    --     if string.find(vim.fn.expand('%'), 'lazygit') then
-    --       vim.keymap.set('t', 'q', '<cmd>FloatermHide<cr>', { desc = 'Hide Lazygit' })
-    --     end
-    --   end,
-    -- })
+    vim.api.nvim_create_autocmd('User', {
+      pattern = { 'FloatermOpen' },
+      callback = function()
+        -- local bufname = vim.fn.expand('%')
+        vim.keymap.set('t', '<esc><esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
+        if string.find(vim.fn.expand '%', 'lazygit') then
+          vim.keymap.del('t', '<esc><esc>')
+        end
+      end,
+    })
   end,
 }
