@@ -20,14 +20,14 @@ return {
     },
     mappings = {
       -- to disable a mapping, set it to ''
-      close = '<esc>',
+      close = '<ESC>',
       go_in = '',
       go_in_plus = 'l', -- close mini.files when opening a file
       go_out = 'h',
       go_out_plus = '',
       reset = '<BS>',
       show_help = '?',
-      synchronize = '<C-y>',
+      synchronize = '<CR>',
       trim_left = '<',
       trim_right = '>',
     },
