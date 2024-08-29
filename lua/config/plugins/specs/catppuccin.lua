@@ -8,29 +8,26 @@ return {
   priority = 1000,
   config = function()
     -- see: https://github.com/catppuccin/nvim?tab=readme-ov-file#configuration
-    require('catppuccin').setup({
-      -- color_overrides = {
-      --   mocha = { base = '#000000', mantle = '#000000', crust = '#000000' },
-      -- },
+    require('catppuccin').setup {
       dim_inactive = {
         enabled = false, -- dims the background color of inactive window
         shade = 'dark',
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
       },
       flavour = 'mocha', -- latte, frappe, macchiato, mocha
-      highlight_overrides = {
-        -- see: https://github.com/catppuccin/nvim?tab=readme-ov-file#overwriting-highlight-groups
-        mocha = function(mocha)
-          return {
-            -- Comment = { fg = '#7f849c' }, -- brighter comments
-          }
-        end,
-      },
+      -- highlight_overrides = {
+      -- see: https://github.com/catppuccin/nvim?tab=readme-ov-file#overwriting-highlight-groups
+      -- mocha = function(mocha)
+      -- return {
+      -- Comment = { fg = '#7f849c' }, -- brighter comments
+      -- }
+      -- end,
+      -- },
       -- see: https://github.com/catppuccin/nvim#integrations
       integrations = {
         cmp = true,
         -- flash = true,
-        -- gitsigns = true,
+        gitsigns = true,
         harpoon = true,
         headlines = true,
         -- illuminate = true,
@@ -53,10 +50,10 @@ return {
           },
         },
         -- navic = { enabled = true, custom_bg = 'lualine' },
-        -- neotest = true,
+        neotest = true,
         noice = true,
         notify = true,
-        -- octo = true,
+        octo = true,
         semantic_tokens = true,
         telescope = true,
         treesitter = true,
@@ -80,9 +77,9 @@ return {
       --   strings = {},
       --   types = {},
       --   variables = {},
-    })
+    }
 
     -- Must call after setup
-    vim.cmd.colorscheme('catppuccin')
+    vim.cmd.colorscheme 'catppuccin'
   end,
 }
