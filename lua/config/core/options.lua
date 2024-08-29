@@ -1,13 +1,10 @@
 -- TODO: move filetype associations to treesitter settings?
 -- https://neovim.io/doc/user/treesitter.html
 
+-- see `:help vim.opt` and `:help option-list`
 -- see: https://www.lazyvim.org/configuration/general#options
 
 local opt = vim.opt
-
--- [[ Setting options ]]
--- See `:help vim.opt`
---  NOTE: For more options, you can see `:help option-list`
 
 -- Make line numbers default
 vim.opt.number = true
