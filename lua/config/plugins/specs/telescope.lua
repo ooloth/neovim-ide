@@ -3,6 +3,27 @@
 -- TODO: how to include/exclude certain file/folder patterns from a search?
 -- TODO: use nvim-notify extension? does noice replace that?
 
+-- Telescope is a fuzzy finder that comes with a lot of different things that
+-- it can fuzzy find! It's more than just a "file finder", it can search
+-- many different aspects of Neovim, your workspace, LSP, and more!
+--
+-- The easiest way to use Telescope, is to start by doing something like:
+--  :Telescope help_tags
+--
+-- After running this command, a window will open up and you're able to
+-- type in the prompt window. You'll see a list of `help_tags` options and
+-- a corresponding preview of the help.
+--
+-- Two important keymaps to use while in Telescope are:
+--  - Insert mode: <c-/>
+--  - Normal mode: ?
+--
+-- This opens a window that shows you all of the keymaps for the current
+-- Telescope picker. This is really useful to discover what Telescope can
+-- do as well as how to actually do it!
+
+-- See `:help telescope` and `:help telescope.setup()`
+
 -- Support opening multiple files in the same picker session:
 -- see: https://github.com/nvim-telescope/telescope.nvim/issues/1048#issuecomment-2142669167
 local select_one_or_multi = function(prompt_bufnr)
@@ -45,27 +66,6 @@ return {
     },
   },
   config = function()
-    -- Telescope is a fuzzy finder that comes with a lot of different things that
-    -- it can fuzzy find! It's more than just a "file finder", it can search
-    -- many different aspects of Neovim, your workspace, LSP, and more!
-    --
-    -- The easiest way to use Telescope, is to start by doing something like:
-    --  :Telescope help_tags
-    --
-    -- After running this command, a window will open up and you're able to
-    -- type in the prompt window. You'll see a list of `help_tags` options and
-    -- a corresponding preview of the help.
-    --
-    -- Two important keymaps to use while in Telescope are:
-    --  - Insert mode: <c-/>
-    --  - Normal mode: ?
-    --
-    -- This opens a window that shows you all of the keymaps for the current
-    -- Telescope picker. This is really useful to discover what Telescope can
-    -- do as well as how to actually do it!
-
-    -- See `:help telescope` and `:help telescope.setup()`
-
     local actions = require 'telescope.actions'
     -- local undo_actions = require('telescope-undo.actions')
 
@@ -155,7 +155,7 @@ return {
     -- vim.keymap.set('n', '<leader>sn', builtin.noice, { desc = 'Notifications (messages)' })
     vim.keymap.set('n', '<leader>so', builtin.vim_options, { desc = 'Options' })
     vim.keymap.set('n', '<leader>sp', builtin.builtin, { desc = 'Telescope pickers' })
-    vim.keymap.set('n', '<leader>sr', builtin.lsp_references, { desc = 'References to symbol' })
+    -- <leader>sr = 'Search references' (see lsp.lua)
     vim.keymap.set('n', '<leader>ss', builtin.live_grep, { desc = 'String' })
     -- TODO: '<leader>st' = 'Todo' (see todo-comment.lua)
     vim.keymap.set('n', '<leader>su', extensions.undo.undo, { desc = 'Undo history' })
