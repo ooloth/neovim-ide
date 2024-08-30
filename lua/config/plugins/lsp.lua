@@ -29,5 +29,6 @@
 --    function will be executed to configure the current buffer
 
 return {
+  require 'config.plugins.specs.mason',
   require 'config.plugins.specs.nvim-lspconfig',
 }
