@@ -30,5 +30,6 @@
 
 return {
   require 'config.plugins.specs.mason',
+  require 'config.plugins.specs.mason-tool-installer',
   require 'config.plugins.specs.nvim-lspconfig',
 }
