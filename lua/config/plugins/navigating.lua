@@ -17,11 +17,11 @@ set('n', 'g;', 'g,', { desc = 'Next change' }) -- go to next change with g;
 set('n', 'g:', 'g;', { desc = 'Prev change' }) -- go to previous change with g;
 
 -- navigate editors (buffers)
--- WARN: don't add c-[] maps here (one is Esc, the other navigates help keywords)
-set('n', '<tab>', '<cmd>bnext<cr>', { desc = 'Next editor' })
-set('n', '<s-tab>', '<cmd>bprevious<cr>', { desc = 'Prev editor' })
+-- WARN: don't add c-[] maps (c-[ means ESC; c-] navigates to :help keywords)
+set('n', '<tab>', '<cmd>bn<cr>', { desc = 'Next editor' })
+set('n', '<s-tab>', '<cmd>bp<cr>', { desc = 'Prev editor' })
 set('n', '<leader>`', '<cmd>e#<cr>', { desc = 'Other editor' }) -- switch to last buffer
-set('n', '<leader>ed', '<cmd>bd<cr>', { desc = 'Close editor' }) -- switch to last buffer
+set('n', '<leader>ed', '<cmd>bp|bd #<cr>', { desc = 'Close editor' }) -- close buffer but not window
 set('n', '<leader>ee', '<cmd>e#<cr>', { desc = 'Other editor' }) -- switch to last buffer
 -- Close all buffers except the current one (like leader-wo does for windows):
 -- https://stackoverflow.com/a/42071865/8802485
