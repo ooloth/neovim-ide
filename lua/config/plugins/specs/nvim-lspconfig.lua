@@ -60,19 +60,15 @@ local highlight_references_to_cursor_word_in_editor = function(lsp_attach_event)
   end
 end
 
--- return {
--- 'neovim/nvim-lspconfig',
---   opts = {
---     -- options for vim.diagnostic.config()
---     ---@type vim.diagnostic.Opts
---     diagnostics = {
---       float = { border = 'rounded', source = true },
---     },
---   },
---   config = function(_, opts)
---     require('lspconfig').setup(opts)
---   end,
--- }
+local show_active_diagnostics_on_cursor_line = function()
+  -- show line diagnostics in floating window while cursor is on line
+  -- see: https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window
+  vim.api.nvim_create_autocmd('CursorHold', {
+    callback = function()
+      vim.diagnostic.open_float(nil, { focusable = false })
+    end,
+  })
+end
 
 return {
   'neovim/nvim-lspconfig',
@@ -84,6 +80,13 @@ return {
     require 'config.plugins.specs.cmp-nvim-lsp',
     require 'config.plugins.specs.fidget',
   },
+  opts = {
+    -- options for vim.diagnostic.config()
+    ---@type vim.diagnostic.Opts
+    diagnostics = {
+      float = { border = 'rounded', source = true },
+    },
+  },
   config = function(_, opts)
     -- Enable behavior that should only exist while an LSP is attached
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -91,6 +94,7 @@ return {
       callback = function(event)
         set_lsp_keymaps(event)
         highlight_references_to_cursor_word_in_editor(event)
+        show_active_diagnostics_on_cursor_line()
       end,
     })
 
