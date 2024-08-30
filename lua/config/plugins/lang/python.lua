@@ -2,10 +2,10 @@
 --  TODO: https://www.lazyvim.org/extras/lang/python
 --  TODO: https://www.lazyvim.org/extras/formatting/black
 
-local extend = require('util').extend
-local inspect = require('util').inspect
-local is_installed_in_venv = require('util.prefer_venv').is_installed_in_venv
-local prefer_venv_executable = require('util.prefer_venv').prefer_venv_executable
+local extend = require('config.util').extend
+local inspect = require('config.util').inspect
+local is_installed_in_venv = require('config.util.prefer_venv').is_installed_in_venv
+local prefer_venv_executable = require('config.util.prefer_venv').prefer_venv_executable
 
 -- Help debugger find current project's local (not pip) modules:
 -- https://stackoverflow.com/a/63271966/8802485
@@ -19,7 +19,7 @@ local pynvim_python = vim.env.HOME .. '/.pyenv/versions/pynvim/bin/python'
 vim.g.python3_host_prog = pynvim_python
 
 -- get the python executable from the project venv (if active) for dap and neotest
-local python = prefer_venv_executable('python')
+local python = prefer_venv_executable 'python'
 
 -- see: https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/black.lua
 local get_formatter_options = function(formatter)
@@ -51,6 +51,7 @@ return {
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     opts = function(_, opts)
+      -- vim.list_extend(opts.ensure_installed or {}, { 'black', 'flake8', 'isort', 'mypy', 'pyright', 'ruff', 'ruff-lsp', 'yapf' })
       extend(opts.ensure_installed, { 'black', 'flake8', 'isort', 'mypy', 'pyright', 'ruff', 'ruff-lsp', 'yapf' })
     end,
   },
@@ -131,58 +132,61 @@ return {
     },
   },
 
-  {
-    'mfussenegger/nvim-lint',
-    -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
-    opts = {
-      linters_by_ft = {
-        python = get_linters_in_venv({ 'flake8', 'mypy', 'ruff_lint' }),
-      },
-      -- stylua: ignore
-      linters = {
-        flake8 = function() return get_linter_options('flake8') end,
-        mypy = function() return get_linter_options('mypy') end,
-        ruff_lint = function() return get_linter_options('ruff') end,
-      },
-    },
-  },
+  -- TODO: lint
+  -- {
+  --   'mfussenegger/nvim-lint',
+  --   -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
+  --   opts = {
+  --     linters_by_ft = {
+  --       python = get_linters_in_venv { 'flake8', 'mypy', 'ruff_lint' },
+  --     },
+  --     -- stylua: ignore
+  --     linters = {
+  --       flake8 = function() return get_linter_options('flake8') end,
+  --       mypy = function() return get_linter_options('mypy') end,
+  --       ruff_lint = function() return get_linter_options('ruff') end,
+  --     },
+  --   },
+  -- },
 
-  {
-    'mfussenegger/nvim-dap',
-    dependencies = {
-      'mfussenegger/nvim-dap-python',
-      -- stylua: ignore
-      keys = {
-        { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
-        { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
-      },
-      config = function()
-        -- use the debugpy installed in the pynvim venv so I don't have to install it in every project's venv:
-        local pynvim_debugpy_python = vim.env.HOME .. '/.pyenv/versions/pynvim/bin/debugpy' .. '/venv/bin/python'
+  -- TODO: dap
+  -- {
+  --   'mfussenegger/nvim-dap',
+  --   dependencies = {
+  --     'mfussenegger/nvim-dap-python',
+  --     -- stylua: ignore
+  --     keys = {
+  --       { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
+  --       { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
+  --     },
+  --     config = function()
+  --       -- use the debugpy installed in the pynvim venv so I don't have to install it in every project's venv:
+  --       local pynvim_debugpy_python = vim.env.HOME .. '/.pyenv/versions/pynvim/bin/debugpy' .. '/venv/bin/python'
+  --
+  --       require('dap-python').setup(pynvim_debugpy_python, { include_configs = true, pythonPath = python })
+  --     end,
+  --   },
+  -- },
 
-        require('dap-python').setup(pynvim_debugpy_python, { include_configs = true, pythonPath = python })
-      end,
-    },
-  },
-
-  {
-    'nvim-neotest/neotest',
-    dependencies = {
-      'nvim-neotest/neotest-python',
-    },
-    opts = {
-      adapters = {
-        ['neotest-python'] = {
-          -- see: https://github.com/nvim-neotest/neotest-python
-          args = { '--log-level', 'DEBUG', '--quiet' },
-          dap = {
-            -- see: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings#launchattach-settings
-            console = 'integratedTerminal',
-            justMyCode = true,
-          },
-          python = python,
-        },
-      },
-    },
-  },
+  -- TODO: testing
+  -- {
+  --   'nvim-neotest/neotest',
+  --   dependencies = {
+  --     'nvim-neotest/neotest-python',
+  --   },
+  --   opts = {
+  --     adapters = {
+  --       ['neotest-python'] = {
+  --         -- see: https://github.com/nvim-neotest/neotest-python
+  --         args = { '--log-level', 'DEBUG', '--quiet' },
+  --         dap = {
+  --           -- see: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings#launchattach-settings
+  --           console = 'integratedTerminal',
+  --           justMyCode = true,
+  --         },
+  --         python = python,
+  --       },
+  --     },
+  --   },
+  -- },
 }
