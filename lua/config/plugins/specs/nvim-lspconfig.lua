@@ -78,11 +78,11 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufReadPost', 'BufNewFile' },
   dependencies = {
-    { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-    'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    { 'j-hui/fidget.nvim', opts = {} }, -- useful status updates for LSP
-    'hrsh7th/cmp-nvim-lsp', -- enables extra capabilities provided by nvim-cmp
+    require 'config.plugins.specs.mason',
+    require 'config.plugins.specs.mason-tool-installer',
+    require 'config.plugins.specs.mason-lspconfig',
+    require 'config.plugins.specs.cmp-nvim-lsp',
+    require 'config.plugins.specs.fidget',
   },
   config = function(_, opts)
     -- Enable behavior that should only exist while an LSP is attached
@@ -94,27 +94,26 @@ return {
       end,
     })
 
-    -- Add nvim-cmp's LSP capabilities to neovim's defaults and share with all servers
-    local capabilities = vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), require('cmp_nvim_lsp').default_capabilities())
+    -- Ensure all servers configured via nvim-lspconfig's "opts.servers" have been installed
+    require('mason-tool-installer').setup {
+      ensure_installed = vim.tbl_keys(opts.servers or {}),
+    }
 
-    -- Ensure the servers and tools above are installed
-    require('mason').setup()
+    -- Set up each server
+    -- see: https://github.com/williamboman/mason-lspconfig.nvim/tree/main?tab=readme-ov-file#setup
+    require('mason-lspconfig').setup_handlers {
+      -- Define default handler for every server
+      function(server_name)
+        -- Grab any custom options set for this LSP in this repo
+        local server = opts.servers[server_name] or {}
 
-    -- for key, _ in pairs(opts.servers) do
-    --   vim.notify(key)
-    -- end
+        -- Merge neovim's LSP capabilities + nvim-cmp's capabilities + any overrides I've defined for this server
+        server.capabilities =
+          vim.tbl_deep_extend('force', vim.lsp.protocol.make_client_capabilities(), require('cmp_nvim_lsp').default_capabilities(), server.capabilities or {})
 
-    require('mason-lspconfig').setup {
-      handlers = {
-        function(server_name)
-          local server = opts.servers[server_name] or {}
-          -- Override default server capabilities above (e.g. to disable LSP features like tsserver's formatting)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-
-          -- Set up server
-          require('lspconfig')[server_name].setup(server)
-        end,
-      },
+        -- Set up server
+        require('lspconfig')[server_name].setup(server)
+      end,
     }
   end,
 }
