@@ -1,17 +1,4 @@
 return {
-  {
-    -- see: https://github.com/mfussenegger/nvim-lint
-    'mfussenegger/nvim-lint',
-    opts = {
-      -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
-      -- see: https://github.com/mfussenegger/nvim-lint#available-linters
-      linters_by_ft = {
-        fish = {},
-      },
-    },
-  },
-
-  -- {
   --   'nvimtools/none-ls.nvim',
   --   opts = function() -- replace all default opts
   --     local nls = require('null-ls')
@@ -32,5 +19,4 @@ return {
   --       },
   --     }
   --   end,
-  -- },
 }

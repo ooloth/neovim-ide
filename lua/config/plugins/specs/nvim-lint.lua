@@ -1,17 +1,18 @@
 -- TODO: https://www.lazyvim.org/plugins/linting
 -- see: https://github.com/mfussenegger/nvim-lint
 -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
+-- see: https://github.com/mfussenegger/nvim-lint#available-linters
 
 return {
   'mfussenegger/nvim-lint',
+  event = { 'BufReadPre', 'BufNewFile' },
   config = function()
-    -- see: https://github.com/mfussenegger/nvim-lint#available-linters
-    require('lint')
-
+    -- Create autocommand which carries out the actual linting
     -- see: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#usage
-    vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
+    local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
+      group = lint_augroup,
       callback = function()
-        -- try_lint without arguments runs the linters defined in `linters_by_ft` for the current filetype
         require('lint').try_lint()
       end,
     })
