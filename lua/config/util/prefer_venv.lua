@@ -1,4 +1,4 @@
-local get_system_executable_path = require('util').get_system_executable_path
+local get_system_executable_path = require('config.util').get_system_executable_path
 
 local M = {}
 
@@ -17,7 +17,7 @@ M.get_venv_executable_path = function(executable_name)
 end
 
 M.get_mason_executable_path = function(executable_name)
-  local mason_registry = require('mason-registry')
+  local mason_registry = require 'mason-registry'
   return mason_registry.get_package(executable_name):get_install_path() .. '/venv/bin/' .. executable_name
 end
 
@@ -38,11 +38,11 @@ M.prefer_venv_executable = function(executable_name)
   -- otherwise, get the path to python outside a virtualenv from pyenv
   if executable_name == 'python' then
     -- return output of `pyenv which python` if it exists
-    if vim.fn.executable('pyenv') == 1 then
-      return string.gsub(vim.fn.system('pyenv which python'), '\n', '')
+    if vim.fn.executable 'pyenv' == 1 then
+      return string.gsub(vim.fn.system 'pyenv which python', '\n', '')
     end
     -- otherwise, return the output of `which python3` if it exists
-    return vim.fn.exepath('python3')
+    return vim.fn.exepath 'python3'
   end
 
   -- otherwise, get the path to the Mason binary

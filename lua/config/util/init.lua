@@ -8,8 +8,8 @@ end
 
 -- For extending a list-type table with another list-type table only (not a dictionary).
 -- @type fun(list:table, values:table): table
-M.extend = function(list, values)
-  vim.list_extend(list or {}, values)
+M.extend = function(list, items)
+  vim.list_extend(list or {}, items)
 end
 
 M.get_system_executable_path = function(executable_name)
