@@ -10,7 +10,7 @@ return {
   -- see: https://github.com/stevearc/conform.nvim
   'stevearc/conform.nvim',
   dependencies = {
-    require 'config.plugins.specs.mason',
+    'williamboman/mason.nvim', -- so mason installations will be possible
     'zapling/mason-conform.nvim',
   },
   event = { 'BufWritePre' },

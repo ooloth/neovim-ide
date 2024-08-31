@@ -74,11 +74,11 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufReadPost', 'BufNewFile' },
   dependencies = {
-    require 'config.plugins.specs.mason',
-    require 'config.plugins.specs.mason-tool-installer',
-    require 'config.plugins.specs.mason-lspconfig',
-    require 'config.plugins.specs.cmp-nvim-lsp',
-    require 'config.plugins.specs.fidget',
+    'williamboman/mason.nvim', -- so mason installations will be possible
+    'williamboman/mason-lspconfig.nvim', -- so lspconfig + mason names will both work
+    'WhoIsSethDaniel/mason-tool-installer.nvim', -- automatically install lsp servers I've configured
+    'hrsh7th/cmp-nvim-lsp', -- extend nvim's default lsp capabilities
+    'j-hui/fidget.nvim', -- show lsp updates via discrete UI in the bottom right
   },
   opts = {
     -- options for vim.diagnostic.config()
@@ -99,12 +99,14 @@ return {
     })
 
     -- Ensure all servers configured via nvim-lspconfig's "opts.servers" have been installed
+    require('mason').setup()
     require('mason-tool-installer').setup {
       ensure_installed = vim.tbl_keys(opts.servers or {}),
     }
 
     -- Set up each server
     -- see: https://github.com/williamboman/mason-lspconfig.nvim/tree/main?tab=readme-ov-file#setup
+    require('mason-lspconfig').setup()
     require('mason-lspconfig').setup_handlers {
       -- Define default handler for every server
       function(server_name)
