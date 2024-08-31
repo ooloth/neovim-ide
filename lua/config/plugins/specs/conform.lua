@@ -11,7 +11,7 @@ return {
   'stevearc/conform.nvim',
   dependencies = {
     require 'config.plugins.specs.mason',
-    require 'config.plugins.specs.mason-conform',
+    'zapling/mason-conform.nvim',
   },
   event = { 'BufWritePre' },
   cmd = { 'ConformInfo' },
