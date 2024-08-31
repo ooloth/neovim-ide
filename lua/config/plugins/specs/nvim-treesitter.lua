@@ -25,21 +25,17 @@ return {
     -- see: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
     -- NOTE: must install parsers that ship with nvim to override them and avoid errors
     -- https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
-    highlight = {
-      enable = true,
-      -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-      --  If you are experiencing weird indenting issues, add the language to
-      --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-      additional_vim_regex_highlighting = { 'ruby' },
-    },
-    indent = { enable = true, disable = { 'ruby' } },
     ensure_installed = { 'query', 'regex' },
+    highlight = { enable = true },
+    indent = { enable = true },
     incremental_selection = {
       -- see: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#incremental-selection
+      -- see `:h nvim-treesitter-incremental-selection-mod`
+      enable = true,
       keymaps = {
         init_selection = '<cr>',
         node_incremental = '<cr>',
-        scope_incremental = false,
+        scope_incremental = '<cr>',
         node_decremental = '<bs>',
       },
     },
