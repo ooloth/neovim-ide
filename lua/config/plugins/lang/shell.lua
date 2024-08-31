@@ -3,7 +3,7 @@
 -- https://www.reddit.com/r/neovim/comments/xzr6py/nvimdap_bash_debugging/
 -- TODO: testing?
 
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 -- Tell treesitter to parse zsh like bash (until someone writes a zsh parser):
 -- https://github.com/nvim-treesitter/nvim-treesitter/issues/655#issuecomment-1476880919
@@ -13,7 +13,14 @@ return {
   {
     'williamboman/mason.nvim',
     opts = function(_, opts)
-      extend(opts.ensure_installed, { 'bash-language-server', 'shellcheck', 'shfmt' })
+      extend(opts.ensure_installed, { 'shellcheck' })
+    end,
+  },
+
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = function(_, opts)
+      extend(opts.ensure_installed, { 'bash' })
     end,
   },
 
@@ -26,13 +33,6 @@ return {
         bashls = {},
       },
     },
-  },
-
-  {
-    'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'bash' })
-    end,
   },
 
   {

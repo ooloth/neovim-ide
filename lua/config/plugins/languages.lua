@@ -14,4 +14,5 @@ return {
   require 'config.plugins.lang.lua',
   require 'config.plugins.lang.markdown',
   require 'config.plugins.lang.python',
+  require 'config.plugins.lang.shell',
 }
