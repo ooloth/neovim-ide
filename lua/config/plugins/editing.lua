@@ -18,4 +18,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
-return {}
+return {
+  require 'config.plugins.specs.nvim-cmp',
+}
