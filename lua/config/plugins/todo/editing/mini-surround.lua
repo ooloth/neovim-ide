@@ -1,7 +1,9 @@
+-- TODO: https://www.lazyvim.org/extras/coding/mini-surround
+
 return {
   'echasnovski/mini.surround',
   config = function(_, opts)
-    local mini_surround = require('mini.surround')
+    local mini_surround = require 'mini.surround'
     mini_surround.setup(opts)
     -- see: https://github.com/echasnovski/mini.surround/blob/main/doc/mini-surround.txt#L473
     -- Remap adding surrounding to Visual mode selection

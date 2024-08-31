@@ -1,3 +1,5 @@
+-- TODO: https://www.lazyvim.org/extras/coding/copilot
+
 return {
   'zbirenbaum/copilot.lua',
   event = 'BufRead',

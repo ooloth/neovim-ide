@@ -1,3 +1,5 @@
+-- TODO: https://www.lazyvim.org/extras/util/octo
+
 return {
   --   'pwntester/octo.nvim',
   --   event = 'VeryLazy',

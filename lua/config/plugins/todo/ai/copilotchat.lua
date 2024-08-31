@@ -1,3 +1,6 @@
+-- TODO: https://www.lazyvim.org/extras/coding/copilot-chat
+-- TODO: https://github.com/CopilotC-Nvim/CopilotChat.nvim
+
 -- see: https://github.com/jellydn/lazy-nvim-ide/blob/main/lua/plugins/extras/copilot-chat.lua
 ---Get all the changes in the git repository
 ---@param staged? boolean
@@ -9,7 +12,7 @@ local function get_git_diff(staged)
     return ''
   end
 
-  local result = handle:read('*a')
+  local result = handle:read '*a'
   handle:close()
   return result
 end
@@ -56,7 +59,7 @@ return {
       show_help = 'yes', -- Show help text for CopilotChatInPlace
     },
     build = function()
-      vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+      vim.notify "Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim."
     end,
     event = 'VeryLazy',
     -- stylua: ignore
