@@ -1,12 +1,14 @@
---  TODO: https://www.lazyvim.org/extras/lang/markdown
+-- TODO: https://www.lazyvim.org/extras/lang/markdown
+-- TODO: lint: https://medium.com/rewrite-tech/the-fun-way-to-improve-your-documentation-part-one-markdownlint-20991ee1df91
+-- TODO: lint: https://medium.com/rewrite-tech/the-fun-way-to-improve-your-documentation-part-two-vale-74ef371198b2
 
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 return {
   {
     'williamboman/mason.nvim',
     opts = function(_, opts)
-      extend(opts.ensure_installed, { 'markdownlint', 'marksman', 'vale-ls' })
+      extend(opts.ensure_installed, { 'markdownlint', 'vale' })
     end,
   },
 
@@ -42,7 +44,7 @@ return {
     'mfussenegger/nvim-lint',
     opts = {
       linters_by_ft = {
-        markdown = { 'markdownlint' },
+        markdown = { 'markdownlint', 'vale' },
         -- NOTE: eslint_lsp already lints MDX files (install https://github.com/mdx-js/eslint-mdx in project)
       },
     },
