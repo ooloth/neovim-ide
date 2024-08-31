@@ -11,6 +11,7 @@
 
 return {
   -- TODO: can I automatically require every file in config.plugins.lang instead of manually updating this list?
+  require 'config.plugins.lang.c',
   require 'config.plugins.lang.lua',
   require 'config.plugins.lang.markdown',
   require 'config.plugins.lang.python',
