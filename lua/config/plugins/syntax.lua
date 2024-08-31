@@ -1,3 +1,3 @@
 return {
-  require 'config.plugins.specs.treesitter',
+  require 'config.plugins.specs.nvim-treesitter',
 }

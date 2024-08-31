@@ -60,9 +60,9 @@ return {
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
-  config = function(_, opts)
-    require('nvim-treesitter.configs').setup(opts)
-  end,
+  -- config = function(_, opts)
+  --   require('nvim-treesitter.configs').setup(opts)
+  -- end,
   init = function(plugin)
     -- PERF: add nvim-treesitter queries to the rtp and it's custom query predicates early
     -- This is needed because a bunch of plugins no longer `require("nvim-treesitter")`, which no longer trigger the **nvim-treesitter** module to be loaded in time.
