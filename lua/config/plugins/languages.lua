@@ -7,7 +7,6 @@
 -- rst = { "vale" },
 -- ruby = { "ruby" },
 -- terraform = { "tflint" },
--- text = { "vale" }
 
 return {
   -- TODO: can I automatically require every file in config.plugins.lang instead of manually updating this list?
@@ -16,4 +15,5 @@ return {
   require 'config.plugins.lang.markdown',
   require 'config.plugins.lang.python',
   require 'config.plugins.lang.shell',
+  require 'config.plugins.lang.text',
 }
