@@ -1,3 +1,5 @@
+-- TODO: folding: Code Folding in Neovim: https://www.youtube.com/watch?v=f_f08KnAJOQ (recommends nvim-ufo over other options like treesitter)
+
 local set = vim.keymap.set
 
 -- better up/down navigation

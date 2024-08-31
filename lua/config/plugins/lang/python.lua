@@ -1,6 +1,7 @@
---  TODO: testing: unittest?
---  TODO: https://www.lazyvim.org/extras/lang/python
---  TODO: https://www.lazyvim.org/extras/formatting/black
+-- TODO: Exploring Data Science Tools and Workflows in NVIM: https://www.youtube.com/watch?v=1xoUmncDwHQ
+-- TODO: testing: unittest?
+-- TODO: https://www.lazyvim.org/extras/lang/python
+-- TODO: https://www.lazyvim.org/extras/formatting/black
 
 local extend = require('config.util').extend
 local inspect = require('config.util').inspect
