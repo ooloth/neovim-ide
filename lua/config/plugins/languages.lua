@@ -16,4 +16,5 @@ return {
   require 'config.plugins.lang.python',
   require 'config.plugins.lang.shell',
   require 'config.plugins.lang.text',
+  require 'config.plugins.lang.vim',
 }
