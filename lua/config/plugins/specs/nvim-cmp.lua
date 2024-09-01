@@ -1,3 +1,4 @@
+-- TODO: what if I want to move to the next line with CR while there are irrelevant options showing and I don't want to leave insert mode with ESC?
 -- TODO: https://www.lazyvim.org/plugins/coding#nvim-cmp
 -- TODO: https://www.lazyvim.org/plugins/coding#cmp-nvim-lsp
 -- TODO: https://www.lazyvim.org/plugins/coding#cmp-buffer

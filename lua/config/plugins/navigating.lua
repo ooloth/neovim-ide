@@ -1,6 +1,14 @@
 -- TODO: folding: Code Folding in Neovim: https://www.youtube.com/watch?v=f_f08KnAJOQ (recommends nvim-ufo over other options like treesitter)
+-- TODO: folding: https://github.com/kevinhwang91/nvim-ufo
+-- TODO: folding: Configuring nvim-ufo to use LSP with lazy.nvim: https://www.reddit.com/r/neovim/comments/12yomtj/configuring_nvimufo_to_use_lsp_with_lazynvim/
 
 local set = vim.keymap.set
+
+-- TODO: use this helper instead to eliminate most of the 'n' and '{ desc = ... }' used in the `set` calls?
+-- or keep it simple by avoiding creating yet another abstracting to memorize/override, etc?
+local map = function(lhs, rhs, desc, mode)
+  vim.keymap.set(mode, lhs, rhs, { desc = desc, expr = true, silent = true })
+end
 
 -- better up/down navigation
 set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
