@@ -1,5 +1,6 @@
 -- DOCS: https://github.com/folke/which-key.nvim
 -- DOCS: https://www.lazyvim.org/plugins/editor#which-keynvim
+-- TODO: `:checkhealth which-key`
 -- TODO: distribute in relevant files with wk.add()?
 
 return {
@@ -17,7 +18,7 @@ return {
         '<leader>e',
         group = 'Editor',
         expand = function()
-          return require('which-key.extras').expand.buf()
+          return require('which-key.extras').expand.buf() -- add numbered mappings to open editors
         end,
       },
       { '<leader>f', group = 'File' },
@@ -29,23 +30,21 @@ return {
       { '<leader>s', group = 'Search' },
       { '<leader>t', group = 'Test' },
       { '<leader>u', group = 'UI' },
-      { '<leader>w', group = 'Window' },
+      {
+        '<leader>w',
+        group = 'Window',
+        proxy = '<C-w>', -- add all built-in <C-w> mappings
+        expand = function()
+          return require('which-key.extras').expand.win() -- add numbered mappings to open windows
+        end,
+      },
       { '<leader>x', group = 'Diagnostics' },
       { ']', group = 'Next' },
       { '[', group = 'Previous' },
       { 'g', group = 'Go to' },
+      { 'gx', desc = 'Open with system app' }, -- improve built-in description
       -- { 'gz', group = 'Surround' },
       { 'z', group = 'fold' },
-      {
-        '<leader>w',
-        group = 'windows',
-        proxy = '<c-w>', -- proxy nvim window mappings
-        expand = function()
-          return require('which-key.extras').expand.win()
-        end,
-      },
-      -- better descriptions for nvim's built-in keymaps
-      { 'gx', desc = 'Open with system app' },
     },
   },
 }
