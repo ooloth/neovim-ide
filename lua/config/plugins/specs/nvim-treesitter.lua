@@ -43,41 +43,20 @@ return {
       move = {
         -- see: https://github.com/nvim-treesitter/nvim-treesitter-textobjects?tab=readme-ov-file#text-objects-move
         enable = true,
-        goto_next_start = {
-          [']f'] = '@function.outer',
-          -- [']c'] = '@class.outer',
-          -- [']a'] = '@parameter.inner',
-        },
-        goto_next_end = {
-          [']F'] = '@function.outer',
-          -- [']C'] = '@class.outer',
-          -- [']A'] = '@parameter.inner',
-        },
-        goto_previous_start = {
-          ['[f'] = '@function.outer',
-          -- ['[c'] = '@class.outer',
-          -- ['[a'] = '@parameter.inner',
-        },
-        goto_previous_end = {
-          ['[F'] = '@function.outer',
-          -- ['[C'] = '@class.outer',
-          -- ['[A'] = '@parameter.inner',
-        },
+        goto_next_start = { [']f'] = '@function.outer' },
+        goto_next_end = { [']F'] = '@function.outer' },
+        goto_previous_start = { ['[f'] = '@function.outer' },
+        goto_previous_end = { ['[F'] = '@function.outer' },
       },
       select = {
         enable = true,
-
-        -- Automatically jump forward to textobj, similar to targets.vim
-        lookahead = true,
-
+        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
           ['af'] = { query = '@function.outer', desc = 'Outer function' },
-          ['if'] = '@function.inner',
-          ['ac'] = '@class.outer',
-          -- You can optionally set descriptions to the mappings (used in the desc parameter of
-          -- nvim_buf_set_keymap) which plugins like which-key display
-          ['ic'] = { query = '@class.inner', desc = 'Select inner part of a class region' },
+          ['if'] = { query = '@function.inner', desc = 'Inner function' },
+          ['ac'] = { query = '@class.outer', desc = 'Outer class' },
+          ['ic'] = { query = '@class.inner', desc = 'Inner class' },
           -- You can also use captures from other query groups like `locals.scm`
           ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
         },

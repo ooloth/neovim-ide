@@ -2,6 +2,7 @@
 -- TODO: how to restrict searches to certain paths?
 -- TODO: how to include/exclude certain file/folder patterns from a search?
 -- TODO: use nvim-notify extension? does noice replace that?
+-- TODO: exclude /archive from file search results?
 
 -- Telescope is a fuzzy finder that comes with a lot of different things that
 -- it can fuzzy find! It's more than just a "file finder", it can search
