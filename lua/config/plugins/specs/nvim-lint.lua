@@ -5,7 +5,7 @@
 
 return {
   'mfussenegger/nvim-lint',
-  event = { 'BufReadPre', 'BufNewFile' },
+  event = { 'BufNewFile', 'BufRead', 'BufWritePre' },
   config = function()
     -- Create autocommand which carries out the actual linting
     -- see: https://github.com/mfussenegger/nvim-lint?tab=readme-ov-file#usage

@@ -72,7 +72,7 @@ end
 
 return {
   'neovim/nvim-lspconfig',
-  event = { 'BufReadPre', 'BufReadPost', 'BufNewFile' },
+  event = { 'BufNewFile', 'BufRead', 'BufWritePre' },
   dependencies = {
     'williamboman/mason.nvim', -- so mason installations will be possible
     'williamboman/mason-lspconfig.nvim', -- so lspconfig + mason names will both work
