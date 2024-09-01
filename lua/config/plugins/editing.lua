@@ -21,5 +21,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
 return {
   require 'config.plugins.specs.guess-indent',
   require 'config.plugins.specs.mini-pairs',
+  require 'config.plugins.specs.mini-surround',
   require 'config.plugins.specs.nvim-cmp',
 }
