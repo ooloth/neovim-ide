@@ -35,7 +35,7 @@ set('n', '<leader>ed', '<cmd>bp|bd #<cr>', { desc = 'Close editor' }) -- close b
 set('n', '<leader>ee', '<cmd>e#<cr>', { desc = 'Other editor' }) -- switch to last buffer
 -- Close all buffers except the current one (like leader-wo does for windows):
 -- https://stackoverflow.com/a/42071865/8802485
-set('n', '<leader>eo', '<cmd>%bd|e#<cr>', { desc = 'Only keep this editor' })
+set('n', '<leader>eo', '<cmd>%bd|e#|bd#<cr>', { desc = 'Only keep this editor' })
 
 -- navigate to location list
 set('n', 'gl', '<cmd>lopen<cr>', { desc = 'Location list' })
