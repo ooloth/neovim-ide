@@ -1,5 +1,4 @@
--- DOCS: https://github.com/folke/noice.nvim?tab=readme-ov-file#-installation
--- DOCS: https://github.com/folke/noice.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
+-- DOCS: https://github.com/folke/noice.nvim
 -- DOCS: https://github.com/folke/noice.nvim/wiki/Configuration-Recipes
 -- DOCS: https://www.lazyvim.org/plugins/ui#noicenvim
 
@@ -7,7 +6,6 @@ return {
   'folke/noice.nvim',
   event = 'VeryLazy',
   dependencies = {
-    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
     'MunifTanjim/nui.nvim', -- used for proper rendering and multiple views
     { 'rcarriga/nvim-notify', opts = { background_colour = '#1A1A28' } }, -- use as vim.notify UI
     'nvim-treesitter/nvim-treesitter',
@@ -54,33 +52,10 @@ return {
         },
         view = 'mini',
       },
-      -- {
-      -- filter out "written" messages (https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#hide-written-messages)
-      --   filter = {
-      --     event = "msg_show",
-      --     kind = "",
-      --     find = "written",
-      --   },
-      --   opts = { skip = true },
-      -- },
     },
   },
-  -- stylua: ignore
-  keys = {
-    -- { "<leader>sn", "", desc = "+noice"},
-    -- { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
-    -- { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
-    -- { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
-    -- { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
-    -- { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
-    -- { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
-    { "<c-d>", function() if not require("noice.lsp").scroll(4) then return "<c-d>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
-    { "<c-u>", function() if not require("noice.lsp").scroll(-4) then return "<c-u>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
-  },
   config = function(_, opts)
-    -- HACK: noice shows messages from before it was enabled,
-    -- but this is not ideal when Lazy is installing plugins,
-    -- so clear the messages in this case.
+    -- HACK: noice shows messages from before it was enabled, but this is not ideal when Lazy is installing plugins, so clear the messages in this case
     if vim.o.filetype == 'lazy' then
       vim.cmd [[messages clear]]
     end
