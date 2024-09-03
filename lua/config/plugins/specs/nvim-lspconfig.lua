@@ -1,4 +1,5 @@
--- TODO: try this - https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua
+-- TODO: inlay hints: leader-u* keymap to toggle
+-- TODO: inlay hints: configure to show only some (e.g. show arg types but hide function reference counts?)
 -- TODO: more ideas - https://github.com/ilias777/nvim/blob/1d0f2e122525869025c4fd6171d69a23020234e1/lua/plugins/lsp/lsp-config.lua
 
 -- DOCS: https://www.lazyvim.org/plugins/lsp
@@ -101,6 +102,13 @@ local show_active_diagnostics_on_cursor_line = function()
   })
 end
 
+-- NOTE: requires configuring each LSP server to provide the inlay hints
+local enable_inlay_hints = function(lsp_attach_event)
+  -- see: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua#L146-L157
+  if vim.api.nvim_buf_is_valid(lsp_attach_event.buf) and vim.bo[lsp_attach_event.buf].buftype == '' then
+    vim.lsp.inlay_hint.enable(true, { bufnr = lsp_attach_event.buf })
+  end
+end
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufNewFile', 'BufRead', 'BufWritePre' },
@@ -120,6 +128,7 @@ return {
         highlight_references_to_cursor_word_in_editor(event)
         show_active_diagnostics_on_cursor_line()
         update_diagnostic_signs_text()
+        enable_inlay_hints(event)
       end,
     })
 
