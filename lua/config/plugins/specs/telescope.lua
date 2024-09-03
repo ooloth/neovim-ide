@@ -123,7 +123,7 @@ return {
 
     -- Load extensions after setup if they're installed
     local telescope = require 'telescope'
-    -- pcall(telescope.load_extension 'noice')
+    pcall(telescope.load_extension 'noice')
     pcall(telescope.load_extension 'smart_open')
     -- pcall(telescope.load_extension, 'ui-select')
     pcall(telescope.load_extension 'undo')
@@ -153,7 +153,7 @@ return {
     -- TODO: '<leader>sl' = 'Links in buffer' (see urlview.lua)
     vim.keymap.set('n', '<leader>sm', builtin.marks, { desc = 'Marks' })
     vim.keymap.set('n', '<leader>sM', builtin.man_pages, { desc = 'Man pages' })
-    -- vim.keymap.set('n', '<leader>sn', builtin.noice, { desc = 'Notifications (messages)' })
+    vim.keymap.set('n', '<leader>sn', extensions.noice.noice, { desc = 'Notifications (messages)' })
     vim.keymap.set('n', '<leader>so', builtin.vim_options, { desc = 'Options' })
     vim.keymap.set('n', '<leader>sp', builtin.builtin, { desc = 'Telescope pickers' })
     -- <leader>sr = 'Search references' (see lsp.lua)
