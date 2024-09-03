@@ -109,6 +109,19 @@ local enable_inlay_hints = function(lsp_attach_event)
     vim.lsp.inlay_hint.enable(true, { bufnr = lsp_attach_event.buf })
   end
 end
+
+-- NOTE: requires configuring each LSP server to provide the code lenses
+local enable_code_lenses = function(lsp_attach_event)
+  -- see: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua#L159-L168
+  if vim.lsp.codelens then
+    vim.lsp.codelens.refresh()
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+      buffer = lsp_attach_event.buf,
+      callback = vim.lsp.codelens.refresh,
+    })
+  end
+end
+
 return {
   'neovim/nvim-lspconfig',
   event = { 'BufNewFile', 'BufRead', 'BufWritePre' },
@@ -129,6 +142,7 @@ return {
         show_active_diagnostics_on_cursor_line()
         update_diagnostic_signs_text()
         enable_inlay_hints(event)
+        enable_code_lenses(event)
       end,
     })
 
