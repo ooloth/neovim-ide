@@ -1,7 +1,30 @@
 -- TODO: try this - https://github.com/neovim/nvim-lspconfig/blob/master/test/minimal_init.lua
 -- TODO: more ideas - https://github.com/ilias777/nvim/blob/1d0f2e122525869025c4fd6171d69a23020234e1/lua/plugins/lsp/lsp-config.lua
 
--- see: https://www.lazyvim.org/plugins/lsp
+-- DOCS: https://www.lazyvim.org/plugins/lsp
+
+local diagnostic_signs_by_severity = {
+  [vim.diagnostic.severity.ERROR] = ' ',
+  [vim.diagnostic.severity.WARN] = ' ',
+  [vim.diagnostic.severity.INFO] = ' ',
+  [vim.diagnostic.severity.HINT] = ' ',
+}
+
+vim.diagnostic.config {
+  float = {
+    border = 'rounded',
+    source = true,
+  },
+  update_in_insert = false,
+  virtual_text = {
+    spacing = 4,
+    source = 'if_many',
+    prefix = function(diagnostic)
+      return diagnostic_signs_by_severity[diagnostic.severity]
+    end,
+  },
+  severity_sort = true,
+}
 
 local set_lsp_keymaps = function(lsp_attach_event)
   local map = function(keys, func, desc, mode)
@@ -60,8 +83,16 @@ local highlight_references_to_cursor_word_in_editor = function(lsp_attach_event)
   end
 end
 
+local update_diagnostic_signs_text = function()
+  -- see: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua#L134-L143
+  for severity, icon in pairs(diagnostic_signs_by_severity) do
+    local name = vim.diagnostic.severity[severity]:lower():gsub('^%l', string.upper)
+    name = 'DiagnosticSign' .. name
+    vim.fn.sign_define(name, { text = icon, texthl = name, numhl = '' })
+  end
+end
+
 local show_active_diagnostics_on_cursor_line = function()
-  -- show line diagnostics in floating window while cursor is on line
   -- see: https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window
   vim.api.nvim_create_autocmd('CursorHold', {
     callback = function()
@@ -80,13 +111,6 @@ return {
     'hrsh7th/cmp-nvim-lsp', -- extend nvim's default lsp capabilities
     'j-hui/fidget.nvim', -- show lsp updates via discrete UI in the bottom right
   },
-  opts = {
-    -- options for vim.diagnostic.config()
-    ---@type vim.diagnostic.Opts
-    diagnostics = {
-      float = { border = 'rounded', source = true },
-    },
-  },
   config = function(_, opts)
     -- Enable behavior that should only exist while an LSP is attached
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -95,6 +119,7 @@ return {
         set_lsp_keymaps(event)
         highlight_references_to_cursor_word_in_editor(event)
         show_active_diagnostics_on_cursor_line()
+        update_diagnostic_signs_text()
       end,
     })
 
