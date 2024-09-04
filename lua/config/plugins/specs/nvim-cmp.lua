@@ -15,6 +15,8 @@ return {
     require 'config.plugins.specs.nvim-snippets',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-emoji',
     'folke/lazydev.nvim',
   },
   config = function()
@@ -48,6 +50,7 @@ return {
         { name = 'nvim_lsp' },
         { name = 'snippets' }, -- nvim-snippets
         { name = 'path' },
+        { name = 'emoji', option = { insert = true } },
       },
     }
   end,
