@@ -20,6 +20,8 @@ return {
     'folke/lazydev.nvim',
   },
   config = function()
+    vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
+
     local cmp = require 'cmp'
 
     cmp.setup {
@@ -29,6 +31,10 @@ return {
           -- see: https://github.com/garymjr/nvim-snippets/issues/7#issuecomment-2137168610
           vim.snippet.expand(args.body)
         end,
+      experimental = {
+        ghost_text = {
+          hl_group = 'CmpGhostText',
+        },
       },
       mapping = cmp.mapping.preset.insert {
         ['<C-j>'] = cmp.mapping.select_next_item(),
