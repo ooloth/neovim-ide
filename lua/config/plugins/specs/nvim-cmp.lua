@@ -31,15 +31,14 @@ return {
       mapping = cmp.mapping.preset.insert {
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4), -- scroll preview window down
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- scroll preview window up
+        ['<C-s>'] = cmp.mapping.complete {}, -- show completion suggestions (if they didn't automatically appear)
+        ['<C-e>'] = cmp.mapping.abort(),
 
         -- This will auto-import if your LSP supports it.
         -- This will expand snippets if the LSP sent a snippet.
         ['<CR>'] = cmp.mapping.confirm { select = true },
-
-        -- Manually trigger a completion from nvim-cmp.
-        ['<C-s>'] = cmp.mapping.complete {},
       },
       sources = {
         {
