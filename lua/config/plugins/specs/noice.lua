@@ -9,6 +9,7 @@ return {
     'MunifTanjim/nui.nvim', -- used for proper rendering and multiple views
     { 'rcarriga/nvim-notify', opts = { background_colour = '#1A1A28' } }, -- use as vim.notify UI
     'nvim-treesitter/nvim-treesitter',
+    'smjonas/inc-rename.nvim', -- for inc_rename preset
   },
   opts = {
     lsp = {
@@ -28,10 +29,9 @@ return {
       },
     },
     presets = {
-      bottom_search = false, -- use a classic bottom cmdline for search
       command_palette = true, -- position the cmdline and popupmenu together
       long_message_to_split = true, -- long messages will be sent to a split
-      inc_rename = false, -- enables an input dialog for inc-rename.nvim
+      inc_rename = true, -- enables an input dialog for inc-rename.nvim
       lsp_doc_border = false, -- add a border to hover docs and signature help
     },
     routes = {
