@@ -30,9 +30,7 @@ return {
     },
     presets = {
       command_palette = true, -- position the cmdline and popupmenu together
-      long_message_to_split = true, -- long messages will be sent to a split
       inc_rename = true, -- enables an input dialog for inc-rename.nvim
-      lsp_doc_border = false, -- add a border to hover docs and signature help
     },
     routes = {
       {
@@ -53,6 +51,11 @@ return {
         view = 'mini',
       },
     },
+  },
+  -- stylua: ignore
+  keys = {
+    { "<c-d>", function() if not require("noice.lsp").scroll(4) then return "<c-d>" end end, silent = true, expr = true, desc = "Scroll Noice Float Forward", mode = {"i", "n", "s"} },
+    { "<c-u>", function() if not require("noice.lsp").scroll(-4) then return "<c-u>" end end, silent = true, expr = true, desc = "Scroll Noice Float Backward", mode = {"i", "n", "s"}},
   },
   config = function(_, opts)
     -- HACK: noice shows messages from before it was enabled, but this is not ideal when Lazy is installing plugins, so clear the messages in this case
