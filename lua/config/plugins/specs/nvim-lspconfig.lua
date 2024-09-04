@@ -12,11 +12,14 @@ local diagnostic_signs_by_severity = {
   [vim.diagnostic.severity.HINT] = ' ',
 }
 
+-- see: `:h vim.diagnostic.Opts`
+-- see: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
 vim.diagnostic.config {
   float = {
-    border = 'rounded',
+    -- NOTE: borders + padding are configured via noice.nvim.opts.lsp.hover.opts.border to take advantage of nui.nvim's ability to customize padding
     source = true,
   },
+  severity_sort = true,
   update_in_insert = false,
   virtual_text = {
     spacing = 4,
@@ -25,7 +28,6 @@ vim.diagnostic.config {
       return diagnostic_signs_by_severity[diagnostic.severity]
     end,
   },
-  severity_sort = true,
 }
 
 local set_lsp_keymaps = function(lsp_attach_event)
@@ -87,7 +89,7 @@ local highlight_references_to_cursor_word_in_editor = function(lsp_attach_event)
   end
 end
 
-local update_diagnostic_signs_text = function()
+local change_diagnostic_signs = function()
   -- see: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua#L134-L143
   for severity, icon in pairs(diagnostic_signs_by_severity) do
     local name = vim.diagnostic.severity[severity]:lower():gsub('^%l', string.upper)
@@ -143,7 +145,7 @@ return {
         set_lsp_keymaps(event)
         highlight_references_to_cursor_word_in_editor(event)
         show_active_diagnostics_on_cursor_line()
-        update_diagnostic_signs_text()
+        change_diagnostic_signs()
         enable_inlay_hints(event)
         enable_code_lenses(event)
       end,
