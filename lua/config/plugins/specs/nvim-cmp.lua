@@ -65,6 +65,10 @@ return {
         { name = 'path' },
         { name = 'emoji', option = { insert = true } },
       },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
     }
   end,
 }
