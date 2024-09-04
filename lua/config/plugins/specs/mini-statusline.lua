@@ -40,9 +40,10 @@ return {
           '%<', -- Mark general truncate point
           { hl = 'MiniStatuslineFilename', strings = { filename } },
           '%=', -- End left alignment
+          { hl = mode_hl, strings = { search } },
           { hl = 'MiniStatuslineDevinfo', strings = { diagnostics, lsp } },
           { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
-          { hl = mode_hl, strings = { search, location } },
+          { hl = mode_hl, strings = { location } },
         }
       end,
       inactive = function()
