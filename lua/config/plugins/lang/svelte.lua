@@ -5,21 +5,19 @@
 -- TODO: testing?
 -- TODO: dap?
 
-local extend = require('config.util').extend
-
 return {
   -- {
   --   'williamboman/mason-tool-installer.nvim',
-  --   opts = function(_, opts)
-  --     extend(opts.ensure_installed, {})
-  --   end,
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
   -- },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'svelte' })
-    end,
+    opts = {
+      ensure_installed = { 'svelte' },
+    },
   },
 
   -- {

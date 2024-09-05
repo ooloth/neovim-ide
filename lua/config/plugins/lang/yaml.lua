@@ -3,25 +3,25 @@
 local extend = require('config.util').extend
 
 return {
-  {
-    'williamboman/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'prettier', 'yaml-language-server' })
-    end,
-  },
+  --   'williamboman/mason-tool-installer.nvim',
+  -- {
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'yaml' })
-    end,
+    opts = {
+      ensure_installed = { 'yaml' },
+    },
   },
 
   {
     'neovim/nvim-lspconfig',
     dependencies = { 'b0o/schemastore.nvim' },
     opts = function(_, opts)
-      extend(opts.servers, {
+      opts.servers = extend(opts.servers, {
         yamlls = {
           settings = {
             yaml = {
@@ -38,6 +38,7 @@ return {
           },
         },
       })
+      return opts
     end,
   },
 

@@ -1,21 +1,19 @@
 --  TODO: lsp?
---  TODO: linting?
-
-local extend = require('config.util').extend
+--  TODO: linting: https://htmlhint.com/docs/user-guide/getting-started
 
 return {
-  {
-    'williamboman/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'prettier' })
-    end,
-  },
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'html' })
-    end,
+    opts = {
+      ensure_installed = { 'html' },
+    },
   },
 
   -- {
@@ -31,6 +29,16 @@ return {
     opts = {
       formatters_by_ft = {
         html = { 'prettier' },
+      },
+    },
+  },
+
+  {
+    'mfussenegger/nvim-lint',
+    opts = {
+      linters_by_ft = {
+        -- see: https://www.html-tidy.org (installed via homebrew)
+        html = { 'tidy' },
       },
     },
   },

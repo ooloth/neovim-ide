@@ -3,22 +3,21 @@
 -- TODO: testing: vitest
 -- TODO: testing: jest
 
-local extend = require('config.util').extend
 local prefer_node_modules_executable = require('config.util.prefer_node_modules').prefer_node_modules_executable
 
 return {
   {
     'williamboman/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'eslint-lsp', 'js-debug-adapter', 'typescript-language-server' })
-    end,
+    opts = {
+      ensure_installed = { 'eslint-lsp', 'js-debug-adapter' },
+    },
   },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'javascript', 'jsdoc', 'typescript', 'tsx' })
-    end,
+    opts = {
+      ensure_installed = { 'javascript', 'jsdoc', 'typescript', 'tsx' },
+    },
   },
 
   {

@@ -1,20 +1,18 @@
 -- TODO: https://www.lazyvim.org/extras/lang/vue
 
-local extend = require('config.util').extend
-
 return {
-  {
-    'williamboman/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'prettier', 'vue-language-server' })
-    end,
-  },
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'vue' })
-    end,
+    opts = {
+      ensure_installed = { 'vue' },
+    },
   },
 
   {

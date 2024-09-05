@@ -7,25 +7,25 @@
 local extend = require('config.util').extend
 
 return {
-  {
-    'williamboman/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'prettier' })
-    end,
-  },
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'jq', 'json', 'json5', 'jsonc' })
-    end,
+    opts = {
+      ensure_installed = { 'jq', 'json', 'json5', 'jsonc' },
+    },
   },
 
   {
     'neovim/nvim-lspconfig',
     dependencies = { 'b0o/schemastore.nvim' },
     opts = function(_, opts)
-      extend(opts.servers, {
+      opts.servers = extend(opts.servers, {
         jsonls = {
           -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
           settings = {
@@ -38,6 +38,7 @@ return {
           },
         },
       })
+      return opts
     end,
   },
 

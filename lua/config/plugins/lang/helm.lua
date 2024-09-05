@@ -1,12 +1,17 @@
 -- TODO: https://www.lazyvim.org/extras/lang/helm
 
-local extend = require('config.util').extend
-
 return {
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
+
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'helm' })
-    end,
+    opts = {
+      ensure_installed = { 'helm' },
+    },
   },
 }

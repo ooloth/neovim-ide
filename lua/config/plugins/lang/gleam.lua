@@ -1,10 +1,15 @@
-local extend = require('config.util').extend
-
 return {
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
+
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'gleam' })
-    end,
+    opts = {
+      ensure_installed = { 'gleam' },
+    },
   },
 }

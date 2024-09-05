@@ -1,11 +1,9 @@
-local extend = require('config.util').extend
-
 return {
   {
-    'williamboman/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'lemminx', 'prettier' })
-    end,
+    'nvim-treesitter/nvim-treesitter',
+    opts = {
+      ensure_installed = { 'xml' },
+    },
   },
 
   {
@@ -15,13 +13,6 @@ return {
         lemminx = {},
       },
     },
-  },
-
-  {
-    'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'xml' })
-    end,
   },
 
   {
@@ -39,6 +30,7 @@ return {
     'mfussenegger/nvim-lint',
     opts = {
       linters_by_ft = {
+        -- see: https://www.html-tidy.org (installed via homebrew)
         xml = { 'tidy' },
       },
     },

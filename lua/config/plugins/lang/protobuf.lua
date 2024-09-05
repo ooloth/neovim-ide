@@ -1,23 +1,28 @@
-local extend = require('config.util').extend
-
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'proto', 'textproto' })
-    end,
+    opts = {
+      ensure_installed = { 'proto', 'textproto' },
+    },
+  },
+
+  {
+    'stevearc/conform.nvim',
+    opts = {
+      formatters_by_ft = {
+        protobuf = { 'buf' },
+      },
+    },
+  },
+
+  {
+    -- see: https://github.com/mfussenegger/nvim-lint
+    'mfussenegger/nvim-lint',
+    opts = {
+      linters_by_ft = {
+        -- see: https://github.com/bufbuild/buf
+        protobuf = { 'buf_lint' },
+      },
+    },
   },
 }
-
--- install the formatter (see: https://mason-registry.dev/registry/list)
--- require('mason-tool-installer').setup({ ensure_installed = { 'buf' } })
--- vim.api.nvim_command('MasonToolsInstall')
-
--- -- -- linting (see: https://github.com/mfussenegger/nvim-lint#usage)
--- -- require('lint').linters_by_ft.protobuf = { 'buf_lint' }
--- --
--- -- formatting (see: https://github.com/stevearc/conform.nvim#options)
--- require('conform').formatters_by_ft.protobuf = { 'buf' }
---
---  TODO: lsp (not yet; see: https://github.com/bufbuild/buf/pull/2662)
---  TODO: treesitter

@@ -5,16 +5,16 @@
 return {
   -- {
   --   'williamboman/mason-tool-installer.nvim',
-  --   opts = function(_, opts)
-  --     extend(opts.ensure_installed, {})
-  --   end,
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
   -- },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed or {}, { 'rust' })
-    end,
+    opts = {
+      ensure_installed = { 'rust' },
+    },
   },
 
   -- formatting (see: https://github.com/stevearc/conform.nvim#setup)

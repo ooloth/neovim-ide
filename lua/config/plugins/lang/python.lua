@@ -49,23 +49,18 @@ local get_linter_options = function(linter)
 end
 
 return {
-  -- {
-  --   'WhoIsSethDaniel/mason-tool-installer.nvim',
-  --   dependencies = {
-  --     'williamboman/mason.nvim', -- so mason installations will be possible
-  --     'williamboman/mason-lspconfig.nvim', -- so lspconfig + mason names will both work
-  --   },
-  --   opts = function(_, opts)
-  --     -- vim.list_extend(opts.ensure_installed or {}, { 'black', 'flake8', 'isort', 'mypy', 'pyright', 'ruff', 'ruff-lsp', 'yapf' })
-  --     extend(opts.ensure_installed, { 'black', 'flake8', 'isort', 'mypy', 'pyright', 'ruff', 'ruff-lsp', 'yapf' })
-  --   end,
-  -- },
+  {
+    'williamboman/mason-tool-installer.nvim',
+    opts = {
+      ensure_installed = { 'flake8', 'mypy', 'ruff' },
+    },
+  },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'python', 'requirements' })
-    end,
+    opts = {
+      ensure_installed = { 'python', 'requirements' },
+    },
   },
 
   {
@@ -137,22 +132,21 @@ return {
     },
   },
 
-  -- TODO: lint
-  -- {
-  --   'mfussenegger/nvim-lint',
-  --   -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
-  --   opts = {
-  --     linters_by_ft = {
-  --       python = get_linters_in_venv { 'flake8', 'mypy', 'ruff_lint' },
-  --     },
-  --     -- stylua: ignore
-  --     linters = {
-  --       flake8 = function() return get_linter_options('flake8') end,
-  --       mypy = function() return get_linter_options('mypy') end,
-  --       ruff_lint = function() return get_linter_options('ruff') end,
-  --     },
-  --   },
-  -- },
+  {
+    'mfussenegger/nvim-lint',
+    -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
+    opts = {
+      linters_by_ft = {
+        python = get_linters_in_venv { 'flake8', 'mypy', 'ruff_lint' },
+      },
+      -- stylua: ignore
+      linters = {
+        flake8 = function() return get_linter_options('flake8') end,
+        mypy = function() return get_linter_options('mypy') end,
+        ruff_lint = function() return get_linter_options('ruff') end,
+      },
+    },
+  },
 
   -- TODO: dap
   -- {

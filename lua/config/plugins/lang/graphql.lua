@@ -2,21 +2,19 @@
 --  TODO: linting
 --  TODO: dap?
 
-local extend = require('config.util').extend
-
 return {
-  {
-    'williamboman/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'prettier' })
-    end,
-  },
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'graphql' })
-    end,
+    opts = {
+      ensure_installed = { 'graphql' },
+    },
   },
 
   -- {

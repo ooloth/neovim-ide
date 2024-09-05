@@ -1,26 +1,30 @@
 -- TODO: https://www.lazyvim.org/extras/lang/go
+-- TODO: Configure Golang in Kickstart.nvim: https://www.youtube.com/watch?v=CNYqPnaCgJw
 -- TODO: lsp
 -- TODO: linting
 -- TODO: dap
 
-local extend = require('config.util').extend
-
 return {
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
+
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'go' })
-    end,
+    opts = {
+      ensure_installed = { 'go' },
+    },
+  },
+
+  {
+    'stevearc/conform.nvim',
+    opts = {
+      formatters_by_ft = {
+        go = { 'gofumpt', 'goimports', 'gci' },
+      },
+    },
   },
 }
-
--- install all the formatters
--- require('mason-tool-installer').setup({ ensure_installed = { 'gofumpt', 'goimports', 'gci' } })
--- vim.api.nvim_command('MasonToolsInstall')
-
--- -- formatting (see: https://github.com/stevearc/conform.nvim#setup)
--- require('conform').setup({
---   formatters_by_ft = {
---     go = { 'gofumpt', 'goimports', 'gci' },
---   },
--- })

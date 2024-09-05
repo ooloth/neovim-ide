@@ -8,24 +8,21 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   version = false, -- last release is way too old and doesn't work on Windows
-  lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
-  event = 'VeryLazy',
+  event = { 'BufEnter', 'VeryLazy' },
   build = ':TSUpdate',
-  main = 'nvim-treesitter.configs', -- sets main module to use for opts
+  main = 'nvim-treesitter.configs', -- sets main module (the module to call .setup(opts) on)
   cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
-  keys = {
-    { '<cr>', desc = 'Increment Selection' },
-    { '<bs>', desc = 'Decrement Selection', mode = 'x' },
-  },
+  opts_extend = { 'ensure_installed' }, -- extend this list-like option when merging configs (see: https://github.com/folke/lazy.nvim/discussions/1706#discussioncomment-10268907)
+  ---@type TSConfig
+  ---@diagnostic disable-next-line: missing-fields
   opts = {
     auto_install = true, -- install missing parsers when entering buffer
-    -- see: https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
-    -- NOTE: must install parsers that ship with nvim to override them and avoid errors
+    -- The following parsers MUST always be installed to override the versions that ship with neovim and avoid errors
     -- https://github.com/nvim-treesitter/nvim-treesitter#i-get-query-error-invalid-node-type-at-position
-    ensure_installed = { 'query', 'regex' },
+    ensure_installed = { 'c', 'lua', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
     highlight = { enable = true },
     indent = { enable = true },
     incremental_selection = {

@@ -1,19 +1,17 @@
-local extend = require('config.util').extend
-
 return {
-  {
-    'williamboman/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'astro-language-server', 'prettier', 'typescript-language-server' })
-    end,
-  },
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = {
+  --     ensure_installed = {},
+  --   },
+  -- },
 
   {
     'nvim-treesitter/nvim-treesitter',
-    opts = function(_, opts)
+    opts = {
       -- see: https://github.com/virchau13/tree-sitter-astro/#troubleshooting
-      extend(opts.ensure_installed, { 'astro', 'css', 'typescript', 'tsx' })
-    end,
+      ensure_installed = { 'astro', 'css', 'typescript', 'tsx' },
+    },
   },
 
   {
