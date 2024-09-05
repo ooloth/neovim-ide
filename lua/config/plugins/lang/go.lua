@@ -1,10 +1,18 @@
 -- TODO: https://www.lazyvim.org/extras/lang/go
 -- TODO: lsp
--- TODO: treesitter
 -- TODO: linting
 -- TODO: dap
 
-return {}
+local extend = require('config.util').extend
+
+return {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = function(_, opts)
+      extend(opts.ensure_installed, { 'go' })
+    end,
+  },
+}
 
 -- install all the formatters
 -- require('mason-tool-installer').setup({ ensure_installed = { 'gofumpt', 'goimports', 'gci' } })

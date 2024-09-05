@@ -1,21 +1,3 @@
--- TODO: consider these default nvim-lint linters:
--- clojure = { "clj-kondo" },
--- dockerfile = { "hadolint" },
--- inko = { "inko" },
--- janet = { "janet" },
--- json = { "jsonlint" },
--- rst = { "vale" },
--- ruby = { "ruby" },
--- terraform = { "tflint" },
+local util = require 'config.util'
 
-return {
-  -- TODO: can I automatically require every file in config.plugins.lang instead of manually updating this list?
-  require 'config.plugins.lang.c',
-  require 'config.plugins.lang.lua',
-  require 'config.plugins.lang.markdown',
-  require 'config.plugins.lang.python',
-  require 'config.plugins.lang.shell',
-  require 'config.plugins.lang.text',
-  require 'config.plugins.lang.tmux',
-  require 'config.plugins.lang.vim',
-}
+return util.require_all_files_in_config_directory 'plugins/lang'

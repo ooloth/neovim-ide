@@ -1,13 +1,12 @@
--- TODO: https://www.lazyvim.org/extras/lang/toml
--- TODO: lsp?
--- TODO: formatting?
--- TODO: linting?
+--  TODO: lsp?
+--  TODO: formatting?
+--  TODO: linting?
 
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 return {
   -- {
-  --   'williamboman/mason.nvim',
+  --   'williamboman/mason-tool-installer.nvim',
   --   opts = function(_, opts)
   --     extend(opts.ensure_installed, {})
   --   end,
@@ -16,7 +15,8 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     opts = function(_, opts)
-      extend(opts.ensure_installed, { 'toml' })
+      -- see: https://github.com/virchau13/tree-sitter-astro/#troubleshooting
+      extend(opts.ensure_installed, { 'pug' })
     end,
   },
 

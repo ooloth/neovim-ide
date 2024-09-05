@@ -1,11 +1,11 @@
 --  TODO: linting?
 --  TODO: https://www.lazyvim.org/extras/lang/tailwind
 
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 return {
   {
-    'williamboman/mason.nvim',
+    'williamboman/mason-tool-installer.nvim',
     opts = function(_, opts)
       extend(opts.ensure_installed, { 'prettier' })
     end,

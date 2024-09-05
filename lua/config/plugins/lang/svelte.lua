@@ -1,12 +1,15 @@
---  TODO: lsp?
---  TODO: formatting?
---  TODO: linting?
+-- TODO: https://www.lazyvim.org/extras/lang/svelte
+-- TODO: lsp?
+-- TODO: formatting?
+-- TODO: linting?
+-- TODO: testing?
+-- TODO: dap?
 
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 return {
   -- {
-  --   'williamboman/mason.nvim',
+  --   'williamboman/mason-tool-installer.nvim',
   --   opts = function(_, opts)
   --     extend(opts.ensure_installed, {})
   --   end,
@@ -15,7 +18,7 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     opts = function(_, opts)
-      extend(opts.ensure_installed, { 'csv', 'psv', 'tsv' })
+      extend(opts.ensure_installed, { 'svelte' })
     end,
   },
 

@@ -3,6 +3,13 @@
 --  TODO: dap
 
 return {
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = function(_, opts)
+  --     extend(opts.ensure_installed, {})
+  --   end,
+  -- },
+
   {
     'nvim-treesitter/nvim-treesitter',
     opts = function(_, opts)

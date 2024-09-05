@@ -49,13 +49,17 @@ local get_linter_options = function(linter)
 end
 
 return {
-  {
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    opts = function(_, opts)
-      -- vim.list_extend(opts.ensure_installed or {}, { 'black', 'flake8', 'isort', 'mypy', 'pyright', 'ruff', 'ruff-lsp', 'yapf' })
-      extend(opts.ensure_installed, { 'black', 'flake8', 'isort', 'mypy', 'pyright', 'ruff', 'ruff-lsp', 'yapf' })
-    end,
-  },
+  -- {
+  --   'WhoIsSethDaniel/mason-tool-installer.nvim',
+  --   dependencies = {
+  --     'williamboman/mason.nvim', -- so mason installations will be possible
+  --     'williamboman/mason-lspconfig.nvim', -- so lspconfig + mason names will both work
+  --   },
+  --   opts = function(_, opts)
+  --     -- vim.list_extend(opts.ensure_installed or {}, { 'black', 'flake8', 'isort', 'mypy', 'pyright', 'ruff', 'ruff-lsp', 'yapf' })
+  --     extend(opts.ensure_installed, { 'black', 'flake8', 'isort', 'mypy', 'pyright', 'ruff', 'ruff-lsp', 'yapf' })
+  --   end,
+  -- },
 
   {
     'nvim-treesitter/nvim-treesitter',

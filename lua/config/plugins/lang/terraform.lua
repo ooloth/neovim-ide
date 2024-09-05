@@ -1,10 +1,11 @@
---  TODO: https://www.lazyvim.org/xtras/lang/terraform
+-- TODO: https://www.lazyvim.org/xtras/lang/terraform
+-- TODO: nvim-lint: consider the default linter: terraform = { "tflint" },
 
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 return {
   {
-    'williamboman/mason.nvim',
+    'williamboman/mason-tool-installer.nvim',
     opts = function(_, opts)
       extend(opts.ensure_installed, { 'terraform-ls', 'tflint' })
     end,

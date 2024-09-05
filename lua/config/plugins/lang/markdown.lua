@@ -2,13 +2,16 @@
 
 local extend = require('config.util').extend
 
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
+
 return {
-  {
-    'williamboman/mason.nvim',
-    opts = function(_, opts)
-      extend(opts.ensure_installed, { 'markdownlint' })
-    end,
-  },
+  -- {
+  --   'williamboman/mason-tool-installer.nvim',
+  --   opts = function(_, opts)
+  --     extend(opts.ensure_installed, { 'markdownlint' })
+  --   end,
+  -- },
 
   {
     'nvim-treesitter/nvim-treesitter',

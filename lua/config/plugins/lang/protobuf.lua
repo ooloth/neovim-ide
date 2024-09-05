@@ -1,4 +1,13 @@
-return {}
+local extend = require('config.util').extend
+
+return {
+  {
+    'nvim-treesitter/nvim-treesitter',
+    opts = function(_, opts)
+      extend(opts.ensure_installed, { 'proto', 'textproto' })
+    end,
+  },
+}
 
 -- install the formatter (see: https://mason-registry.dev/registry/list)
 -- require('mason-tool-installer').setup({ ensure_installed = { 'buf' } })

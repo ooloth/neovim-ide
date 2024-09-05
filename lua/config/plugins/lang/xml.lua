@@ -1,8 +1,8 @@
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 return {
   {
-    'williamboman/mason.nvim',
+    'williamboman/mason-tool-installer.nvim',
     opts = function(_, opts)
       extend(opts.ensure_installed, { 'lemminx', 'prettier' })
     end,
