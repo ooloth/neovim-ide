@@ -1,6 +1,6 @@
 -- see: https://www.youtube.com/watch?v=NhTPVXP8n7w
 
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 return {
   'kristijanhusak/vim-dadbod-ui',

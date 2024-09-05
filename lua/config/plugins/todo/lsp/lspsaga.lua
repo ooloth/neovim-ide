@@ -1,4 +1,4 @@
-local extend = require('util').extend
+local extend = require('config.util').extend
 
 return {
   'nvimdev/lspsaga.nvim',
