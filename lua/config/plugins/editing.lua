@@ -48,5 +48,6 @@ return {
   require 'config.plugins.specs.inc-rename',
   require 'config.plugins.specs.mini-pairs',
   require 'config.plugins.specs.mini-surround',
+  require 'config.plugins.specs.netrw',
   require 'config.plugins.specs.nvim-cmp',
 }
