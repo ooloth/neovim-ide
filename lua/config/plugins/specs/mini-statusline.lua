@@ -2,18 +2,14 @@
 -- TODO: show active macro recording register if recording in progress
 
 local lsp_attached_servers = function()
-  local servers_attached_to_current_buffer = vim.lsp.get_clients { bufnr = vim.fn.bufnr '%' }
-  local server_names = ''
-  local separator = ''
+  local current_buffer_servers = vim.lsp.get_clients { bufnr = vim.fn.bufnr '%' }
+  local server_names = {}
 
-  for i, v in ipairs(servers_attached_to_current_buffer) do
-    if i > 1 then
-      separator = ', '
-    end
-    server_names = server_names .. separator .. v.name
+  for _, value in ipairs(current_buffer_servers) do
+    vim.list_extend(server_names, { value.name })
   end
 
-  return server_names
+  return table.concat(server_names, ', ')
 end
 
 return {
