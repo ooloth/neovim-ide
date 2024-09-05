@@ -2,6 +2,13 @@
 -- TODO: folding: https://github.com/kevinhwang91/nvim-ufo
 -- TODO: folding: Configuring nvim-ufo to use LSP with lazy.nvim: https://www.reddit.com/r/neovim/comments/12yomtj/configuring_nvimufo_to_use_lsp_with_lazynvim/
 
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = 'expr'
+vim.opt.foldtext = ''
+vim.opt.mouse = '' -- disable mouse mode (use 'a' to enable)
+vim.opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
+vim.opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
+
 local set = vim.keymap.set
 
 -- TODO: use this helper instead to eliminate most of the 'n' and '{ desc = ... }' used in the `set` calls?
