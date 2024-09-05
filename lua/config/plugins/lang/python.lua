@@ -119,6 +119,7 @@ return {
         -- Ruff Server (replaces ruff_lsp and handles linting, formatting and code actions)
         -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff
         -- see: https://docs.astral.sh/ruff/editors/setup/#neovim
+        -- see: Ruff's language server is now written in Rust: https://astral.sh/blog/ruff-v0.4.5
         ruff = {},
       },
     },
@@ -127,12 +128,12 @@ return {
   {
     'stevearc/conform.nvim',
     opts = {
+      -- NOTE: ruff_format has been replaced by the ruff lsp above
       formatters_by_ft = { python = { 'isort', 'black', 'yapf' } },
       -- stylua: ignore
       formatters = {
         black = function() return get_formatter_options('black') end,
         isort = function() return get_formatter_options('isort') end,
-        -- NOTE: ruff_format has been replaced by the ruff lsp above
         yapf = function() return get_formatter_options('yapf') end,
       },
     },
@@ -143,13 +144,13 @@ return {
     -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
     opts = {
       linters_by_ft = {
+        -- NOTE: ruff_lint has been replaced by the ruff lsp above
         python = get_linters_in_venv { 'flake8', 'mypy' },
       },
       -- stylua: ignore
       linters = {
         flake8 = function() return get_linter_options('flake8') end,
         mypy = function() return get_linter_options('mypy') end,
-        -- NOTE: ruff_lint has been replaced by the ruff lsp above
       },
     },
   },
