@@ -21,7 +21,7 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = { 'b0o/schemastore.nvim' },
     opts = function(_, opts)
-      opts.servers = extend(opts.servers, {
+      extend(opts.servers, {
         yamlls = {
           settings = {
             yaml = {
@@ -38,7 +38,6 @@ return {
           },
         },
       })
-      return opts
     end,
   },
 

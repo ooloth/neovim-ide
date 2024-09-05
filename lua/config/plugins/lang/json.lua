@@ -25,7 +25,7 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = { 'b0o/schemastore.nvim' },
     opts = function(_, opts)
-      opts.servers = extend(opts.servers, {
+      extend(opts.servers, {
         jsonls = {
           -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls
           settings = {
@@ -38,7 +38,6 @@ return {
           },
         },
       })
-      return opts
     end,
   },
 
