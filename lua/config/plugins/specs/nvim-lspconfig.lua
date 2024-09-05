@@ -47,6 +47,7 @@ local set_lsp_keymaps = function(lsp_attach_event)
     -- TODO: only attempt this if the LSP has rename capabilities (do any not?)
     return ':IncRename ' .. vim.fn.expand '<cword>'
   end, { desc = 'Rename symbol under cursor', expr = true }) -- rename the variable under your cursor; most Language Servers support renaming across files, etc.
+  map('<leader>sr', builtin.lsp_references, 'References to symbol under cursor') -- find references to the word under the cursor
   map('<leader>ss', builtin.lsp_document_symbols, 'Symbols in editor') -- fuzzy find all the symbols in your current document; symbols are things like variables, functions, types, etc.
   map('<leader>sS', builtin.lsp_dynamic_workspace_symbols, 'Symbols in project') -- fuzzy find all the symbols in your current workspace; similar to document symbols, except searches over your entire project
   map('<leader>st', builtin.lsp_type_definitions, 'type definition') -- jump to the type of the word under your cursor; useful when you're not sure what type a variable is and you want to see the definition of its *type*, not where it was *defined*
