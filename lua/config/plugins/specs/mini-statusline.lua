@@ -1,13 +1,12 @@
 -- TODO: show active virtual env when in a python file (and a warning if no venv is active)
 -- TODO: show active macro recording register if recording in progress
 
--- FIXME: only show the active servers attached to the current buffer (not all active servers)
 local lsp_attached_servers = function()
-  local attached_servers = vim.lsp.get_clients()
+  local servers_attached_to_current_buffer = vim.lsp.get_clients { bufnr = vim.fn.bufnr '%' }
   local server_names = ''
   local separator = ''
 
-  for i, v in ipairs(attached_servers) do
+  for i, v in ipairs(servers_attached_to_current_buffer) do
     if i > 1 then
       separator = ', '
     end
