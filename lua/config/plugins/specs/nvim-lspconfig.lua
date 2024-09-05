@@ -44,8 +44,9 @@ local set_lsp_keymaps = function(lsp_attach_event)
   map('gr', builtin.lsp_references, 'Go to references') -- find references to the word under the cursor
   map('<leader>ra', vim.lsp.buf.code_action, 'Code action', { 'n', 'x' }) -- execute a code action, usually your cursor needs to be on top of an error or a suggestion from your LSP for this to activate
   vim.keymap.set('n', '<leader>rs', function()
+    -- TODO: only attempt this if the LSP has rename capabilities (do any not?)
     return ':IncRename ' .. vim.fn.expand '<cword>'
-  end, { desc = 'Rename symbol', expr = true }) -- rename the variable under your cursor; most Language Servers support renaming across files, etc.
+  end, { desc = 'Rename symbol under cursor', expr = true }) -- rename the variable under your cursor; most Language Servers support renaming across files, etc.
   map('<leader>ss', builtin.lsp_document_symbols, 'Symbols in editor') -- fuzzy find all the symbols in your current document; symbols are things like variables, functions, types, etc.
   map('<leader>sS', builtin.lsp_dynamic_workspace_symbols, 'Symbols in project') -- fuzzy find all the symbols in your current workspace; similar to document symbols, except searches over your entire project
   map('<leader>st', builtin.lsp_type_definitions, 'type definition') -- jump to the type of the word under your cursor; useful when you're not sure what type a variable is and you want to see the definition of its *type*, not where it was *defined*
@@ -136,6 +137,7 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim', -- automatically install lsp servers I've configured
     'hrsh7th/cmp-nvim-lsp', -- extend nvim's default lsp capabilities
     'j-hui/fidget.nvim', -- show lsp updates via discrete UI in the bottom right
+    'smjonas/inc-rename.nvim', -- used by some lsp keymaps
   },
   config = function(_, opts)
     -- Enable behavior that should only exist while an LSP is attached

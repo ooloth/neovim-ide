@@ -9,7 +9,6 @@ return {
     'MunifTanjim/nui.nvim', -- used for proper rendering and multiple views
     { 'rcarriga/nvim-notify', opts = { background_colour = '#1A1A28' } }, -- use as vim.notify UI
     'nvim-treesitter/nvim-treesitter',
-    'smjonas/inc-rename.nvim', -- for inc_rename preset
   },
   opts = {
     lsp = {
