@@ -3,8 +3,6 @@
 -- TODO: https://www.lazyvim.org/extras/lang/python
 -- TODO: https://www.lazyvim.org/extras/formatting/black
 
-local extend = require('config.util').extend
-local inspect = require('config.util').inspect
 local is_installed_in_venv = require('config.util.prefer_venv').is_installed_in_venv
 local prefer_venv_executable = require('config.util.prefer_venv').prefer_venv_executable
 
@@ -21,6 +19,21 @@ vim.g.python3_host_prog = pynvim_python
 
 -- get the python executable from the project venv (if active) for dap and neotest
 local python = prefer_venv_executable 'python'
+
+-- see: https://docs.astral.sh/ruff/editors/setup/#neovim
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then
+      return
+    end
+    if client.name == 'ruff' then
+      client.server_capabilities.hoverProvider = false -- Disable hover in favor of Pyright
+    end
+  end,
+  desc = 'LSP: Disable hover capability from Ruff',
+})
 
 -- see: https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/black.lua
 local get_formatter_options = function(formatter)
@@ -91,29 +104,22 @@ return {
             -- see: https://microsoft.github.io/pyright/#/settings
             python = {
               analysis = {
+                ignore = { '*' }, -- ignore all files for analysis to exclusively use Ruff for linting
                 -- diagnosticMode = 'workspace',
-                diagnosticSeverityOverrides = {
-                  reportUnusedVariable = 'off', -- use ruff or flake8 for linting (diagnostics)
-                },
-                typeCheckingMode = 'off', -- use mypy for type-checking
-                useLibraryCodeForTypes = true,
+                -- diagnosticSeverityOverrides = {
+                --   reportUnusedVariable = 'off', -- use ruff or flake8 for linting (diagnostics)
+                -- },
+                -- typeCheckingMode = 'off', -- use mypy for type-checking
+                -- useLibraryCodeForTypes = true,
               },
               disableOrganizeImports = true, -- use ruff or isort for import sorting
             },
           },
         },
-        -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp
-        ruff_lsp = {},
-      },
-      setup = {
-        ruff_lsp = function()
-          require('lazyvim.util').lsp.on_attach(function(client, _)
-            if client.name == 'ruff_lsp' then
-              -- Disable Ruff's hover in favor of Pyright's
-              client.server_capabilities.hoverProvider = false
-            end
-          end)
-        end,
+        -- Ruff Server (replaces ruff_lsp and handles linting, formatting and code actions)
+        -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff
+        -- see: https://docs.astral.sh/ruff/editors/setup/#neovim
+        ruff = {},
       },
     },
   },
@@ -121,12 +127,12 @@ return {
   {
     'stevearc/conform.nvim',
     opts = {
-      formatters_by_ft = { python = { 'isort', 'black', 'ruff_format', 'yapf' } },
+      formatters_by_ft = { python = { 'isort', 'black', 'yapf' } },
       -- stylua: ignore
       formatters = {
         black = function() return get_formatter_options('black') end,
         isort = function() return get_formatter_options('isort') end,
-        ruff_format = function() return get_formatter_options('ruff_format') end,
+        -- NOTE: ruff_format has been replaced by the ruff lsp above
         yapf = function() return get_formatter_options('yapf') end,
       },
     },
@@ -137,13 +143,13 @@ return {
     -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
     opts = {
       linters_by_ft = {
-        python = get_linters_in_venv { 'flake8', 'mypy', 'ruff_lint' },
+        python = get_linters_in_venv { 'flake8', 'mypy' },
       },
       -- stylua: ignore
       linters = {
         flake8 = function() return get_linter_options('flake8') end,
         mypy = function() return get_linter_options('mypy') end,
-        ruff_lint = function() return get_linter_options('ruff') end,
+        -- NOTE: ruff_lint has been replaced by the ruff lsp above
       },
     },
   },
