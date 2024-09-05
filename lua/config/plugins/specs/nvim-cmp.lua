@@ -25,9 +25,7 @@ return {
 
     cmp.setup {
       completion = {
-        -- TODO: remove "noselect" if I want to go back to the first item being automatically selected
-        -- see: https://stackoverflow.com/a/74714258/8802485
-        completeopt = 'menu,menuone,noinsert,noselect',
+        completeopt = 'menu,menuone,noinsert',
       },
       experimental = {
         ghost_text = {
@@ -42,11 +40,9 @@ return {
         ['<C-s>'] = cmp.mapping.complete {}, -- show completion suggestions (if they didn't automatically appear)
         ['<C-e>'] = cmp.mapping.abort(),
 
-        -- TODO: set select = true if I want to go back to CR always inserting an item (rather than allowing a newline)
-        -- I could always consider C-y instead of CR to remove the issue of wanting CR to sometimes close the window
         -- This will auto-import if your LSP supports it.
         -- This will expand snippets if the LSP sent a snippet.
-        ['<CR>'] = cmp.mapping.confirm { select = false },
+        ['<CR>'] = cmp.mapping.confirm { select = true },
         ['<C-y>'] = cmp.mapping.confirm { select = true }, -- TODO: try out this alternative to CR
       },
       snippet = {
