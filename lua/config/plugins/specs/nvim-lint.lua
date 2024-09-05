@@ -1,7 +1,8 @@
 -- TODO: https://www.lazyvim.org/plugins/linting
--- see: https://github.com/mfussenegger/nvim-lint
--- see: https://www.lazyvim.org/plugins/linting#nvim-lint
--- see: https://github.com/mfussenegger/nvim-lint#available-linters
+
+-- DOCS: https://github.com/mfussenegger/nvim-lint
+-- DOCS: https://github.com/mfussenegger/nvim-lint#available-linters
+-- DOCS: https://www.lazyvim.org/plugins/linting#nvim-lint
 
 return {
   'mfussenegger/nvim-lint',

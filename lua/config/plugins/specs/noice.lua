@@ -1,3 +1,4 @@
+-- TODO: how to dismiss a notification immediately if I want to?
 -- DOCS: https://github.com/folke/noice.nvim
 -- DOCS: https://github.com/folke/noice.nvim/wiki/Configuration-Recipes
 -- DOCS: https://www.lazyvim.org/plugins/ui#noicenvim
