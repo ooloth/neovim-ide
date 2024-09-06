@@ -1,7 +1,6 @@
--- TODO: show active virtual env when in a python file (and a warning if no venv is active)
--- TODO: show active macro recording register if recording in progress
+-- TODO: show @recording messages in statusline instead of notify pop-ups? https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
 
-local lsp_attached_servers = function()
+local get_attached_lsp_servers = function()
   local current_buffer_servers = vim.lsp.get_clients { bufnr = vim.fn.bufnr '%' }
   local server_names = {}
 
@@ -10,6 +9,20 @@ local lsp_attached_servers = function()
   end
 
   return table.concat(server_names, ', ')
+end
+
+local get_active_venv = function()
+  if vim.bo.filetype ~= 'python' then
+    return ''
+  end
+
+  if not vim.env.VIRTUAL_ENV then
+    return '(no venv activated)'
+  end
+
+  -- example path (pyenv) = '/Users/michael/.pyenv/versions/3.12.1/envs/scraper'
+  -- example path (rye) = '/Users/michael/Repos/ooloth/some-python-project/.venv'
+  return '(' .. vim.fs.basename(vim.env.VIRTUAL_ENV) .. ')'
 end
 
 return {
@@ -27,8 +40,9 @@ return {
         local filename = statusline.section_filename { trunc_width = 999 } -- always truncate to the relative path
         local fileinfo = MiniStatusline.section_fileinfo { trunc_width = 999 } -- always truncate to just the filetype + icon
         local location = '%2l:%-2v' -- LINE:COLUMN
-        local lsp = lsp_attached_servers()
+        local lsp = get_attached_lsp_servers()
         local search = statusline.section_searchcount { trunc_width = 75 }
+        local venv = get_active_venv()
 
         -- Customize highlight group colors
         local mocha = require 'catppuccin.palettes.mocha'
@@ -44,7 +58,7 @@ return {
           { hl = mode_hl, strings = { search } },
           { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics } },
           { hl = 'MiniStatuslineLspServers', strings = { lsp } },
-          { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+          { hl = 'MiniStatuslineFileinfo', strings = { fileinfo, venv } },
           { hl = mode_hl, strings = { location } },
         }
       end,
