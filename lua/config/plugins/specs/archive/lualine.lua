@@ -1,8 +1,9 @@
--- TODO: -- TODO: https://www.lazyvim.org/plugins/ui#lualinenvim
+-- NOTE: using mini.statusline instead
+
 -- TODO: https://www.lazyvim.org/plugins/ui#lualinenvim
 -- TODO: show @recording messages in statusline instead of notify pop-ups? https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
 
-local Util = require('lazyvim.util')
+local Util = require 'lazyvim.util'
 local icons = require('lazyvim.config').icons
 
 local function get_venv()
@@ -60,7 +61,7 @@ local catppuccin = {
 
 -- set transparent background:
 -- see: https://www.reddit.com/r/neovim/comments/zh4kc8/comment/j0qtbb4/?utm_source=share&utm_medium=web2x&context=3
-local custom_catppuccin = require('lualine.themes.catppuccin')
+local custom_catppuccin = require 'lualine.themes.catppuccin'
 custom_catppuccin.normal.c.bg = nil
 
 local options = {
@@ -123,7 +124,7 @@ local sections = {
       cond = function()
         return package.loaded['dap'] and require('dap').status() ~= ''
       end,
-      color = Util.ui.fg('Debug'),
+      color = Util.ui.fg 'Debug',
     },
     {
       'filetype',
