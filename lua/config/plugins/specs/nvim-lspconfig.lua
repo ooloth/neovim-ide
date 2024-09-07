@@ -16,7 +16,8 @@ local diagnostic_signs_by_severity = {
 -- see: https://neovim.io/doc/user/diagnostic.html#vim.diagnostic.Opts
 vim.diagnostic.config {
   float = {
-    -- NOTE: borders + padding are configured via noice.nvim.opts.lsp.hover.opts.border to take advantage of nui.nvim's ability to customize padding
+    -- NOTE: border padding configured via noice.nvim.opts.lsp.hover.opts.border to take advantage of nui.nvim's ability to customize padding
+    border = 'rounded',
     source = true,
   },
   severity_sort = true,
