@@ -1,3 +1,4 @@
+-- TODO: show attached formatters and linters as well
 -- TODO: show @recording messages in statusline instead of notify pop-ups? https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
 
 local get_attached_lsp_servers = function()

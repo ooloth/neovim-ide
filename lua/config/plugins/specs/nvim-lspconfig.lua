@@ -1,7 +1,7 @@
 -- TODO: gd: go straight to definition?
 -- TODO: inlay hints: leader-u* keymap to toggle
 -- TODO: inlay hints: configure to show only some (e.g. show arg types but hide function reference counts?)
--- TODO: more ideas - https://github.com/ilias777/nvim/blob/1d0f2e122525869025c4fd6171d69a23020234e1/lua/plugins/lsp/lsp-config.lua
+-- TODO: more ideas: https://github.com/ilias777/nvim/blob/1d0f2e122525869025c4fd6171d69a23020234e1/lua/plugins/lsp/lsp-config.lua
 
 -- DOCS: https://www.lazyvim.org/plugins/lsp
 
@@ -44,7 +44,6 @@ local set_lsp_keymaps = function(lsp_attach_event)
   map('gr', builtin.lsp_references, 'Go to references') -- find references to the word under the cursor
   map('<leader>ra', vim.lsp.buf.code_action, 'Code action', { 'n', 'x' }) -- execute a code action, usually your cursor needs to be on top of an error or a suggestion from your LSP for this to activate
   vim.keymap.set('n', '<leader>rs', function()
-    -- TODO: only attempt this if the LSP has rename capabilities (do any not?)
     return ':IncRename ' .. vim.fn.expand '<cword>'
   end, { desc = 'Rename symbol under cursor', expr = true }) -- rename the variable under your cursor; most Language Servers support renaming across files, etc.
   map('<leader>sr', builtin.lsp_references, 'References to symbol under cursor') -- find references to the word under the cursor
