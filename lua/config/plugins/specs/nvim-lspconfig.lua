@@ -138,8 +138,9 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim', -- automatically install lsp servers I've configured
     'hrsh7th/cmp-nvim-lsp', -- extend nvim's default lsp capabilities
     'j-hui/fidget.nvim', -- show lsp updates via discrete UI in the bottom right
-    'nvim-telescope/telescope.nvim', -- used by some lsp keymaps
-    'smjonas/inc-rename.nvim', -- used by some lsp keymaps
+    'nvim-telescope/telescope.nvim', -- keymaps: better references, etc
+    'smjonas/inc-rename.nvim', -- keymaps: better rename symbol UI
+    'stevearc/dressing.nvim', -- keymaps: better vim.ui.select UI (e.g. for code actions)
   },
   config = function(_, opts)
     -- Enable behavior that should only exist while an LSP is attached
