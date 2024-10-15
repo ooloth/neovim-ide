@@ -159,7 +159,7 @@ return {
     -- Ensure all servers configured via nvim-lspconfig's "opts.servers" have been installed
     require('mason').setup()
     require('mason-tool-installer').setup {
-      ensure_installed = vim.tbl_keys(opts.servers or {}),
+      ensure_installed = vim.tbl_keys(opts.servers or {}), -- FIXME: exclude deno?
     }
 
     -- Set up each server
