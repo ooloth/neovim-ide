@@ -34,13 +34,14 @@ return {
             })
           end,
           -- see: https://github.com/microsoft/vscode-eslint/tree/main?tab=readme-ov-file#settings-options
+          -- defaults: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
           settings = {
             nodePath = vim.fn.getcwd() .. '/node_modules',
             -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
             workingDirectory = { mode = 'auto' },
           },
         },
-        tsserver = {
+        ts_ls = {
           keys = function()
             return {}
           end,
