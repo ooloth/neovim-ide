@@ -41,6 +41,7 @@ vim.cmd [[
 
 return {
   -- require 'config.plugins.specs.bufferline',
+  -- require 'config.plugins.specs.archive.tokyonight',
   require 'config.plugins.specs.catppuccin',
   require 'config.plugins.specs.dressing',
   require 'config.plugins.specs.fidget',

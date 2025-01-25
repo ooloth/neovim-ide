@@ -21,6 +21,7 @@ local get_active_venv = function()
     return '(no venv activated)'
   end
 
+  -- TODO: need anymore with uv?
   -- example path (pyenv) = '/Users/michael/.pyenv/versions/3.12.1/envs/scraper'
   -- example path (rye) = '/Users/michael/Repos/ooloth/some-python-project/.venv'
   return '(' .. vim.fs.basename(vim.env.VIRTUAL_ENV) .. ')'
@@ -47,6 +48,7 @@ return {
 
         -- Customize highlight group colors
         local mocha = require 'catppuccin.palettes.mocha'
+        vim.api.nvim_set_hl(0, 'MiniStatuslineFilename', { bg = 'none' }) -- no middle bg color across statusline
         vim.api.nvim_set_hl(0, 'MiniStatuslineLspServers', { bg = mocha.surface0 })
         vim.api.nvim_set_hl(0, 'MiniStatuslineDiagnostics', { fg = mocha.yellow })
 
