@@ -49,7 +49,9 @@ return {
           -- root_dir = { vim.fn.getcwd() .. '/deno.json', vim.fn.getcwd() .. '/deno.lock' },
           settings = {
             deno = {
-              -- TODO: only if there's a deno.json?
+              -- FIXME: only if there's a deno.json?
+              -- see: https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
+              enable = false, -- TODO: unblock when I can get it to only apply to deno projects
               -- enable = is_deno_project(),
               suggest = {
                 imports = {
