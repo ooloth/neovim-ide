@@ -23,7 +23,7 @@ local get_active_venv = function()
 
   -- TODO: need anymore with uv?
   -- example path (pyenv) = '/Users/michael/.pyenv/versions/3.12.1/envs/scraper'
-  -- example path (rye) = '/Users/michael/Repos/ooloth/some-python-project/.venv'
+  -- example path (uv) = '/Users/michael/Repos/ooloth/some-python-project/.venv'
   return '(' .. vim.fs.basename(vim.env.VIRTUAL_ENV) .. ')'
 end
 
@@ -37,11 +37,13 @@ return {
         local statusline = require 'mini.statusline'
 
         -- Get strings to display
-        local mode, mode_hl = statusline.section_mode { trunc_width = 120 }
+        local mode, mode_hl = statusline.section_mode { trunc_width = 9999 } -- always truncate to one letter
         local diagnostics = statusline.section_diagnostics { trunc_width = 75 }
         local filename = statusline.section_filename { trunc_width = 999 } -- always truncate to the relative path
         local fileinfo = MiniStatusline.section_fileinfo { trunc_width = 999 } -- always truncate to just the filetype + icon
         local location = '%2l:%-2v' -- LINE:COLUMN
+        -- See: https://github.com/echasnovski/mini.statusline/blob/main/lua/mini/statusline.lua#L433
+        -- local location = '%l/%L %2v/%-2{virtcol("$") - 1}' -- LINE/LINES COLUMN/COLUMNS
         local lsp = get_attached_lsp_servers()
         local search = statusline.section_searchcount { trunc_width = 75 }
         local venv = get_active_venv()
