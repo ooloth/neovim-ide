@@ -1,3 +1,6 @@
+-- TODO:
+-- fidget: fix bg color
+
 vim.opt.background = 'dark' -- colorschemes that can be light or dark will be made dark
 vim.opt.breakindent = true
 -- vim.opt.cmdheight = 0
@@ -40,8 +43,6 @@ vim.cmd [[
 ]]
 
 return {
-  -- require 'config.plugins.specs.bufferline',
-  -- require 'config.plugins.specs.archive.tokyonight',
   require 'config.plugins.specs.catppuccin',
   require 'config.plugins.specs.dressing',
   require 'config.plugins.specs.fidget',
