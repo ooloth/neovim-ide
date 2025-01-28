@@ -15,14 +15,14 @@ return {
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
       },
       flavour = 'mocha', -- latte, frappe, macchiato, mocha
-      -- highlight_overrides = {
-      -- see: https://github.com/catppuccin/nvim?tab=readme-ov-file#overwriting-highlight-groups
-      -- mocha = function(mocha)
-      -- return {
-      -- Comment = { fg = '#7f849c' }, -- brighter comments
-      -- }
-      -- end,
-      -- },
+      highlight_overrides = {
+        -- see: https://github.com/catppuccin/nvim?tab=readme-ov-file#overwriting-highlight-groups
+        mocha = function(mocha)
+          return {
+            Comment = { fg = '#7f849c' }, -- brighter comments
+          }
+        end,
+      },
       -- see: https://github.com/catppuccin/nvim#integrations
       integrations = {
         cmp = true,
