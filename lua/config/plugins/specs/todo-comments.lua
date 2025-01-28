@@ -16,7 +16,7 @@ return {
     highlight = {
       after = 'fg',
       keyword = 'fg',
-      multiline = false,
+      multiline = true, -- highlight the entire block?
     },
     signs = false,
   },
