@@ -7,5 +7,6 @@ vim.opt.smartcase = true -- if any capital letters, search is case-sensitive
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<CR><Esc>', { silent = true })
 
 return {
+  require 'config.plugins.specs.mini-pick',
   require 'config.plugins.specs.telescope',
 }
