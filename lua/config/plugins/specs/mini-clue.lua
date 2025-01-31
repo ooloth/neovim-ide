@@ -1,12 +1,11 @@
--- DOCS: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-clue.md
-
 return {
   'echasnovski/mini.clue',
   version = '*',
   config = function()
-    -- DOCS: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-clue.md#default-config
     local miniclue = require 'mini.clue'
+
     miniclue.setup {
+      -- see: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-clue.md#default-config
       clues = {
         -- Enhance this by adding descriptions for <Leader> mapping groups
         miniclue.gen_clues.builtin_completion(),
