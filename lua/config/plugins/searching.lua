@@ -8,5 +8,6 @@ vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<CR><Esc>', { silent = true })
 
 return {
   require 'config.plugins.specs.mini-pick',
+  require 'config.plugins.specs.snacks-terminal',
   require 'config.plugins.specs.telescope',
 }
