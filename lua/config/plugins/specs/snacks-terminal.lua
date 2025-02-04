@@ -1,12 +1,11 @@
 return {
   'folke/snacks.nvim',
   opts = {
-    terminal = {
-      win = {
-        -- see: https://github.com/folke/snacks.nvim/blob/main/docs/win.md
-        height = 0,
-        width = 0,
-      },
-    },
+    terminal = {},
+  },
+  keys = {
+    -- stylua: ignore start 
+    { "<c-t>", mode = {'n', 't'}, function() Snacks.terminal.toggle() end, desc = "Toggle Terminal" },
+    -- stylua: ignore end
   },
 }
