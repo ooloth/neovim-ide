@@ -15,8 +15,8 @@ return {
       layouts = {
         default = {
           layout = {
-            height = 0.99,
-            width = 0.99,
+            height = 0,
+            width = 0,
           },
         },
       },
@@ -24,8 +24,8 @@ return {
     terminal = {
       win = {
         -- see: https://github.com/folke/snacks.nvim/blob/main/docs/win.md
-        height = 0.99999999999999,
-        width = 0.99999999999999,
+        height = 0,
+        width = 0,
       },
     },
   },
