@@ -67,12 +67,13 @@ autocmd('FileType', {
     vim.bo.shiftwidth = 4
   end,
 })
+
 -- Don't prefix comment characters to newlines after comments
 -- https://neovim.discourse.group/t/options-formatoptions-not-working-when-put-in-init-lua/3746/5
-vim.api.nvim_create_autocmd('BufEnter', {
+autocmd('BufEnter', {
   callback = function()
-    vim.opt.formatoptions:remove 'r'
-    vim.opt.formatoptions:remove 'o'
+    vim.opt.formatoptions:remove { 'r', 'o' }
+    -- vim.opt.formatoptions:remove { 'c', 'r', 'o' }
   end,
 })
 
