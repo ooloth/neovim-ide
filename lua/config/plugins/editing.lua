@@ -1,13 +1,5 @@
 vim.opt.autoindent = true -- copy indent from current line when starting new one
 -- vim.opt.autowrite = true -- Enable auto write
-
--- Sync clipboard between OS and Neovim (after `UiEnter` because it can increase startup-time)
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-  -- Sync with vim + system clipboards if not in SSH session
-  -- vim.opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
-end)
-
 vim.opt.completeopt = 'menu,menuone,noselect'
 vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 vim.opt.expandtab = true -- Use spaces instead of tabs
@@ -25,10 +17,28 @@ vim.opt.undolevels = 10000
 vim.opt.updatetime = 250 -- faster swap file saving and CursorHold triggering
 vim.opt.wildmode = 'longest:full,full' -- command-line completion behavior
 
+-- Sync clipboard between OS and Neovim (after `UiEnter` because it can increase startup-time)
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+  -- Sync with vim + system clipboards if not in SSH session
+  -- vim.opt.clipboard = vim.env.SSH_TTY and '' or 'unnamedplus'
+end)
+
+local autocmd = vim.api.nvim_create_autocmd
+
+-- TODO: can I debounce so this waits 5 seconds before firing (and skips multiples in the meantime)?
+autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave' }, {
+  -- autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave', 'TextChanged' }, {
+  desc = 'Auto save',
+  callback = function()
+    vim.api.nvim_command 'update'
+    -- vim.api.nvim_command 'silent update'
+  end,
+  nested = true, -- to support format on save
+})
+
 -- Highlight yanked text (see `:help vim.highlight.on_yank()`)
 vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
