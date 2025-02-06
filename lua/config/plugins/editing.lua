@@ -53,8 +53,10 @@ autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave' }, {
   -- autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave', 'TextChanged' }, {
   desc = 'Auto save',
   callback = function()
-    vim.api.nvim_command 'update'
-    -- vim.api.nvim_command 'silent update'
+    if vim.bo.filetype ~= '' and vim.bo.buftype == '' then
+      vim.api.nvim_command 'update'
+      -- vim.api.nvim_command 'silent update'
+    end
   end,
   nested = true, -- to support format on save
 })
