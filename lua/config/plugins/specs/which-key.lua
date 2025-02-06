@@ -7,7 +7,7 @@ return {
   'folke/which-key.nvim',
   opts = {
     -- see: https://www.lazyvim.org/plugins/editor#which-keynvim
-    defaults = {},
+    -- defaults = {},
     icons = { mappings = false },
     sort = { 'alphanum' },
     spec = {
@@ -22,7 +22,9 @@ return {
         end,
       },
       { '<leader>f', group = 'File' },
-      { '<leader>g', group = 'Git', { '<leader>t', group = 'Toggle' } },
+      { '<leader>g', group = 'Git' },
+      { '<leader>gl', group = 'Log' },
+      { '<leader>gt', group = 'Toggle' },
       { '<leader>i', group = 'Inspect' },
       { '<leader>o', group = 'Open' },
       { '<leader>q', group = 'Quit' },
