@@ -1,2 +1,0 @@
--- TODO: move filetype associations to treesitter settings?
--- https://neovim.io/doc/user/treesitter.html
