@@ -37,11 +37,24 @@ vim.opt.timeoutlen = 300 -- shorter mapped sequence wait time (displays which-ke
 vim.opt.winminwidth = 5 -- Minimum window width
 vim.opt.wrap = false -- disable line wrap
 
+local autocmd = vim.api.nvim_create_autocmd
+
 vim.cmd [[
   autocmd InsertEnter * set nocursorline
   autocmd InsertLeave * set cursorline
 ]]
 
+autocmd('TextYankPost', {
+  desc = 'Highlight yanked text',
+  callback = function()
+    if vim.version().minor >= 11 then
+      vim.hl.on_yank { higroup = 'Visual', timeout = 200 }
+    else
+      -- vim.highlight.on_yank()
+      vim.highlight.on_yank { higroup = 'Visual', timeout = 200 }
+    end
+  end,
+})
 return {
   require 'config.plugins.specs.catppuccin',
   require 'config.plugins.specs.dressing',

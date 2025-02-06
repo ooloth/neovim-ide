@@ -37,8 +37,6 @@ autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave' }, {
   nested = true, -- to support format on save
 })
 
--- Highlight yanked text (see `:help vim.highlight.on_yank()`)
-vim.api.nvim_create_autocmd('TextYankPost', {
 -- TODO: confirm if this solves the lazygit change discarding issue
 autocmd('FocusGained', {
   desc = 'Update buffer when there are file changes',
