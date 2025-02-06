@@ -37,7 +37,21 @@ vim.opt.timeoutlen = 300 -- shorter mapped sequence wait time (displays which-ke
 vim.opt.winminwidth = 5 -- Minimum window width
 vim.opt.wrap = false -- disable line wrap
 
+local set = vim.keymap.set
 local autocmd = vim.api.nvim_create_autocmd
+
+-- Resize window using <ctrl> arrow keys
+set('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
+set('n', '<C-Down>', '<cmd>resize -2<cr>', { desc = 'Decrease Window Height' })
+set('n', '<C-Left>', '<cmd>vertical resize -2<cr>', { desc = 'Decrease Window Width' })
+set('n', '<C-Right>', '<cmd>vertical resize +2<cr>', { desc = 'Increase Window Width' })
+
+-- Clear search highlights on <esc>
+set({ 'i', 'n' }, '<esc>', '<cmd>nohlsearch<cr><esc>', { silent = true })
+
+-- Clear search, diff update and redraw
+-- taken from runtime/lua/_editor.lua
+set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / Clear hlsearch / Diff Update' })
 
 vim.cmd [[
   autocmd InsertEnter * set nocursorline

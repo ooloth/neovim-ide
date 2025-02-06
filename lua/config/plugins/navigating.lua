@@ -14,8 +14,13 @@ local set = vim.keymap.set
 -- TODO: use this helper instead to eliminate most of the 'n' and '{ desc = ... }' used in the `set` calls?
 -- or keep it simple by avoiding creating yet another abstracting to memorize/override, etc?
 local map = function(lhs, rhs, desc, mode)
+  mode = mode or 'n'
   vim.keymap.set(mode, lhs, rhs, { desc = desc, expr = true, silent = true })
 end
+
+-- swap : and ,
+set({ 'n', 'v' }, ',', ':') -- enter command mode with , instead of :
+set({ 'n', 'v' }, ':', ',') -- navigate f and t results using ;/: (like n/N for / results)
 
 -- better up/down navigation
 set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
@@ -39,7 +44,6 @@ set('n', '<tab>', '<cmd>bn<cr>', { desc = 'Next editor' })
 set('n', '<s-tab>', '<cmd>bp<cr>', { desc = 'Prev editor' })
 set('n', '<leader>`', '<cmd>e#<cr>', { desc = 'Other editor' }) -- switch to last buffer
 set('n', '<leader>ed', '<cmd>bp|bd #<cr>', { desc = 'Close editor' }) -- close buffer but not window
-set('n', '<leader>ee', '<cmd>e#<cr>', { desc = 'Other editor' }) -- switch to last buffer
 -- Close all buffers except the current one (like leader-wo does for windows):
 -- https://stackoverflow.com/a/42071865/8802485
 set('n', '<leader>eo', '<cmd>%bd|e#|bd#<cr>', { desc = 'Only keep this editor' })
@@ -87,6 +91,44 @@ set('n', '<leader>wo', '<c-w>o', { desc = 'Only keep this one' })
 set('n', '<leader>wt', '<cmd>tab split<cr>', { desc = 'Open in new tab' })
 set('n', '<leader>ww', '<c-w>p', { desc = 'Other Window', remap = true })
 -- TODO: "leader-ww" = pick window (see nvim-window-picker.lua)?
+
+-- new file
+set('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
+set('n', '<leader>on', ':ene <BAR> startinsert<cr>', { desc = 'New file' })
+
+-- lazy
+set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
+
+set('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
+set('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
+
+set('n', '[q', vim.cmd.cprev, { desc = 'Prev Quickfix' })
+set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
+
+-- diagnostic
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go { severity = severity }
+  end
+end
+
+set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
+set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
+set('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
+set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
+set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
+set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
+set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+set('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next Search Result' })
+set('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
+set('o', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
+set('n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev Search Result' })
+set('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
+set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
 
 return {
   require 'config.plugins.specs.mini-files', -- file system editor + explorer
