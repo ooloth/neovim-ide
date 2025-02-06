@@ -55,6 +55,13 @@ autocmd('TextYankPost', {
     end
   end,
 })
+
+autocmd('VimResized', {
+  desc = 'Equalize splits after resizing Neovim window',
+  callback = function()
+    vim.cmd 'wincmd ='
+  end,
+})
 return {
   require 'config.plugins.specs.catppuccin',
   require 'config.plugins.specs.dressing',
