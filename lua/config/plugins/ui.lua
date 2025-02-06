@@ -62,6 +62,18 @@ autocmd('VimResized', {
     vim.cmd 'wincmd ='
   end,
 })
+
+-- TODO: move to after/ftplugin?
+autocmd('FileType', {
+  pattern = { 'gitcommit', 'log', 'markdown', 'text' },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+  group = general,
+  desc = 'Enable Wrap in these filetypes',
+})
+
 return {
   require 'config.plugins.specs.catppuccin',
   require 'config.plugins.specs.dressing',
