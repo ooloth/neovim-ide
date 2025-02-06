@@ -45,6 +45,28 @@ autocmd('FocusGained', {
   end,
 })
 
+-- -- -- TODO: apply when opening to an empty buffer
+-- -- autocmd('VimEnter', {
+-- --   desc = "Open Snacks picker when it's a Directory",
+-- --   callback = function(data)
+-- --     local buffer_is_a_directory = vim.fn.isdirectory(data.file) == 1
+-- --
+--     -- change to the directory
+--     if buffer_is_a_directory then
+--       vim.cmd.cd(data.file)
+--       vim.cmd 'lua Snacks.picker.smart()'
+--     end
+--   end,
+-- })
+
+-- TODO: move to after/ftplugin?
+autocmd('FileType', {
+  desc = 'Set shiftwidth to 4 in these filetypes',
+  pattern = { 'c', 'cpp', 'py', 'java', 'cs' },
+  callback = function()
+    vim.bo.shiftwidth = 4
+  end,
+})
 -- Don't prefix comment characters to newlines after comments
 -- https://neovim.discourse.group/t/options-formatoptions-not-working-when-put-in-init-lua/3746/5
 vim.api.nvim_create_autocmd('BufEnter', {
