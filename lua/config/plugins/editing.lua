@@ -48,17 +48,20 @@ set('i', ',', ',<c-g>u')
 set('i', '.', '.<c-g>u')
 set('i', ';', ';<c-g>u')
 
--- TODO: can I debounce so this waits 5 seconds before firing (and skips multiples in the meantime)?
-autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave' }, {
-  -- autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave', 'TextChanged' }, {
-  desc = 'Auto save',
+autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave', 'TextChanged' }, {
+  desc = 'Auto save after short delay',
   callback = function()
-    if vim.bo.filetype ~= '' and vim.bo.buftype == '' then
-      vim.api.nvim_command 'update'
-      -- vim.api.nvim_command 'silent update'
+    local save_file_if_changed = function()
+      local file_is_mine_to_save = vim.bo.filetype ~= '' and vim.bo.buftype == ''
+      if file_is_mine_to_save then
+        -- TODO: change to 'silent update' once I'm sure it works properly
+        vim.api.nvim_command 'update' -- save only if changed
+      end
     end
+
+    vim.defer_fn(save_file_if_changed, 5000) -- wait 5 seconds, then auto-save
   end,
-  nested = true, -- to support format on save
+  nested = true, -- support format on save
 })
 
 -- TODO: confirm if this solves the lazygit change discarding issue
