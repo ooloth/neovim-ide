@@ -37,4 +37,7 @@ return {
       },
     },
   },
+
+  -- Prettier markdown rendering in normal mode
+  require 'config.plugins.specs.render-markdown',
 }
