@@ -1,7 +1,6 @@
 vim.opt.autoindent = true -- copy indent from current line when starting new one
 -- vim.opt.autowrite = true -- Enable auto write
 vim.opt.completeopt = 'menu,menuone,noselect'
-vim.opt.confirm = true -- Confirm to save changes before exiting modified buffer
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.formatoptions = 'tcqjnl' -- default is 'tcqj' (see `:h fo-table`)
 vim.opt.inccommand = 'nosplit' -- preview incremental substitute
@@ -48,43 +47,12 @@ set('i', ',', ',<c-g>u')
 set('i', '.', '.<c-g>u')
 set('i', ';', ';<c-g>u')
 
-autocmd({ 'BufLeave', 'FocusLost', 'InsertLeave', 'TextChanged' }, {
-  desc = 'Auto save after short delay',
-  callback = function()
-    local save_file_if_changed = function()
-      local file_is_mine_to_save = vim.bo.filetype ~= '' and vim.bo.buftype == ''
-      if file_is_mine_to_save then
-        -- TODO: change to 'silent update' once I'm sure it works properly
-        vim.api.nvim_command 'update' -- save only if changed
-      end
-    end
-
-    vim.defer_fn(save_file_if_changed, 5000) -- wait 5 seconds, then auto-save
-  end,
-  nested = true, -- support format on save
-})
-
--- TODO: confirm if this solves the lazygit change discarding issue
 autocmd('FocusGained', {
   desc = 'Update buffer when there are file changes',
   callback = function()
     vim.cmd 'checktime'
   end,
 })
-
--- -- -- TODO: apply when opening to an empty buffer
--- -- autocmd('VimEnter', {
--- --   desc = "Open Snacks picker when it's a Directory",
--- --   callback = function(data)
--- --     local buffer_is_a_directory = vim.fn.isdirectory(data.file) == 1
--- --
---     -- change to the directory
---     if buffer_is_a_directory then
---       vim.cmd.cd(data.file)
---       vim.cmd 'lua Snacks.picker.smart()'
---     end
---   end,
--- })
 
 -- TODO: move to after/ftplugin?
 autocmd('FileType', {
@@ -105,6 +73,7 @@ autocmd('BufEnter', {
 })
 
 return {
+  require 'config.plugins.specs.auto-save',
   require 'config.plugins.specs.guess-indent',
   require 'config.plugins.specs.inc-rename',
   require 'config.plugins.specs.mini-pairs',
