@@ -19,7 +19,9 @@ return {
 
   {
     'neovim/nvim-lspconfig',
-    dependencies = { 'b0o/schemastore.nvim' },
+    dependencies = {
+      'b0o/schemastore.nvim',
+    },
     opts = function(_, opts)
       extend(opts.servers, {
         yamlls = {
