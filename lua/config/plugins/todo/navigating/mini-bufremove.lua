@@ -1,10 +1,6 @@
-local close_buffer = function()
-  require('mini.bufremove').delete(0, false)
-end
+local close_buffer = function() require('mini.bufremove').delete(0, false) end
 
-local force_close_buffer = function()
-  require('mini.bufremove').delete(0, true)
-end
+local force_close_buffer = function() require('mini.bufremove').delete(0, true) end
 
 return {
   'echasnovski/mini.bufremove',

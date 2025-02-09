@@ -18,9 +18,7 @@ return {
   keys = {
     {
       '<leader>rf',
-      function()
-        require('conform').format { async = true, lsp_fallback = true }
-      end,
+      function() require('conform').format { async = true, lsp_fallback = true } end,
       mode = '',
       desc = 'Format editor',
     },

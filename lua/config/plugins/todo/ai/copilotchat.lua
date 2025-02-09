@@ -8,9 +8,7 @@
 local function get_git_diff(staged)
   local cmd = staged and 'git diff --staged' or 'git diff'
   local handle = io.popen(cmd)
-  if not handle then
-    return ''
-  end
+  if not handle then return '' end
 
   local result = handle:read '*a'
   handle:close()
@@ -58,23 +56,20 @@ return {
       proxy = '', -- Proxies requests via https or socks
       show_help = 'yes', -- Show help text for CopilotChatInPlace
     },
-    build = function()
-      vim.notify "Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim."
-    end,
+    build = function() vim.notify "Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim." end,
     event = 'VeryLazy',
-    -- stylua: ignore
     keys = {
       -- Custom input for CopilotChat
-      { '<leader>aa', function()
-          local input = vim.fn.input('Ask Copilot: ')
-          if input ~= '' then
-            vim.cmd('CopilotChat ' .. input)
-          end
+      {
+        '<leader>aa',
+        function()
+          local input = vim.fn.input 'Ask Copilot: '
+          if input ~= '' then vim.cmd('CopilotChat ' .. input) end
         end,
         desc = 'Ask for something else',
       },
       -- Code related commands
-      { "<leader>ab", "<cmd>CopilotChatVsplitToggle<cr>", desc = "Toggle vertical split" },
+      { '<leader>ab', '<cmd>CopilotChatVsplitToggle<cr>', desc = 'Toggle vertical split' },
       { '<leader>ac', '<cmd>CopilotChatConcise<cr>', desc = 'Make text concise' },
       { '<leader>ad', '<cmd>CopilotChatDocumentation<cr>', desc = 'Add documentation for code' },
       { '<leader>aD', '<cmd>CopilotChatDebugInfo<cr>', desc = 'Debug Info' },
@@ -97,7 +92,7 @@ return {
           local diff = get_git_diff()
           if diff ~= '' then
             vim.fn.setreg('"', diff)
-            vim.cmd('CopilotChat Write commit message for the change with commitizen convention.')
+            vim.cmd 'CopilotChat Write commit message for the change with commitizen convention.'
           end
         end,
         desc = 'Generate commit message for all changes',
@@ -108,7 +103,7 @@ return {
           local diff = get_git_diff(true)
           if diff ~= '' then
             vim.fn.setreg('"', diff)
-            vim.cmd('CopilotChat Write commit message for the change with commitizen convention.')
+            vim.cmd 'CopilotChat Write commit message for the change with commitizen convention.'
           end
         end,
         desc = 'Generate commit message for staged changes',

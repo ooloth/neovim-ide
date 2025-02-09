@@ -49,18 +49,14 @@ set('i', ';', ';<c-g>u')
 
 autocmd('FocusGained', {
   desc = 'Update buffer when there are file changes',
-  callback = function()
-    vim.cmd 'checktime'
-  end,
+  callback = function() vim.cmd 'checktime' end,
 })
 
 -- TODO: move to after/ftplugin?
 autocmd('FileType', {
   desc = 'Set shiftwidth to 4 in these filetypes',
   pattern = { 'c', 'cpp', 'py', 'java', 'cs' },
-  callback = function()
-    vim.bo.shiftwidth = 4
-  end,
+  callback = function() vim.bo.shiftwidth = 4 end,
 })
 
 -- Don't prefix comment characters to newlines after comments

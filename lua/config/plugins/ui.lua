@@ -72,9 +72,7 @@ autocmd('TextYankPost', {
 
 autocmd('VimResized', {
   desc = 'Equalize splits after resizing Neovim window',
-  callback = function()
-    vim.cmd 'wincmd ='
-  end,
+  callback = function() vim.cmd 'wincmd =' end,
 })
 
 -- TODO: move to after/ftplugin?

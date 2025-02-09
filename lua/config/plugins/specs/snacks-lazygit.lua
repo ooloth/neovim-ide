@@ -15,8 +15,6 @@ return {
     },
   },
   keys = {
-    -- stylua: ignore start
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-    -- stylua: ignore end
+    { '<leader>gg', function() Snacks.lazygit() end, desc = 'Lazygit' },
   },
 }

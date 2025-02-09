@@ -9,9 +9,7 @@ return {
     { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
     {
       'nvim-treesitter/nvim-treesitter',
-      opts = function(_, opts)
-        extend(opts.ensure_installed, { 'sql' })
-      end,
+      opts = function(_, opts) extend(opts.ensure_installed, { 'sql' }) end,
     },
     {
       'folke/which-key.nvim',

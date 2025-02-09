@@ -7,18 +7,15 @@ return {
     { 'nvim-tree/nvim-web-devicons' },
     {
       'nvim-treesitter/nvim-treesitter',
-      opts = function(_, opts)
-        extend(opts.ensure_installed, { 'markdown', 'markdown_inline' })
-      end,
+      opts = function(_, opts) extend(opts.ensure_installed, { 'markdown', 'markdown_inline' }) end,
     },
   },
   keys = function()
-    -- stylua: ignore
     return {
       { ']d', '<cmd>Lspsaga diagnostic_jump_next<cr>', desc = 'Next diagnostic' },
       { '[d', '<cmd>Lspsaga diagnostic_jump_prev<cr>', desc = 'Previous diagnostic' },
-      { ']e', function() require('lspsaga.diagnostic'):goto_next({ severity = vim.diagnostic.severity.ERROR }) end, desc = 'Next diagnostic' },
-      { '[e', function() require('lspsaga.diagnostic'):goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, desc = 'Previous diagnostic' },
+      { ']e', function() require('lspsaga.diagnostic'):goto_next { severity = vim.diagnostic.severity.ERROR } end, desc = 'Next diagnostic' },
+      { '[e', function() require('lspsaga.diagnostic'):goto_prev { severity = vim.diagnostic.severity.ERROR } end, desc = 'Previous diagnostic' },
       { 'ga', '<cmd>Lspsaga code_action<cr>', desc = 'Code actions' },
       { 'gd', '<cmd>Lspsaga goto_definition<cr>', desc = 'Definition' },
       { 'gh', '<cmd>Lspsaga hover_doc<cr>', desc = 'Hover' },

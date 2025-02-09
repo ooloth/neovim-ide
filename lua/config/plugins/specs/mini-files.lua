@@ -1,11 +1,7 @@
 -- see: https://github.com/echasnovski/mini.nvim/blob/main/doc/mini-files.txt#L444-L446
-local hide_junk = function(fs_entry)
-  return not vim.startswith(fs_entry.name, '.DS_Store')
-end
+local hide_junk = function(fs_entry) return not vim.startswith(fs_entry.name, '.DS_Store') end
 
-local open_at_current_file = function()
-  require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
-end
+local open_at_current_file = function() require('mini.files').open(vim.api.nvim_buf_get_name(0), true) end
 
 return {
   'echasnovski/mini.files',

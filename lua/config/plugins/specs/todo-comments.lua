@@ -20,7 +20,5 @@ return {
     },
     signs = false,
   },
-  init = function()
-    vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = 'Todo' })
-  end,
+  init = function() vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = 'Todo' }) end,
 }

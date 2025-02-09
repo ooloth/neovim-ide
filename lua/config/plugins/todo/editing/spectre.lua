@@ -6,9 +6,7 @@ return {
     return {
       {
         '<leader>rr',
-        function()
-          require('spectre').open()
-        end,
+        function() require('spectre').open() end,
         desc = 'Replace pattern',
       },
     }

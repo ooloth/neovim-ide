@@ -52,16 +52,15 @@ return {
       },
     },
   },
-  -- stylua: ignore
   keys = {
+    -- stylua: ignore start
     { "<c-d>", function() if not require("noice.lsp").scroll(4) then return "<c-d>" end end, silent = true, expr = true, desc = "Scroll Noice Float Forward", mode = {"i", "n", "s"} },
     { "<c-u>", function() if not require("noice.lsp").scroll(-4) then return "<c-u>" end end, silent = true, expr = true, desc = "Scroll Noice Float Backward", mode = {"i", "n", "s"}},
+    -- stylua: ignore end
   },
   config = function(_, opts)
     -- HACK: noice shows messages from before it was enabled, but this is not ideal when Lazy is installing plugins, so clear the messages in this case
-    if vim.o.filetype == 'lazy' then
-      vim.cmd [[messages clear]]
-    end
+    if vim.o.filetype == 'lazy' then vim.cmd [[messages clear]] end
     require('noice').setup(opts)
   end,
 }

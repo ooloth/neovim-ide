@@ -13,13 +13,9 @@ local get_attached_lsp_servers = function()
 end
 
 local get_active_venv = function()
-  if vim.bo.filetype ~= 'python' then
-    return ''
-  end
+  if vim.bo.filetype ~= 'python' then return '' end
 
-  if not vim.env.VIRTUAL_ENV then
-    return '(no venv activated)'
-  end
+  if not vim.env.VIRTUAL_ENV then return '(no venv activated)' end
 
   -- TODO: need anymore with uv?
   -- example path (pyenv) = '/Users/michael/.pyenv/versions/3.12.1/envs/scraper'

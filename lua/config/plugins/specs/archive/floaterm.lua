@@ -68,14 +68,13 @@ return {
   'voldikss/vim-floaterm',
   event = 'VeryLazy',
   cmd = 'FloatermNew',
-  -- stylua: ignore
   keys = {
-    { '<leader>gg', function() toggle_if_running_else_create('lazygit') end, desc = 'Lazygit' },
-    { '<c-g>', function() toggle_if_running_else_create('lazygit') end, desc = 'Lazygit' },
-    { '<c-t>', function() toggle_if_running_else_create('scratch') end, desc = 'Open scratch terminal' }, -- TODO: toggle most recent terminal instead?
+    { '<leader>gg', function() toggle_if_running_else_create 'lazygit' end, desc = 'Lazygit' },
+    { '<c-g>', function() toggle_if_running_else_create 'lazygit' end, desc = 'Lazygit' },
+    { '<c-t>', function() toggle_if_running_else_create 'scratch' end, desc = 'Open scratch terminal' }, -- TODO: toggle most recent terminal instead?
     { '<c-g>', mode = 't', '<cmd>FloatermHide<cr>', desc = 'Hide Lazygit' },
     { '<c-t>', mode = 't', '<cmd>FloatermHide<cr>', desc = 'Hide terminal' },
-    { '<c-z>', mode = 't', function() toggle_maximized('scratch') end, desc = 'Toggle maximized terminal' }, 
+    { '<c-z>', mode = 't', function() toggle_maximized 'scratch' end, desc = 'Toggle maximized terminal' },
   },
   init = function()
     -- Set float border to catppuccin mocha "surface1" color (used for split borders)
@@ -91,9 +90,7 @@ return {
         vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })
 
         -- unless this is lazygit (which uses ESC internally)
-        if string.find(bufname, 'lazygit') then
-          vim.keymap.del('t', '<esc>')
-        end
+        if string.find(bufname, 'lazygit') then vim.keymap.del('t', '<esc>') end
       end,
     })
 
@@ -101,9 +98,7 @@ return {
     -- see: https://github.com/voldikss/vim-floaterm/issues/296#issuecomment-1098841533
     vim.api.nvim_create_autocmd('VimResized', {
       callback = function()
-        if vim.bo.filetype == 'floaterm' then
-          vim.cmd.FloatermUpdate()
-        end
+        if vim.bo.filetype == 'floaterm' then vim.cmd.FloatermUpdate() end
       end,
     })
   end,

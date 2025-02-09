@@ -7,13 +7,9 @@ local Util = require 'lazyvim.util'
 local icons = require('lazyvim.config').icons
 
 local function get_venv()
-  if vim.bo.filetype ~= 'python' then
-    return ''
-  end
+  if vim.bo.filetype ~= 'python' then return '' end
 
-  if not vim.env.VIRTUAL_ENV then
-    return '(  No venv activated)'
-  end
+  if not vim.env.VIRTUAL_ENV then return '(  No venv activated)' end
 
   -- example path = '/Users/michael/.pyenv/versions/3.12.1/envs/scraper'
   local function get_version_and_venv(path_to_pyenv_venv)
@@ -74,9 +70,7 @@ local options = {
 
 local empty = {
   -- TODO: return '' if no diagnostics?
-  function()
-    return '█'
-  end,
+  function() return '█' end,
   padding = 0,
   color = { fg = catppuccin['base'], bg = catppuccin['base'] },
 }
@@ -118,12 +112,8 @@ local sections = {
     },
     'searchcount',
     {
-      function()
-        return '  ' .. require('dap').status()
-      end,
-      cond = function()
-        return package.loaded['dap'] and require('dap').status() ~= ''
-      end,
+      function() return '  ' .. require('dap').status() end,
+      cond = function() return package.loaded['dap'] and require('dap').status() ~= '' end,
       color = Util.ui.fg 'Debug',
     },
     {

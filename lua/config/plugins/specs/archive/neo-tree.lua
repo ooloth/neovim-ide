@@ -11,8 +11,7 @@ return {
     keys = function() -- replace all default keys
       return {
         -- see: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/editor.lua
-        -- stylua: ignore
-        { '<leader>e', function() require('neo-tree.command').execute({ toggle = true, dir = vim.loop.cwd() }) end, desc = 'Explorer' },
+        { '<leader>e', function() require('neo-tree.command').execute { toggle = true, dir = vim.loop.cwd() } end, desc = 'Explorer' },
       }
     end,
     opts = {

@@ -25,9 +25,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client == nil then
-      return
-    end
+    if client == nil then return end
     if client.name == 'ruff' then
       client.server_capabilities.hoverProvider = false -- Disable hover in favor of Pyright
     end
@@ -40,9 +38,7 @@ local get_formatter_options = function(formatter)
   local formatter_options = require('conform.formatters.' .. formatter)
   local executable = formatter == 'ruff_format' and 'ruff' or formatter
   formatter_options.command = prefer_venv_executable(executable)
-  formatter_options.condition = function()
-    return is_installed_in_venv(executable)
-  end
+  formatter_options.condition = function() return is_installed_in_venv(executable) end
   return formatter_options
 end
 
@@ -130,11 +126,10 @@ return {
     opts = {
       -- NOTE: ruff_format has been replaced by the ruff lsp above
       formatters_by_ft = { python = { 'isort', 'black', 'yapf' } },
-      -- stylua: ignore
       formatters = {
-        black = function() return get_formatter_options('black') end,
-        isort = function() return get_formatter_options('isort') end,
-        yapf = function() return get_formatter_options('yapf') end,
+        black = function() return get_formatter_options 'black' end,
+        isort = function() return get_formatter_options 'isort' end,
+        yapf = function() return get_formatter_options 'yapf' end,
       },
     },
   },
@@ -147,10 +142,9 @@ return {
         -- NOTE: ruff_lint has been replaced by the ruff lsp above
         python = get_linters_in_venv { 'flake8', 'mypy' },
       },
-      -- stylua: ignore
       linters = {
-        flake8 = function() return get_linter_options('flake8') end,
-        mypy = function() return get_linter_options('mypy') end,
+        flake8 = function() return get_linter_options 'flake8' end,
+        mypy = function() return get_linter_options 'mypy' end,
       },
     },
   },
@@ -160,7 +154,6 @@ return {
   --   'mfussenegger/nvim-dap',
   --   dependencies = {
   --     'mfussenegger/nvim-dap-python',
-  --     -- stylua: ignore
   --     keys = {
   --       { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method", ft = "python" },
   --       { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },

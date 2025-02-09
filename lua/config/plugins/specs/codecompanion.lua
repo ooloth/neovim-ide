@@ -1,5 +1,6 @@
 return {
   'olimorris/codecompanion.nvim',
+  -- event = 'InsertEnter', -- lazy load
   dependencies = {
     -- see: https://codecompanion.olimorris.dev/installation.html#installation-1
     {
@@ -7,6 +8,7 @@ return {
       branch = 'master', -- resolves "buffer not modifiable" after first chat question: https://github.com/olimorris/codecompanion.nvim/issues/377#issuecomment-2443121875
     },
     'nvim-treesitter/nvim-treesitter',
+    'zbirenbaum/copilot.lua',
   },
   keys = {
     { '<Leader>a,', '<cmd>CodeCompanionActions<cr>', desc = 'CodeCompanion actions', mode = { 'n', 'v' } },
@@ -15,17 +17,40 @@ return {
     { '<Leader>as', '<cmd>CodeCompanionChat Add<cr>', desc = 'Send selection to chat', mode = 'v' },
   },
   opts = {
+    display = {
+      chat = {
+        show_settings = false, -- show LLM settings at the top of the chat buffer?
+        show_token_count = true, -- show the token count for each response?
+        start_in_insert_mode = true, -- open the chat buffer in insert mode?
+        window = { width = 0.45 },
+      },
+    },
     strategies = {
       chat = {
         keymaps = {
           close = {
             modes = { n = { '<esc>' }, i = '<c-c>' },
+            -- Toggle instead of closing to avoid losing this session's chat history
+            callback = function() require('codecompanion').toggle() end,
+            description = 'Toggle Chat',
           },
           completion = {
             modes = { i = '<c-s>' },
           },
           send = {
-            modes = { n = '<cr>', i = '<c-cr>' },
+            modes = { n = '<cr>', i = '<c-l>' },
+          },
+        },
+      },
+      inline = {
+        keymaps = {
+          accept_change = {
+            modes = { n = 'ga' },
+            description = 'Accept the suggested change',
+          },
+          reject_change = {
+            modes = { n = 'gr' },
+            description = 'Reject the suggested change',
           },
         },
       },

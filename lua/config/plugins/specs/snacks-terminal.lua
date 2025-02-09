@@ -6,8 +6,6 @@ return {
     terminal = {},
   },
   keys = {
-    -- stylua: ignore start 
-    { "<c-t>", mode = {'n', 't'}, function() Snacks.terminal.toggle() end, desc = "Toggle Terminal" },
-    -- stylua: ignore end
+    { '<c-t>', mode = { 'n', 't' }, function() Snacks.terminal.toggle() end, desc = 'Toggle Terminal' },
   },
 }

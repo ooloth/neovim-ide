@@ -25,9 +25,7 @@ vim.diagnostic.config {
   virtual_text = {
     spacing = 4,
     source = 'if_many',
-    prefix = function(diagnostic)
-      return diagnostic_signs_by_severity[diagnostic.severity]
-    end,
+    prefix = function(diagnostic) return diagnostic_signs_by_severity[diagnostic.severity] end,
   },
 }
 
@@ -44,9 +42,7 @@ local set_lsp_keymaps = function(lsp_attach_event)
   -- map('gI', builtin.lsp_implementations, 'Go to implementations') -- jump to an implementation of the word under your cursor; useful when your language has ways of declaring types without an actual implementation
   -- map('gr', builtin.lsp_references, 'Go to references') -- find references to the word under the cursor
   map('<leader>ra', vim.lsp.buf.code_action, 'Code action', { 'n', 'x' }) -- execute a code action, usually your cursor needs to be on top of an error or a suggestion from your LSP for this to activate
-  vim.keymap.set('n', '<leader>rs', function()
-    return ':IncRename ' .. vim.fn.expand '<cword>'
-  end, { desc = 'Rename symbol under cursor', expr = true }) -- rename the variable under your cursor; most Language Servers support renaming across files, etc.
+  vim.keymap.set('n', '<leader>rs', function() return ':IncRename ' .. vim.fn.expand '<cword>' end, { desc = 'Rename symbol under cursor', expr = true }) -- rename the variable under your cursor; most Language Servers support renaming across files, etc.
   -- map('<leader>sr', builtin.lsp_references, 'References to symbol under cursor') -- find references to the word under the cursor
   -- map('<leader>ss', builtin.lsp_document_symbols, 'Symbols in editor') -- fuzzy find all the symbols in your current document; symbols are things like variables, functions, types, etc.
   -- map('<leader>sS', builtin.lsp_dynamic_workspace_symbols, 'Symbols in project') -- fuzzy find all the symbols in your current workspace; similar to document symbols, except searches over your entire project
@@ -55,7 +51,6 @@ local set_lsp_keymaps = function(lsp_attach_event)
   local client = vim.lsp.get_client_by_id(lsp_attach_event.data.client_id)
 
   -- Set keymap to toggle inlay hints if the language server supports them (this may be unwanted, since they displace some of your code)
-  -- stylua: ignore
   if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
     map('<leader>uh', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = lsp_attach_event.buf }) end, 'Toggle inlay hints')
   end
@@ -103,9 +98,7 @@ end
 local show_active_diagnostics_on_cursor_line = function()
   -- see: https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window
   vim.api.nvim_create_autocmd('CursorHold', {
-    callback = function()
-      vim.diagnostic.open_float(nil, { focusable = false })
-    end,
+    callback = function() vim.diagnostic.open_float(nil, { focusable = false }) end,
   })
 end
 

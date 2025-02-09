@@ -42,9 +42,7 @@ return {
           },
         },
         ts_ls = {
-          keys = function()
-            return {}
-          end,
+          keys = function() return {} end,
           -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
           -- see: https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#tsserver-options
           settings = {
@@ -58,9 +56,7 @@ return {
         tsserver = function()
           require('lazyvim.util').lsp.on_attach(function(client, _) -- FIXME: remove lazyvim import?
             -- prefer local typescript version (if available)
-            if client.name == 'tsserver' then
-              client.config.cmd = { prefer_node_modules_executable 'tsserver', '--stdio' }
-            end
+            if client.name == 'tsserver' then client.config.cmd = { prefer_node_modules_executable 'tsserver', '--stdio' } end
           end)
         end,
       },

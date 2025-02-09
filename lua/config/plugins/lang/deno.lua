@@ -6,9 +6,7 @@ vim.g.markdown_fenced_languages = {
 
 local is_deno_project = function()
   local handle = io.popen 'ls'
-  if not handle then
-    return false
-  end
+  if not handle then return false end
   vim.notify(vim.inspect(handle))
 
   local result = handle:read '*a'
@@ -18,9 +16,7 @@ local is_deno_project = function()
   local file1 = 'deno.json'
   local file2 = 'deno.lock'
 
-  if result:find(file1) or result:find(file2) then
-    return true
-  end
+  if result:find(file1) or result:find(file2) then return true end
 
   return false
 end
