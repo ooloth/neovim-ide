@@ -1,6 +1,7 @@
 vim.opt.autoindent = true -- copy indent from current line when starting new one
 -- vim.opt.autowrite = true -- Enable auto write
 vim.opt.completeopt = 'menu,menuone,noselect'
+vim.opt.confirm = true -- confirm what to do before closing unsaved buffer
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.formatoptions = 'tcqjnl' -- default is 'tcqj' (see `:h fo-table`)
 vim.opt.inccommand = 'nosplit' -- preview incremental substitute
