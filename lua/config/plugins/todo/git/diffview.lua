@@ -4,9 +4,7 @@ return {
   dependencies = { 'nvim-lua/plenary.nvim' },
   keys = function()
     local upstream_branch = 'origin/main'
-    if vim.env.IS_WORK == 'true' then
-      upstream_branch = 'origin/trunk'
-    end
+    if vim.env.IS_WORK then upstream_branch = 'origin/trunk' end
 
     return {
       { '<leader>gd', '<cmd>DiffviewOpen<cr>', 'Diff vs HEAD' },
