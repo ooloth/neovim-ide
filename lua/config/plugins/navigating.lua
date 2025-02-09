@@ -99,9 +99,6 @@ set('n', '<leader>on', ':ene <BAR> startinsert<cr>', { desc = 'New file' })
 -- lazy
 set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 
-set('n', '<leader>xl', '<cmd>lopen<cr>', { desc = 'Location List' })
-set('n', '<leader>xq', '<cmd>copen<cr>', { desc = 'Quickfix List' })
-
 set('n', '[q', vim.cmd.cprev, { desc = 'Prev Quickfix' })
 set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
 

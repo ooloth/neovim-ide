@@ -7,4 +7,5 @@ return {
   require 'config.plugins.specs.conform',
   require 'config.plugins.specs.copilot',
   require 'config.plugins.specs.nvim-lint',
+  require 'config.plugins.specs.trouble',
 }
