@@ -2,7 +2,6 @@
 
 return {
   'zbirenbaum/copilot.lua',
-  event = 'InsertEnter', -- lazy load
   -- see: https://github.com/zbirenbaum/copilot.lua?tab=readme-ov-file#setup-and-configuration
   opts = {
     suggestion = {

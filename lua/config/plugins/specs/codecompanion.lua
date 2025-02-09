@@ -1,6 +1,5 @@
 return {
   'olimorris/codecompanion.nvim',
-  -- event = 'InsertEnter', -- lazy load
   dependencies = {
     -- see: https://codecompanion.olimorris.dev/installation.html#installation-1
     {
