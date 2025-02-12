@@ -13,14 +13,9 @@ return {
     spec = {
       mode = { 'n', 'v' }, -- inherited by block of mappings below
       { '<leader><tab>', group = 'Tab' },
+      { '<leader>a', group = 'AI' },
       { '<leader>d', group = 'Debug' },
-      {
-        '<leader>e',
-        group = 'Editor',
-        expand = function()
-          return require('which-key.extras').expand.buf() -- add numbered mappings to open editors
-        end,
-      },
+      { '<leader>e', group = 'Editor' },
       { '<leader>f', group = 'File' },
       { '<leader>g', group = 'Git' },
       { '<leader>gl', group = 'Log' },
@@ -36,9 +31,6 @@ return {
         '<leader>w',
         group = 'Window',
         proxy = '<C-w>', -- add all built-in <C-w> mappings
-        expand = function()
-          return require('which-key.extras').expand.win() -- add numbered mappings to open windows
-        end,
       },
       { '<leader>x', group = 'Diagnostics' },
       { ']', group = 'Next' },
