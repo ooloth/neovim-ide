@@ -142,7 +142,7 @@ return {
       callback = function(event)
         set_lsp_keymaps(event)
         highlight_references_to_cursor_word_in_editor(event)
-        show_active_diagnostics_on_cursor_line()
+        show_active_diagnostics_on_cursor_line() -- NOTE: not necessary with inline text + trouble.nvim list available
         change_diagnostic_signs()
         enable_inlay_hints(event)
         enable_code_lenses(event)
