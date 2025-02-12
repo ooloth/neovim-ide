@@ -2,11 +2,24 @@ return {
   'folke/trouble.nvim',
   opts = {
     -- see: https://github.com/folke/trouble.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
-    -- for default options, refer to the configuration section for custom setup.
-    --     auto_close = true,
-    --     height = 14,
+    focus = true, -- focus Trouble window when it opens
+    indent_guides = false,
+    keys = {
+      ['<esc>'] = 'close',
+      e = {
+        action = function(view) view:filter({ buf = 0 }, { toggle = true }) end,
+        desc = 'Toggle Current Buffer Filter',
+      },
+    },
+    modes = {
+      diagnostics = {
+        format = '{severity_icon}{message:md} {item.source} {code} {filename} {pos}',
+        groups = {}, -- no tree view (every line is actionable)
+      },
+    },
+    open_no_results = true, -- open the trouble window when there are no results
+    warn_no_results = false, -- show a warning when there are no results
   },
-  cmd = 'Trouble',
   keys = {
     { '<leader>cl', '<cmd>Trouble lsp toggle focus=false win.position=right<cr>', desc = 'LSP Definitions / references / ... (Trouble)' },
     { '<leader>cs', '<cmd>Trouble symbols toggle focus=false<cr>', desc = 'Symbols (Trouble)' },
