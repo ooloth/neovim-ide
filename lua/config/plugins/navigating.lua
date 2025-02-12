@@ -14,9 +14,12 @@ local set = vim.keymap.set
 -- TODO: use this helper instead to eliminate most of the 'n' and '{ desc = ... }' used in the `set` calls?
 -- or keep it simple by avoiding creating yet another abstracting to memorize/override, etc?
 -- TODO: attach this to _G?
-local map = function(lhs, rhs, desc, mode)
-  mode = mode or 'n'
-  vim.keymap.set(mode, lhs, rhs, { desc = desc, expr = true, silent = true })
+local map = function(lhs, rhs, desc, opts)
+  -- local map = function(lhs, rhs, desc, mode)
+  local default_opts = { desc = desc, expr = true, silent = true }
+  local combined_opts = vim.tbl_deep_extend('force', default_opts, opts or {})
+
+  vim.keymap.set(mode, lhs, rhs, combined_opts)
 end
 
 -- swap : and ,
@@ -80,8 +83,7 @@ set('n', '<leader>=', '<c-w>=', { desc = 'Resize equally' })
 set('n', '<leader>[', '<cmd>vertical resize -3<cr>', { desc = 'Reduce size' })
 set('n', '<leader>]', '<cmd>vertical resize +3<cr>', { desc = 'Increase size' })
 set('n', '<leader>wd', '<c-w>c', { desc = 'Delete Window', remap = true })
--- TODO: "leader-wm" = toggle maximize window (see vim-maximizer.lua}
--- set("n", "<leader>wm", function() LazyVim.toggle.maximize() end, { desc = "Maximize Toggle" })
+-- NOTE: "leader-wm" = toggle maximize window (see snacks-zen.lua}
 set('n', '<leader>wt', '<cmd>tab split<cr>', { desc = 'Open in new tab' })
 set('n', '<leader>ww', '<c-w>p', { desc = 'Other Window', remap = true })
 -- TODO: "leader-ww" = pick window (see nvim-window-picker.lua)?
