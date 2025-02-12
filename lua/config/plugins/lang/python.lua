@@ -18,7 +18,7 @@ local pynvim_python = vim.env.HOME .. '/.pyenv/versions/pynvim/bin/python'
 vim.g.python3_host_prog = pynvim_python
 
 -- get the python executable from the project venv (if active) for dap and neotest
-local python = prefer_venv_executable 'python'
+local python = prefer_venv_executable('python')
 
 -- see: https://docs.astral.sh/ruff/editors/setup/#neovim
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -127,9 +127,9 @@ return {
       -- NOTE: ruff_format has been replaced by the ruff lsp above
       formatters_by_ft = { python = { 'isort', 'black', 'yapf' } },
       formatters = {
-        black = function() return get_formatter_options 'black' end,
-        isort = function() return get_formatter_options 'isort' end,
-        yapf = function() return get_formatter_options 'yapf' end,
+        black = function() return get_formatter_options('black') end,
+        isort = function() return get_formatter_options('isort') end,
+        yapf = function() return get_formatter_options('yapf') end,
       },
     },
   },
@@ -140,11 +140,11 @@ return {
     opts = {
       linters_by_ft = {
         -- NOTE: ruff_lint has been replaced by the ruff lsp above
-        python = get_linters_in_venv { 'flake8', 'mypy' },
+        python = get_linters_in_venv({ 'flake8', 'mypy' }),
       },
       linters = {
-        flake8 = function() return get_linter_options 'flake8' end,
-        mypy = function() return get_linter_options 'mypy' end,
+        flake8 = function() return get_linter_options('flake8') end,
+        mypy = function() return get_linter_options('mypy') end,
       },
     },
   },

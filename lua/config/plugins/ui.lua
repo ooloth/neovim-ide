@@ -23,7 +23,7 @@ vim.opt.pumblend = 10 -- popup blend transparency (%)
 vim.opt.pumheight = 15 -- maximum number of entries in a popup
 vim.opt.relativenumber = false -- show relative line numbers
 vim.opt.scrolloff = 10 -- lines of context kept onscreen
-vim.opt.shortmess:append { W = true, I = true, c = true, C = true } -- abbreviate some messages
+vim.opt.shortmess:append({ W = true, I = true, c = true, C = true }) -- abbreviate some messages
 vim.opt.showmode = false -- hide mode since it's already in the status line
 vim.opt.sidescroll = 5
 vim.opt.sidescrolloff = 8 -- columns of context kept onscreen
@@ -53,26 +53,26 @@ set({ 'i', 'n' }, '<esc>', '<cmd>nohlsearch<cr><esc>', { silent = true })
 -- taken from runtime/lua/_editor.lua
 set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / Clear hlsearch / Diff Update' })
 
-vim.cmd [[
+vim.cmd([[
   autocmd InsertEnter * set nocursorline
   autocmd InsertLeave * set cursorline
-]]
+]])
 
 autocmd('TextYankPost', {
   desc = 'Highlight yanked text',
   callback = function()
     if vim.version().minor >= 11 then
-      vim.hl.on_yank { higroup = 'Visual', timeout = 200 }
+      vim.hl.on_yank({ higroup = 'Visual', timeout = 200 })
     else
       -- vim.highlight.on_yank()
-      vim.highlight.on_yank { higroup = 'Visual', timeout = 200 }
+      vim.highlight.on_yank({ higroup = 'Visual', timeout = 200 })
     end
   end,
 })
 
 autocmd('VimResized', {
   desc = 'Equalize splits after resizing Neovim window',
-  callback = function() vim.cmd 'wincmd =' end,
+  callback = function() vim.cmd('wincmd =') end,
 })
 
 -- TODO: move to after/ftplugin?
@@ -87,11 +87,11 @@ autocmd('FileType', {
 })
 
 return {
-  require 'config.plugins.specs.catppuccin',
-  require 'config.plugins.specs.dressing',
-  require 'config.plugins.specs.fidget',
-  require 'config.plugins.specs.mini-statusline',
-  require 'config.plugins.specs.noice',
-  require 'config.plugins.specs.todo-comments',
-  require 'config.plugins.specs.which-key',
+  require('config.plugins.specs.catppuccin'),
+  require('config.plugins.specs.dressing'),
+  require('config.plugins.specs.fidget'),
+  require('config.plugins.specs.mini-statusline'),
+  require('config.plugins.specs.noice'),
+  require('config.plugins.specs.todo-comments'),
+  require('config.plugins.specs.which-key'),
 }

@@ -5,5 +5,5 @@ set('t', '<c-/>', '<cmd>close<cr>', { desc = 'Hide Terminal' })
 set('t', '<c-_>', '<cmd>close<cr>', { desc = 'which_key_ignore' })
 
 return {
-  require 'config.plugins.specs.snacks-terminal',
+  require('config.plugins.specs.snacks-terminal'),
 }

@@ -6,7 +6,7 @@ local js_based_languages = { 'typescript', 'typescriptreact', 'javascript', 'jav
 local attach_debugger = function()
   -- (re-)reads launch.json if present
   -- FIXME: fails if comments are present in jsonc file (how to parse jsonc properly?)
-  if vim.fn.filereadable '.vscode/launch.json' then
+  if vim.fn.filereadable('.vscode/launch.json') then
     -- TODO: move launch.json config divider here
     -- for _, language in ipairs(js_based_languages) do
     --   require('dap').configurations[language] = {
@@ -33,7 +33,7 @@ local attach_debugger = function()
 
     -- override pythonPath in all python configurations
     local python_configurations = dap_configurations.python or {}
-    local python = prefer_venv_executable 'python'
+    local python = prefer_venv_executable('python')
     for _, config in ipairs(python_configurations) do
       config.pythonPath = python
     end
@@ -100,12 +100,12 @@ return {
         },
       },
       config = function(_, opts)
-        local dap = require 'dap'
-        local dapui = require 'dapui'
+        local dap = require('dap')
+        local dapui = require('dapui')
         dapui.setup(opts)
-        dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open {} end
-        dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close {} end
-        dap.listeners.before.event_exited['dapui_config'] = function() dapui.close {} end
+        dap.listeners.after.event_initialized['dapui_config'] = function() dapui.open({}) end
+        dap.listeners.before.event_terminated['dapui_config'] = function() dapui.close({}) end
+        dap.listeners.before.event_exited['dapui_config'] = function() dapui.close({}) end
       end,
     },
 
@@ -149,7 +149,7 @@ return {
   keys = {
     -- { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
     { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Toggle Breakpoint' },
-    { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end, desc = 'Breakpoint Condition' },
+    { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = 'Breakpoint Condition' },
     { '<leader>dc', function() require('dap').continue() end, desc = 'Continue' },
     { '<leader>dC', function() require('dap').run_to_cursor() end, desc = 'Run to Cursor' },
     { '<leader>dd', attach_debugger, desc = 'Start debugger' },
@@ -164,12 +164,12 @@ return {
     { '<leader>dr', function() require('dap').restart() end, desc = 'Restart' },
     { '<leader>ds', function() require('dap').step_over() end, desc = 'Step Over' },
     { '<leader>dx', function() require('dap').terminate() end, desc = 'End session' },
-    { '<leader>du', function() require('dapui').toggle {} end, desc = 'Dap UI' },
+    { '<leader>du', function() require('dapui').toggle({}) end, desc = 'Dap UI' },
     { '<leader>dw', function() require('dapui').elements.watches.add() end, desc = 'Watch symbol under cursor' },
   },
 
   config = function()
-    local Config = require 'lazyvim.config'
+    local Config = require('lazyvim.config')
     vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
 
     for name, sign in pairs(Config.icons.dap) do

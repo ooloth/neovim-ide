@@ -8,7 +8,7 @@ return {
   priority = 1000,
   config = function()
     -- see: https://github.com/catppuccin/nvim?tab=readme-ov-file#configuration
-    require('catppuccin').setup {
+    require('catppuccin').setup({
       dim_inactive = {
         enabled = false, -- dims the background color of inactive window
         shade = 'dark',
@@ -76,9 +76,9 @@ return {
       --   strings = {},
       --   types = {},
       --   variables = {},
-    }
+    })
 
     -- Must call after setup
-    vim.cmd.colorscheme 'catppuccin'
+    vim.cmd.colorscheme('catppuccin')
   end,
 }

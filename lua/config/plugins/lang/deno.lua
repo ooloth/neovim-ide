@@ -5,11 +5,11 @@ vim.g.markdown_fenced_languages = {
 }
 
 local is_deno_project = function()
-  local handle = io.popen 'ls'
+  local handle = io.popen('ls')
   if not handle then return false end
   vim.notify(vim.inspect(handle))
 
-  local result = handle:read '*a'
+  local result = handle:read('*a')
   handle:close()
   vim.notify(vim.inspect(result))
 
@@ -60,10 +60,10 @@ return {
           },
           setup = {
             deno_ls = function()
-              local nvim_lsp = require 'nvim_lsp'
-              nvim_lsp.deno_ls.setup {
+              local nvim_lsp = require('nvim_lsp')
+              nvim_lsp.deno_ls.setup({
                 root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.lock'),
-              }
+              })
               -- require('lazyvim.util').lsp.on_attach(function(client, _) -- FIXME: remove lazyvim import?
               --   if client.name == 'deno_ls' then
               --     client.config.enabled = is_deno_project()

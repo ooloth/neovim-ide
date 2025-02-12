@@ -2,9 +2,9 @@ return {
   'echasnovski/mini.clue',
   version = '*',
   config = function()
-    local miniclue = require 'mini.clue'
+    local miniclue = require('mini.clue')
 
-    miniclue.setup {
+    miniclue.setup({
       -- see: https://github.com/echasnovski/mini.nvim/blob/main/readmes/mini-clue.md#default-config
       clues = {
         -- Enhance this by adding descriptions for <Leader> mapping groups
@@ -51,6 +51,6 @@ return {
           width = 46,
         },
       },
-    }
+    })
   end,
 }

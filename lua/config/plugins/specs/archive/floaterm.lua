@@ -52,7 +52,7 @@ local function toggle_if_running_else_create(name)
 end
 
 local function toggle_maximized(name)
-  local current_term_name = vim.fn['floaterm#config#get'](vim.fn.bufnr '%', 'name')
+  local current_term_name = vim.fn['floaterm#config#get'](vim.fn.bufnr('%'), 'name')
 
   if name == current_term_name then
     -- if current_term_name ~= 'lazygit' then
@@ -69,12 +69,12 @@ return {
   event = 'VeryLazy',
   cmd = 'FloatermNew',
   keys = {
-    { '<leader>gg', function() toggle_if_running_else_create 'lazygit' end, desc = 'Lazygit' },
-    { '<c-g>', function() toggle_if_running_else_create 'lazygit' end, desc = 'Lazygit' },
-    { '<c-t>', function() toggle_if_running_else_create 'scratch' end, desc = 'Open scratch terminal' }, -- TODO: toggle most recent terminal instead?
+    { '<leader>gg', function() toggle_if_running_else_create('lazygit') end, desc = 'Lazygit' },
+    { '<c-g>', function() toggle_if_running_else_create('lazygit') end, desc = 'Lazygit' },
+    { '<c-t>', function() toggle_if_running_else_create('scratch') end, desc = 'Open scratch terminal' }, -- TODO: toggle most recent terminal instead?
     { '<c-g>', mode = 't', '<cmd>FloatermHide<cr>', desc = 'Hide Lazygit' },
     { '<c-t>', mode = 't', '<cmd>FloatermHide<cr>', desc = 'Hide terminal' },
-    { '<c-z>', mode = 't', function() toggle_maximized 'scratch' end, desc = 'Toggle maximized terminal' },
+    { '<c-z>', mode = 't', function() toggle_maximized('scratch') end, desc = 'Toggle maximized terminal' },
   },
   init = function()
     -- Set float border to catppuccin mocha "surface1" color (used for split borders)
@@ -84,7 +84,7 @@ return {
     vim.api.nvim_create_autocmd('User', {
       pattern = { 'FloatermOpen' },
       callback = function()
-        local bufname = vim.fn.expand '%'
+        local bufname = vim.fn.expand('%')
 
         -- Switch to normal mode with ESC...
         vim.keymap.set('t', '<esc>', '<c-\\><c-n>', { desc = 'Enter Normal Mode' })

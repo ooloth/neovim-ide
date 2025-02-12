@@ -100,7 +100,7 @@ set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
-  return function() go { severity = severity } end
+  return function() go({ severity = severity }) end
 end
 
 -- TODO: does mini.bracketed replace these?
@@ -121,7 +121,7 @@ set('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result
 set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
 
 return {
-  require 'config.plugins.specs.mini-files', -- file system editor + explorer
-  require 'config.plugins.specs.persistence', -- session manager
-  require 'config.plugins.specs.vim-tmux-navigator', -- move across vim + tmux windows with c-jkhl
+  require('config.plugins.specs.mini-files'), -- file system editor + explorer
+  require('config.plugins.specs.persistence'), -- session manager
+  require('config.plugins.specs.vim-tmux-navigator'), -- move across vim + tmux windows with c-jkhl
 }

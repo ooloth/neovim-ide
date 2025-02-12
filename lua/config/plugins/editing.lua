@@ -10,7 +10,7 @@ vim.opt.shiftwidth = 2 -- rize of an indent
 vim.opt.smartindent = true -- Insert indents automatically
 vim.opt.spell = false
 vim.opt.spelllang = { 'en' }
-vim.opt.spelloptions:append 'noplainbuffer'
+vim.opt.spelloptions:append('noplainbuffer')
 vim.opt.tabstop = 2 -- Number of spaces tabs count for
 vim.opt.undofile = true -- save undo history
 vim.opt.undolevels = 10000
@@ -50,7 +50,7 @@ set('i', ';', ';<c-g>u')
 
 autocmd('FocusGained', {
   desc = 'Update buffer when there are file changes',
-  callback = function() vim.cmd 'checktime' end,
+  callback = function() vim.cmd('checktime') end,
 })
 
 -- TODO: move to after/ftplugin?
@@ -64,17 +64,17 @@ autocmd('FileType', {
 -- https://neovim.discourse.group/t/options-formatoptions-not-working-when-put-in-init-lua/3746/5
 autocmd('BufEnter', {
   callback = function()
-    vim.opt.formatoptions:remove { 'r', 'o' }
+    vim.opt.formatoptions:remove({ 'r', 'o' })
     -- vim.opt.formatoptions:remove { 'c', 'r', 'o' }
   end,
 })
 
 return {
-  require 'config.plugins.specs.auto-save',
-  require 'config.plugins.specs.guess-indent',
-  require 'config.plugins.specs.inc-rename',
-  require 'config.plugins.specs.mini-pairs',
-  require 'config.plugins.specs.mini-surround',
-  require 'config.plugins.specs.netrw',
-  require 'config.plugins.specs.nvim-cmp',
+  require('config.plugins.specs.auto-save'),
+  require('config.plugins.specs.guess-indent'),
+  require('config.plugins.specs.inc-rename'),
+  require('config.plugins.specs.mini-pairs'),
+  require('config.plugins.specs.mini-surround'),
+  require('config.plugins.specs.netrw'),
+  require('config.plugins.specs.nvim-cmp'),
 }

@@ -28,7 +28,7 @@
 -- Support opening multiple files in the same picker session:
 -- see: https://github.com/nvim-telescope/telescope.nvim/issues/1048#issuecomment-2142669167
 local select_one_or_multi = function(prompt_bufnr)
-  local actions = require 'telescope.actions'
+  local actions = require('telescope.actions')
   local picker = require('telescope.actions.state').get_current_picker(prompt_bufnr)
   local multi = picker:get_multi_selection()
 
@@ -67,10 +67,10 @@ return {
     },
   },
   config = function()
-    local actions = require 'telescope.actions'
+    local actions = require('telescope.actions')
     -- local undo_actions = require('telescope-undo.actions')
 
-    require('telescope').setup {
+    require('telescope').setup({
       defaults = {
         layout_config = {
           flex = { width = 0.98, height = 0.97, preview_width = 0.5 },
@@ -119,17 +119,17 @@ return {
           -- },
         },
       },
-    }
+    })
 
     -- Load extensions after setup if they're installed
-    local telescope = require 'telescope'
-    pcall(telescope.load_extension 'noice')
-    pcall(telescope.load_extension 'smart_open')
+    local telescope = require('telescope')
+    pcall(telescope.load_extension('noice'))
+    pcall(telescope.load_extension('smart_open'))
     -- pcall(telescope.load_extension, 'ui-select')
-    pcall(telescope.load_extension 'undo')
+    pcall(telescope.load_extension('undo'))
 
     -- See `:help telescope.builtin`
-    local builtin = require 'telescope.builtin'
+    local builtin = require('telescope.builtin')
     local extensions = telescope.extensions
 
     vim.keymap.set('n', '<leader>/', builtin.current_buffer_fuzzy_find, { desc = 'Fuzzily search in current buffer' })
@@ -144,8 +144,8 @@ return {
     vim.keymap.set('n', '<leader>sa', builtin.autocommands, { desc = 'Auto commands' })
     vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = 'Commands (plugin)' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Diagnostics' })
-    vim.keymap.set('n', '<leader>se', function() builtin.buffers { cwd_only = true } end, { desc = 'Editors' })
-    vim.keymap.set('n', '<leader>sf', function() extensions.smart_open.smart_open { cwd_only = true } end, { desc = 'Files' })
+    vim.keymap.set('n', '<leader>se', function() builtin.buffers({ cwd_only = true }) end, { desc = 'Editors' })
+    vim.keymap.set('n', '<leader>sf', function() extensions.smart_open.smart_open({ cwd_only = true }) end, { desc = 'Files' })
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Grep any string' })
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Help' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Keymaps' })
@@ -161,6 +161,6 @@ return {
     vim.keymap.set('n', '<leader>su', extensions.undo.undo, { desc = 'Undo history' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Word under cursor' })
     vim.keymap.set('n', '<leader>sz', builtin.resume, { desc = 'Resume last search' })
-    vim.keymap.set('n', '<leader>uC', function() builtin.colorscheme { enable_preview = true } end, { desc = 'Colorschemes (with preview)' })
+    vim.keymap.set('n', '<leader>uC', function() builtin.colorscheme({ enable_preview = true }) end, { desc = 'Colorschemes (with preview)' })
   end,
 }

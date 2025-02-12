@@ -11,7 +11,7 @@ return {
   version = false, -- last release is way too old
   event = 'InsertEnter',
   dependencies = {
-    require 'config.plugins.specs.nvim-snippets',
+    require('config.plugins.specs.nvim-snippets'),
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-buffer',
@@ -21,9 +21,9 @@ return {
   config = function()
     vim.api.nvim_set_hl(0, 'CmpGhostText', { link = 'Comment', default = true })
 
-    local cmp = require 'cmp'
+    local cmp = require('cmp')
 
-    cmp.setup {
+    cmp.setup({
       completion = {
         completeopt = 'menu,menuone,noinsert',
       },
@@ -32,19 +32,19 @@ return {
           hl_group = 'CmpGhostText',
         },
       },
-      mapping = cmp.mapping.preset.insert {
+      mapping = cmp.mapping.preset.insert({
         ['<C-j>'] = cmp.mapping.select_next_item(),
         ['<C-k>'] = cmp.mapping.select_prev_item(),
         ['<C-d>'] = cmp.mapping.scroll_docs(4), -- scroll preview window down
         ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- scroll preview window up
-        ['<C-s>'] = cmp.mapping.complete {}, -- show completion suggestions (if they didn't automatically appear)
+        ['<C-s>'] = cmp.mapping.complete({}), -- show completion suggestions (if they didn't automatically appear)
         ['<C-e>'] = cmp.mapping.abort(),
 
         -- This will auto-import if your LSP supports it.
         -- This will expand snippets if the LSP sent a snippet.
-        ['<CR>'] = cmp.mapping.confirm { select = true },
-        ['<C-y>'] = cmp.mapping.confirm { select = true }, -- TODO: try out this alternative to CR
-      },
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }), -- TODO: try out this alternative to CR
+      }),
       snippet = {
         expand = function(args)
           -- see: https://github.com/garymjr/nvim-snippets/issues/7#issuecomment-2137168610
@@ -65,6 +65,6 @@ return {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
-    }
+    })
   end,
 }

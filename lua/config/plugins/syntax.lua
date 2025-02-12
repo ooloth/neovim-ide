@@ -1,5 +1,5 @@
 -- custom filename -> filetype associations
-vim.filetype.add {
+vim.filetype.add({
   extension = {
     -- see: https://sbulav.github.io/vim/neovim-improving-work-with-terraform/#correctly-detecting-tf-filetype
     tf = 'terraform',
@@ -18,9 +18,9 @@ vim.filetype.add {
     ['.*/.vscode/.*%.json'] = 'jsonc',
     ['.*/vscode/.*%.json'] = 'jsonc',
   },
-}
+})
 
 return {
-  require 'config.plugins.specs.mini-ai',
-  require 'config.plugins.specs.nvim-treesitter',
+  require('config.plugins.specs.mini-ai'),
+  require('config.plugins.specs.nvim-treesitter'),
 }

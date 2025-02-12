@@ -56,6 +56,6 @@ return {
     },
   },
   init = function()
-    vim.cmd [[cab cc CodeCompanion]] -- expand 'cc' into 'CodeCompanion' in the neovim command prompt
+    vim.cmd([[cab cc CodeCompanion]]) -- expand 'cc' into 'CodeCompanion' in the neovim command prompt
   end,
 }

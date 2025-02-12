@@ -7,7 +7,7 @@ return {
   keys = {
     {
       '<leader>un',
-      function() require('notify').dismiss { silent = true, pending = true } end,
+      function() require('notify').dismiss({ silent = true, pending = true }) end,
       desc = 'Dismiss All Notifications',
     },
   },
@@ -20,6 +20,6 @@ return {
     on_open = function(win) vim.api.nvim_win_set_config(win, { zindex = 100 }) end,
   },
   init = function()
-    vim.notify = require 'notify' -- set as default notify function used by all plugins
+    vim.notify = require('notify') -- set as default notify function used by all plugins
   end,
 }

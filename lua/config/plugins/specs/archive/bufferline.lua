@@ -13,7 +13,7 @@ return {
 
     return {
       -- see: https://github.com/catppuccin/nvim?tab=readme-ov-file#integrations
-      highlights = require('catppuccin.groups.integrations.bufferline').get {
+      highlights = require('catppuccin.groups.integrations.bufferline').get({
         custom = {
           mocha = {
             separator_selected = { fg = mocha_custom_bg },
@@ -21,7 +21,7 @@ return {
             separator = { fg = mocha_custom_bg },
           },
         },
-      },
+      }),
       options = {
         always_show_bufferline = true,
         diagnostics = 'nvim_lsp', -- indicate diagnostic issues

@@ -10,7 +10,7 @@ local function get_git_diff(staged)
   local handle = io.popen(cmd)
   if not handle then return '' end
 
-  local result = handle:read '*a'
+  local result = handle:read('*a')
   handle:close()
   return result
 end
@@ -56,14 +56,14 @@ return {
       proxy = '', -- Proxies requests via https or socks
       show_help = 'yes', -- Show help text for CopilotChatInPlace
     },
-    build = function() vim.notify "Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim." end,
+    build = function() vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.") end,
     event = 'VeryLazy',
     keys = {
       -- Custom input for CopilotChat
       {
         '<leader>aa',
         function()
-          local input = vim.fn.input 'Ask Copilot: '
+          local input = vim.fn.input('Ask Copilot: ')
           if input ~= '' then vim.cmd('CopilotChat ' .. input) end
         end,
         desc = 'Ask for something else',
@@ -92,7 +92,7 @@ return {
           local diff = get_git_diff()
           if diff ~= '' then
             vim.fn.setreg('"', diff)
-            vim.cmd 'CopilotChat Write commit message for the change with commitizen convention.'
+            vim.cmd('CopilotChat Write commit message for the change with commitizen convention.')
           end
         end,
         desc = 'Generate commit message for all changes',
@@ -103,7 +103,7 @@ return {
           local diff = get_git_diff(true)
           if diff ~= '' then
             vim.fn.setreg('"', diff)
-            vim.cmd 'CopilotChat Write commit message for the change with commitizen convention.'
+            vim.cmd('CopilotChat Write commit message for the change with commitizen convention.')
           end
         end,
         desc = 'Generate commit message for staged changes',
