@@ -13,6 +13,7 @@ local set = vim.keymap.set
 
 -- TODO: use this helper instead to eliminate most of the 'n' and '{ desc = ... }' used in the `set` calls?
 -- or keep it simple by avoiding creating yet another abstracting to memorize/override, etc?
+-- TODO: attach this to _G?
 local map = function(lhs, rhs, desc, mode)
   mode = mode or 'n'
   vim.keymap.set(mode, lhs, rhs, { desc = desc, expr = true, silent = true })
@@ -73,21 +74,14 @@ set('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First tab' })
 set('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last tab' })
 
 -- "window"
--- TODO: map all <c-w> commands?
 set('n', '<leader>\\', '<c-w>v', { desc = 'Split right' })
-set('n', '<leader>w\\', '<c-w>v', { desc = 'Split right' })
 set('n', '<leader>-', '<c-w>s', { desc = 'Split below' })
-set('n', '<leader>w-', '<c-w>s', { desc = 'Split below' })
 set('n', '<leader>=', '<c-w>=', { desc = 'Resize equally' })
-set('n', '<leader>w=', '<c-w>=', { desc = 'Resize equally' })
 set('n', '<leader>[', '<cmd>vertical resize -3<cr>', { desc = 'Reduce size' })
-set('n', '<leader>w[', '<cmd>vertical resize -3<cr>', { desc = 'Reduce size' })
 set('n', '<leader>]', '<cmd>vertical resize +3<cr>', { desc = 'Increase size' })
-set('n', '<leader>w]', '<cmd>vertical resize +3<cr>', { desc = 'Increase size' })
 set('n', '<leader>wd', '<c-w>c', { desc = 'Delete Window', remap = true })
 -- TODO: "leader-wm" = toggle maximize window (see vim-maximizer.lua}
 -- set("n", "<leader>wm", function() LazyVim.toggle.maximize() end, { desc = "Maximize Toggle" })
-set('n', '<leader>wo', '<c-w>o', { desc = 'Only keep this one' })
 set('n', '<leader>wt', '<cmd>tab split<cr>', { desc = 'Open in new tab' })
 set('n', '<leader>ww', '<c-w>p', { desc = 'Other Window', remap = true })
 -- TODO: "leader-ww" = pick window (see nvim-window-picker.lua)?
@@ -109,6 +103,7 @@ local diagnostic_goto = function(next, severity)
   return function() go { severity = severity } end
 end
 
+-- TODO: does mini.bracketed replace these?
 set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
 set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
 set('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
