@@ -9,7 +9,7 @@ return {
   {
     'williamboman/mason-tool-installer.nvim',
     opts = {
-      ensure_installed = { 'eslint-lsp', 'js-debug-adapter' },
+      ensure_installed = { 'eslint-lsp', 'js-debug-adapter', 'ts_ls' },
     },
   },
 
@@ -49,11 +49,33 @@ return {
             completions = {
               completeFunctionCalls = true,
             },
+            javascript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all';
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = false,
+              },
+            },
+            typescript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = 'all', -- 'none' | 'literals' | 'all';
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = false,
+              },
+            },
           },
         },
       },
       setup = {
-        tsserver = function()
+        ts_ls = function()
           require('lazyvim.util').lsp.on_attach(function(client, _) -- FIXME: remove lazyvim import?
             -- prefer local typescript version (if available)
             if client.name == 'tsserver' then client.config.cmd = { prefer_node_modules_executable 'tsserver', '--stdio' } end
