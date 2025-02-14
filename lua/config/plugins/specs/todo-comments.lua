@@ -1,7 +1,4 @@
 -- TODO: https://www.lazyvim.org/plugins/editor#todo-commentsnvim
--- NOTE: testing
--- WARN: testing
--- FIX: testing
 
 return {
   'folke/todo-comments.nvim',

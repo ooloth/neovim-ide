@@ -48,7 +48,7 @@ return {
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = 'Search history' },
     { '<leader>sa', function() Snacks.picker.autocmds() end, desc = 'Autocmds' },
     { '<leader>sc', function() Snacks.picker.command_history() end, desc = 'Command history' },
-    { '<leader>sd', function() Snacks.picker.diagnostics() end, desc = 'Diagnostics' },
+    -- NOTE: leader-sd is used by trouble.nvim to open diagnostics in Trouble's quickfix view
     { '<leader>se', function() Snacks.picker.buffers() end, desc = 'Editors' },
     { '<leader>sE', function() Snacks.picker.grep_buffers() end, desc = 'Grep open editors' },
     { '<leader>sf', function() Snacks.picker.files({ hidden = true }) end, desc = 'Files' },
@@ -60,7 +60,7 @@ return {
     { '<leader>sk', function() Snacks.picker.keymaps() end, desc = 'Keymaps' },
     -- { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
     { '<leader>sm', function() Snacks.picker.marks() end, desc = 'Marks' },
-    { '<leader>sM', function() Snacks.picker.man() end, desc = 'Man pages' },
+    l({ '<leader>sM', function() Snacks.picker.man() end, desc = 'Man pages' }),
     { '<leader>sp', function() Snacks.picker() end, desc = 'Pickers' },
     -- { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
     { '<leader>sr', function() Snacks.picker.recent({ filter = { cwd = true } }) end, desc = 'Recent files' },

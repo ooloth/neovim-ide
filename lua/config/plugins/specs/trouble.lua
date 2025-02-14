@@ -1,5 +1,3 @@
--- TODO: any way to live grep the list? or should I just use a picker?
-
 return {
   'folke/trouble.nvim',
   opts = {
@@ -10,18 +8,24 @@ return {
       ['<esc>'] = 'close',
       e = {
         action = function(view) view:filter({ buf = 0 }, { toggle = true }) end,
-        desc = 'Toggle Current Buffer Filter',
+        desc = 'Toggle current buffer filter',
       },
     },
     modes = {
       diagnostics = {
         format = '{severity_icon}{message:md} {item.source} {code} {filename} {pos}',
+        -- groups = {
+        --   { 'cmd', format = '{hl:Title}Diagnostics in open editors{hl} {count}' },
+        -- },
         groups = {}, -- no tree view (every line is actionable)
       },
       todo = {
         -- see: https://github.com/folke/todo-comments.nvim/blob/main/lua/trouble/sources/todo.lua
-        groups = {}, -- no tree view (every line is actionable)
         format = '{todo_icon} {text} {filename} {pos}',
+        -- groups = {
+        --   { 'cmd', format = '{hl:Title}TODO comments in project{hl} {count}' },
+        -- },
+        groups = {}, -- no tree view (every line is actionable)
         sort = { 'tag', 'filename', 'pos', 'message' },
       },
     },
@@ -29,6 +33,6 @@ return {
     warn_no_results = false, -- show a warning when there are no results
   },
   keys = {
-    { '<leader>x', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Diagnostics (all)' },
+    { '<leader>sd', '<cmd>Trouble diagnostics toggle<cr>', desc = 'Diagnostics (open editors)' },
   },
 }
