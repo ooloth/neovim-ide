@@ -3,9 +3,7 @@
 return {
   'folke/snacks.nvim',
   opts = {
-    zen = {
-      enabled = true,
-    },
+    zen = {},
     styles = {
       zoom_indicator = {
         text = ' 󰊓 ZOOMED 󰊓   ',
@@ -14,6 +12,7 @@ return {
     },
   },
   keys = {
+    { '<leader>em', function() Snacks.zen.zoom() end, desc = 'Maximize (toggle)' },
     { '<leader>wm', function() Snacks.zen.zoom() end, desc = 'Maximize (toggle)' },
   },
 }
