@@ -56,7 +56,9 @@ return {
       proxy = '', -- Proxies requests via https or socks
       show_help = 'yes', -- Show help text for CopilotChatInPlace
     },
-    build = function() vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.") end,
+    build = function()
+      vim.notify("Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim.")
+    end,
     event = 'VeryLazy',
     keys = {
       -- Custom input for CopilotChat

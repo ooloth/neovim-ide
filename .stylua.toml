@@ -1,7 +1,13 @@
+# see: https://github.com/JohnnyMorganz/StyLua?tab=readme-ov-file#options
+# see: https://github.com/JohnnyMorganz/StyLua?tab=readme-ov-file#configuration
+# see: https://github.com/JohnnyMorganz/StyLua?tab=readme-ov-file#usage
+
 call_parentheses = "Always"
 collapse_simple_statement = "Always"
-column_width = 160
+column_width = 120
 indent_type = "Spaces"
 indent_width = 2
-line_endings = "Unix"
 quote_style = "AutoPreferSingle"
+
+[sort_requires]
+enabled = true

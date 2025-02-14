@@ -22,7 +22,12 @@ return {
     -- { '<leader>um', function() require("tint").toggle() end, desc = 'Toggle dimming' },
     -- },
     init = function()
-      vim.api.nvim_set_keymap('n', '<leader>um', '<cmd>lua require("tint").toggle()<cr>', { desc = 'Toggle dimming', noremap = true, silent = true })
+      vim.api.nvim_set_keymap(
+        'n',
+        '<leader>um',
+        '<cmd>lua require("tint").toggle()<cr>',
+        { desc = 'Toggle dimming', noremap = true, silent = true }
+      )
     end,
   },
 

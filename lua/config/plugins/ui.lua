@@ -51,7 +51,12 @@ set({ 'i', 'n' }, '<esc>', '<cmd>nohlsearch<cr><esc>', { silent = true })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
-set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / Clear hlsearch / Diff Update' })
+set(
+  'n',
+  '<leader>ur',
+  '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
+  { desc = 'Redraw / Clear hlsearch / Diff Update' }
+)
 
 vim.cmd([[
   autocmd InsertEnter * set nocursorline
@@ -77,13 +82,12 @@ autocmd('VimResized', {
 
 -- TODO: move to after/ftplugin?
 autocmd('FileType', {
+  desc = 'Enable wrap in these filetypes',
   pattern = { 'gitcommit', 'log', 'markdown', 'text' },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
   end,
-  group = general,
-  desc = 'Enable Wrap in these filetypes',
 })
 
 return {

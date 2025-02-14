@@ -149,7 +149,11 @@ return {
   keys = {
     -- { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
     { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Toggle Breakpoint' },
-    { '<leader>dB', function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = 'Breakpoint Condition' },
+    {
+      '<leader>dB',
+      function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
+      desc = 'Breakpoint Condition',
+    },
     { '<leader>dc', function() require('dap').continue() end, desc = 'Continue' },
     { '<leader>dC', function() require('dap').run_to_cursor() end, desc = 'Run to Cursor' },
     { '<leader>dd', attach_debugger, desc = 'Start debugger' },
@@ -174,7 +178,10 @@ return {
 
     for name, sign in pairs(Config.icons.dap) do
       sign = type(sign) == 'table' and sign or { sign }
-      vim.fn.sign_define('Dap' .. name, { text = sign[1], texthl = sign[2] or 'DiagnosticInfo', linehl = sign[3], numhl = sign[3] })
+      vim.fn.sign_define(
+        'Dap' .. name,
+        { text = sign[1], texthl = sign[2] or 'DiagnosticInfo', linehl = sign[3], numhl = sign[3] }
+      )
     end
   end,
 }
