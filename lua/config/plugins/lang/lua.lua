@@ -31,7 +31,7 @@ return {
                 arrayIndex = 'Disable',
                 enable = true,
                 paramType = true, -- requires the parameters to be defined with @param
-                -- paramName = 'Disable', -- 'All', 'Literal', 'Disable'
+                paramName = 'Disable', -- 'All', 'Literal', 'Disable'
                 semicolon = 'Disable',
                 setType = true, -- display the type being applied at assignment operations
               },

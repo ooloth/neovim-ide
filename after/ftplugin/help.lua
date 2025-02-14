@@ -1,4 +1,4 @@
-vim.cmd('wincmd L') -- move help window to the right
+vim.cmd('wincmd L') -- move initial help window to the right
 
 vim.opt_local.conceallevel = 0 -- show concealable characters
 vim.opt_local.buflisted = false -- exclude from jump list
