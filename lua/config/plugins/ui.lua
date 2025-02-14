@@ -51,12 +51,7 @@ set({ 'i', 'n' }, '<esc>', '<cmd>nohlsearch<cr><esc>', { silent = true })
 
 -- Clear search, diff update and redraw
 -- taken from runtime/lua/_editor.lua
-set(
-  'n',
-  '<leader>ur',
-  '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
-  { desc = 'Redraw / Clear hlsearch / Diff Update' }
-)
+set('n', '<leader>ur', '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>', { desc = 'Redraw / Clear hlsearch / Diff Update' })
 
 vim.cmd([[
   autocmd InsertEnter * set nocursorline

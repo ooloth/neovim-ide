@@ -145,12 +145,7 @@ return {
     vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = 'Commands (plugin)' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Diagnostics' })
     vim.keymap.set('n', '<leader>se', function() builtin.buffers({ cwd_only = true }) end, { desc = 'Editors' })
-    vim.keymap.set(
-      'n',
-      '<leader>sf',
-      function() extensions.smart_open.smart_open({ cwd_only = true }) end,
-      { desc = 'Files' }
-    )
+    vim.keymap.set('n', '<leader>sf', function() extensions.smart_open.smart_open({ cwd_only = true }) end, { desc = 'Files' })
     vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Grep any string' })
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Help' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Keymaps' })
