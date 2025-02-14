@@ -23,6 +23,7 @@ return {
         lua_ls = {
           settings = {
             Lua = {
+              -- see: https://luals.github.io/wiki/settings/
               codeLens = {
                 enable = true,
               },
@@ -35,10 +36,10 @@ return {
               hint = {
                 arrayIndex = 'Disable',
                 enable = true,
-                paramType = true,
-                paramName = 'Disable',
+                paramType = true, -- requires the parameters to be defined with @param
+                -- paramName = 'Disable', -- 'All', 'Literal', 'Disable'
                 semicolon = 'Disable',
-                setType = false,
+                setType = true, -- display the type being applied at assignment operations
               },
               workspace = {
                 checkThirdParty = false,
