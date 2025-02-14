@@ -12,6 +12,14 @@ return {
         },
         -- TODO: customize dimensions of special layouts that feel too small
       },
+      win = {
+        input = {
+          keys = {
+            ['<c-h>'] = { 'history_forward', mode = { 'i', 'n' } },
+            ['<c-l>'] = { 'history_back', mode = { 'i', 'n' } },
+          },
+        },
+      },
     },
   },
   keys = {
@@ -20,7 +28,11 @@ return {
     { 'gI', function() Snacks.picker.lsp_implementations() end, desc = 'Goto implementation' },
     { 'gr', function() Snacks.picker.lsp_references() end, nowait = true, desc = 'References' },
     { 'gy', function() Snacks.picker.lsp_type_definitions() end, desc = 'Goto t[y]pe definition' },
-    { '<leader><space>', function() Snacks.picker.smart({ filter = { cwd = true } }) end, desc = 'Smart find recent files' },
+    {
+      '<leader><space>',
+      function() Snacks.picker.smart({ filter = { cwd = true } }) end,
+      desc = 'Smart find recent files',
+    },
     { '<leader>/', function() Snacks.picker.grep() end, desc = 'Grep' },
     { '<leader>,', function() Snacks.picker.command_history() end, desc = 'Command history' },
     { '<leader>e/', function() Snacks.picker.lines() end, desc = 'Search lines' },
@@ -56,7 +68,12 @@ return {
     -- TODO: '<leader>st' = 'Todos' (see todo-comment.lua)
     -- { "<leader>st", function() Snacks.explorer() end, desc = "File tree" },
     { '<leader>su', function() Snacks.picker.undo() end, desc = 'Undo history' },
-    { '<leader>sw', function() Snacks.picker.grep_word() end, desc = 'Visual selection or cursor word', mode = { 'n', 'x' } },
+    {
+      '<leader>sw',
+      function() Snacks.picker.grep_word() end,
+      desc = 'Visual selection or cursor word',
+      mode = { 'n', 'x' },
+    },
     { '<leader>sz', function() Snacks.picker.resume() end, desc = 'Resume' },
     { '<leader>uC', function() Snacks.picker.colorschemes() end, desc = 'Colorschemes' },
   },
