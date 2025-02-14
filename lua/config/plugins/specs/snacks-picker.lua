@@ -60,7 +60,7 @@ return {
     { '<leader>sk', function() Snacks.picker.keymaps() end, desc = 'Keymaps' },
     -- { "<leader>sl", function() Snacks.picker.loclist() end, desc = "Location List" },
     { '<leader>sm', function() Snacks.picker.marks() end, desc = 'Marks' },
-    l({ '<leader>sM', function() Snacks.picker.man() end, desc = 'Man pages' }),
+    { '<leader>sM', function() Snacks.picker.man() end, desc = 'Man pages' },
     { '<leader>sp', function() Snacks.picker() end, desc = 'Pickers' },
     -- { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
     { '<leader>sr', function() Snacks.picker.recent({ filter = { cwd = true } }) end, desc = 'Recent files' },
