@@ -2,13 +2,6 @@
 -- TODO: debugging: https://www.lazyvim.org/extras/dap/nlua
 
 return {
-  -- {
-  --   'williamboman/mason-tool-installer.nvim',
-  --   opts = {
-  --     ensure_installed = {},
-  --   },
-  -- },
-
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
@@ -23,9 +16,10 @@ return {
         lua_ls = {
           settings = {
             Lua = {
+              -- see: https://github.com/luals/lua-language-server/blob/master/locale/en-us/setting.lua
               -- see: https://luals.github.io/wiki/settings/
               codeLens = {
-                enable = true,
+                enable = false, -- "N references" after functions kept flickering on save
               },
               completion = {
                 callSnippet = 'Replace',
