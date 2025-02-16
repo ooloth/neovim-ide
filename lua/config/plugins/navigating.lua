@@ -155,9 +155,8 @@ local function open_in_split(options)
   vim.cmd('wincmd p') -- move to new window
 end
 
--- Map <leader>el to the function
-set('n', '<leader>eh', function() open_in_split({ direction = 'left' }) end, { silent = true })
-set('n', '<leader>el', function() open_in_split({ direction = 'right' }) end, { silent = true })
+set('n', '<leader>eh', function() open_in_split({ direction = 'left' }) end, { desc = 'Move one split left', silent = true })
+set('n', '<leader>el', function() open_in_split({ direction = 'right' }) end, { desc = 'Move one split right', silent = true })
 
 return {
   require('config.plugins.specs.mini-files'), -- file system editor + explorer
