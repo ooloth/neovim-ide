@@ -28,7 +28,7 @@ return {
       chat = {
         keymaps = {
           close = {
-            modes = { n = { '<esc>' }, i = '<c-c>' },
+            modes = { n = { 'q' }, i = '<c-c>' },
             -- Toggle instead of closing to avoid losing this session's chat history
             callback = function() require('codecompanion').toggle() end,
             description = 'Toggle Chat',
