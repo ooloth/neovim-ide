@@ -16,6 +16,12 @@ return {
         },
         -- TODO: customize dimensions of special layouts that feel too small
       },
+      sources = {
+        -- NOTE: keep this example for how to customize a source
+        -- grep = {
+        --   layout = { preset = 'vertical', layout = { height = 0, width = 0 } },
+        -- },
+      },
       win = {
         input = {
           keys = {
