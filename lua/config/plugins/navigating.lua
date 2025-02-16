@@ -98,22 +98,6 @@ set('n', '<leader>l', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 set('n', '[q', vim.cmd.cprev, { desc = 'Prev Quickfix' })
 set('n', ']q', vim.cmd.cnext, { desc = 'Next Quickfix' })
 
--- diagnostic
-local diagnostic_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function() go({ severity = severity }) end
-end
-
--- TODO: does mini.bracketed replace these?
-set('n', '<leader>cd', vim.diagnostic.open_float, { desc = 'Line Diagnostics' })
-set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic' })
-set('n', '[d', diagnostic_goto(false), { desc = 'Prev Diagnostic' })
-set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
-set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
-set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
-set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
-
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 set('n', 'n', "'Nn'[v:searchforward].'zv'", { expr = true, desc = 'Next Search Result' })
 set('x', 'n', "'Nn'[v:searchforward]", { expr = true, desc = 'Next Search Result' })
