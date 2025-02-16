@@ -113,7 +113,7 @@ set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result
 ---@param options OpenInSplitOptions
 local function open_in_split(options)
   local opts = options or {}
-  local direction = opts.direction or 'right'
+  local direction = opts.direction or 'right' -- TODO: support up/down?
 
   local current_bufnr = vim.api.nvim_get_current_buf()
   local current_winnr = vim.api.nvim_get_current_win()
