@@ -122,22 +122,38 @@ set('n', 'N', "'nN'[v:searchforward].'zv'", { expr = true, desc = 'Prev Search R
 set('x', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
 set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result' })
 
----Open the current buffer in the right split
-local function open_in_right_split()
+---@class OpenInSplitOptions
+---@field direction string: 'left' or 'right'
+
+---Open the current buffer in vertical split
+---@param opts OpenInSplitOptions
+local function open_in_split(opts)
+  local options = opts or {}
+  local direction = options.direction or 'right'
+
   local current_bufnr = vim.api.nvim_get_current_buf()
   local current_winnr = vim.api.nvim_get_current_win()
 
-  vim.cmd('wincmd l') -- try to move right to see if there's already a split
-  if vim.api.nvim_get_current_win() == current_winnr then vim.cmd('vsplit') end
+  if direction == 'right' then
+    vim.cmd('wincmd l') -- try to move right
+    if vim.api.nvim_get_current_win() == current_winnr then vim.cmd('vsplit') end
+  elseif direction == 'left' then
+    vim.cmd('wincmd h') -- try to move left
+    if vim.api.nvim_get_current_win() == current_winnr then
+      vim.cmd('vsplit') -- create vertical split
+      vim.cmd('wincmd h') -- move to left window (the "new" one)
+    end
+  end
 
   vim.cmd('buffer ' .. current_bufnr) -- open current buffer in new window
-  vim.cmd('wincmd h') -- move to original window
+  vim.cmd('wincmd p') -- move to original window
   vim.cmd('b#') -- show the previous buffer
-  vim.cmd('wincmd l') -- move to new window
+  vim.cmd('wincmd p') -- move to new window
 end
 
 -- Map <leader>el to the function
-set('n', '<leader>el', open_in_right_split, { noremap = true, silent = true })
+set('n', '<leader>eh', function() open_in_split({ direction = 'left' }) end, { silent = true })
+set('n', '<leader>el', function() open_in_split({ direction = 'right' }) end, { silent = true })
 
 return {
   require('config.plugins.specs.mini-files'), -- file system editor + explorer
