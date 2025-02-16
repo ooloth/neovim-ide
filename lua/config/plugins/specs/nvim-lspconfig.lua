@@ -39,6 +39,7 @@ local set_lsp_keymaps = function(lsp_attach_event)
 
   -- map('gd', builtin.lsp_definitions, 'Go to definition') -- jump to where the variable/function under the cursor was first created; to jump back, press <C-t>
   -- map('gD', vim.lsp.buf.declaration, 'Go to declaration') -- for example, in C this would take you to the header
+  map('gh', function() require('noice.lsp').hover() end, 'Show hover doc')
   -- map('gI', builtin.lsp_implementations, 'Go to implementations') -- jump to an implementation of the word under your cursor; useful when your language has ways of declaring types without an actual implementation
   -- map('gr', builtin.lsp_references, 'Go to references') -- find references to the word under the cursor
   map('<leader>ra', vim.lsp.buf.code_action, 'Code action', { 'n', 'x' }) -- execute a code action, usually your cursor needs to be on top of an error or a suggestion from your LSP for this to activate
@@ -138,6 +139,7 @@ return {
     'williamboman/mason.nvim', -- so mason installations will be possible
     'williamboman/mason-lspconfig.nvim', -- so lspconfig + mason names will both work
     'WhoIsSethDaniel/mason-tool-installer.nvim', -- automatically install lsp servers I've configured
+    'folke/noice.nvim', -- for 'gh' keymap
     'hrsh7th/cmp-nvim-lsp', -- extend nvim's default lsp capabilities
     'j-hui/fidget.nvim', -- show lsp updates via discrete UI in the bottom right
     -- 'nvim-telescope/telescope.nvim', -- keymaps: better references, etc
