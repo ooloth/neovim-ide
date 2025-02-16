@@ -19,6 +19,13 @@ return {
           { 'cmd', format = '{hl:Title}Diagnostics (open editors){hl} {count}' },
         },
       },
+      snacks = {
+        -- see: https://github.com/folke/trouble.nvim/blob/main/lua/trouble/sources/snacks.lua
+        format = '{file_icon} {text:ts} {filename} {pos}',
+        groups = {
+          { 'cmd', format = '{hl:Title}Snacks{hl} {cmd:Comment} {count}' },
+        },
+      },
       todo = {
         -- see: https://github.com/folke/todo-comments.nvim/blob/main/lua/trouble/sources/todo.lua
         format = '{todo_icon} {text} {filename} {pos}',

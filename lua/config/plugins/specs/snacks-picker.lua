@@ -17,6 +17,7 @@ return {
           keys = {
             ['<c-h>'] = { 'history_forward', mode = { 'i', 'n' } },
             ['<c-l>'] = { 'history_back', mode = { 'i', 'n' } },
+            ['<c-t>'] = { 'trouble_open', mode = { 'n', 'i' } }, -- send results to Trouble
           },
         },
       },
