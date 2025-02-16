@@ -5,6 +5,10 @@ return {
   opts = {
     picker = {
       -- see: https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
+      actions = {
+        -- see: https://www.lazyvim.org/extras/editor/snacks_picker#snacksnvim-1
+        trouble_open = function(...) return require('trouble.sources.snacks').actions.trouble_open.action(...) end,
+      },
       layouts = {
         -- see: https://github.com/folke/snacks.nvim/blob/main/docs/picker.md#%EF%B8%8F-layouts
         default = {
