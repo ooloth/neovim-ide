@@ -1,7 +1,9 @@
+---@module 'trouble'
+
 return {
   'folke/trouble.nvim',
+  ---@type trouble.Config
   opts = {
-    -- see: https://github.com/folke/trouble.nvim?tab=readme-ov-file#%EF%B8%8F-configuration
     focus = true, -- focus Trouble window when it opens
     indent_guides = false,
     keys = {
