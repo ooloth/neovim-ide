@@ -125,23 +125,27 @@ set('o', 'N', "'nN'[v:searchforward]", { expr = true, desc = 'Prev Search Result
 ---@class OpenInSplitOptions
 ---@field direction string: 'left' or 'right'
 
----Open the current buffer in vertical split
----@param opts OpenInSplitOptions
-local function open_in_split(opts)
-  local options = opts or {}
-  local direction = options.direction or 'right'
+---Open the current buffer in a vertical split to the left or right.
+---@param options OpenInSplitOptions
+local function open_in_split(options)
+  local opts = options or {}
+  local direction = opts.direction or 'right'
 
   local current_bufnr = vim.api.nvim_get_current_buf()
   local current_winnr = vim.api.nvim_get_current_win()
 
+  local still_in_same_window = function() return vim.api.nvim_get_current_win() == current_winnr end
+
   if direction == 'right' then
-    vim.cmd('wincmd l') -- try to move right
-    if vim.api.nvim_get_current_win() == current_winnr then vim.cmd('vsplit') end
+    vim.cmd('wincmd l') -- try to move one window to the right
+    if still_in_same_window() then
+      vim.cmd('vsplit') -- create vertical split and move into it
+    end
   elseif direction == 'left' then
-    vim.cmd('wincmd h') -- try to move left
-    if vim.api.nvim_get_current_win() == current_winnr then
-      vim.cmd('vsplit') -- create vertical split
-      vim.cmd('wincmd h') -- move to left window (the "new" one)
+    vim.cmd('wincmd h') -- try to move one window to the left
+    if still_in_same_window() then
+      vim.cmd('vsplit') -- create vertical split and move into it
+      vim.cmd('wincmd h') -- move back to window on left (technically the original window, but conceptually the new one)
     end
   end
 
