@@ -1,5 +1,3 @@
--- TODO: https://www.lazyvim.org/plugins/editor#todo-commentsnvim
-
 return {
   'folke/todo-comments.nvim',
   event = 'VeryLazy',
@@ -20,9 +18,9 @@ return {
     },
     signs = false,
   },
-  init = function()
-    vim.keymap.set('n', '<leader>st', '<cmd>Trouble todo filter = { tag = { FIX, FIXME, TODO, WARN } }<cr>', { desc = 'Todos' })
-    vim.keymap.set('n', ']t', function() require('todo-comments').jump_next() end, { desc = 'Next todo comment' })
-    vim.keymap.set('n', '[t', function() require('todo-comments').jump_prev() end, { desc = 'Previous todo comment' })
-  end,
+  keys = {
+    { ']t', function() require('todo-comments').jump_next() end, desc = 'Next todo (editor)' },
+    { '[t', function() require('todo-comments').jump_prev() end, desc = 'Previous todo (editor)' },
+    { '<leader>st', '<cmd>Trouble todo toggle filter = {tag = {FIXME,FIX,TODO,WARN}}<cr>', desc = 'Todos' },
+  },
 }
