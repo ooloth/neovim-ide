@@ -5,18 +5,18 @@ return {
   event = 'VeryLazy',
   cmd = {
     'TmuxNavigateLeft',
-    'TmuxNavigateDown',
-    'TmuxNavigateUp',
     'TmuxNavigateRight',
+    'TmuxNavigateUp',
+    'TmuxNavigateDown',
     'TmuxNavigatePrevious',
   },
   keys = {
-    { '<c-h>', '<cmd><c-u>TmuxNavigateLeft<cr>' },
-    { '<c-j>', '<cmd>TmuxNavigateDown<cr>' },
-    { '<c-n>', '<cmd>TmuxNavigateDown<cr>' }, -- compensate for c-j outputting c-n on Air
-    { '<c-k>', '<cmd>TmuxNavigateUp<cr>' },
-    { '<c-p>', '<cmd>TmuxNavigateUp<cr>' }, -- compensate for c-k outputting c-p on Air
-    { '<c-l>', '<cmd><c-u>TmuxNavigateRight<cr>' },
-    { '<c-\\>', '<cmd><c-u>TmuxNavigatePrevious<cr>' },
+    { '<c-h>', '<cmd>TmuxNavigateLeft<cr>', mode = { 'n', 'v' } },
+    { '<c-l>', '<cmd>TmuxNavigateRight<cr>', mode = { 'n', 'v' } },
+    { '<c-k>', '<cmd>TmuxNavigateUp<cr>', mode = { 'n', 'v' } },
+    { '<c-p>', '<cmd>TmuxNavigateUp<cr>', mode = { 'n', 'v' } }, -- compensate for c-k outputting c-p on Air
+    { '<c-j>', '<cmd>TmuxNavigateDown<cr>', mode = { 'n', 'v' } },
+    { '<c-n>', '<cmd>TmuxNavigateDown<cr>', mode = { 'n', 'v' } }, -- compensate for c-j outputting c-n on Air
+    { '<c-\\>', '<cmd>TmuxNavigatePrevious<cr>', mode = { 'n', 'v' } },
   },
 }
