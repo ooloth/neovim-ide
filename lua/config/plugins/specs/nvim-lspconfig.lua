@@ -30,35 +30,37 @@ vim.diagnostic.config({
 })
 
 local set_lsp_keymaps = function(lsp_attach_event)
-  local map = function(keys, func, desc, mode)
-    mode = mode or 'n'
-    vim.keymap.set(mode, keys, func, { buffer = lsp_attach_event.buf, desc = desc })
+  ---@param mode string|string[]
+  ---@param lhs string
+  ---@param rhs string|function
+  ---@param desc string
+  ---@param opts vim.keymap.set.Opts?
+  local buffer_map = function(mode, lhs, rhs, desc, opts)
+    ---@type vim.keymap.set.Opts
+    local options = opts or {}
+    options.buffer = lsp_attach_event.buf
+    options.desc = desc
+
+    vim.keymap.set(mode or 'n', lhs, rhs, options)
   end
 
-  -- local builtin = require 'telescope.builtin'
-
-  -- map('gd', builtin.lsp_definitions, 'Go to definition') -- jump to where the variable/function under the cursor was first created; to jump back, press <C-t>
-  -- map('gD', vim.lsp.buf.declaration, 'Go to declaration') -- for example, in C this would take you to the header
-  map('gh', function() require('noice.lsp').hover() end, 'Show hover doc')
-  -- map('gI', builtin.lsp_implementations, 'Go to implementations') -- jump to an implementation of the word under your cursor; useful when your language has ways of declaring types without an actual implementation
-  -- map('gr', builtin.lsp_references, 'Go to references') -- find references to the word under the cursor
-  map('<leader>ra', vim.lsp.buf.code_action, 'Code action', { 'n', 'x' }) -- execute a code action, usually your cursor needs to be on top of an error or a suggestion from your LSP for this to activate
-  vim.keymap.set(
+  buffer_map('n', 'gh', function() require('noice.lsp').hover() end, 'Show hover doc')
+  buffer_map({ 'n', 'x' }, '<leader>ra', vim.lsp.buf.code_action, 'Code action') -- execute a code action, usually your cursor needs to be on top of an error or a suggestion from your LSP for this to activate
+  -- rename the variable under your cursor; most Language Servers support renaming across files, etc.
+  buffer_map(
     'n',
     '<leader>rs',
     function() return ':IncRename ' .. vim.fn.expand('<cword>') end,
-    { desc = 'Rename symbol under cursor', expr = true }
-  ) -- rename the variable under your cursor; most Language Servers support renaming across files, etc.
-  -- map('<leader>sr', builtin.lsp_references, 'References to symbol under cursor') -- find references to the word under the cursor
-  -- map('<leader>ss', builtin.lsp_document_symbols, 'Symbols in editor') -- fuzzy find all the symbols in your current document; symbols are things like variables, functions, types, etc.
-  -- map('<leader>sS', builtin.lsp_dynamic_workspace_symbols, 'Symbols in project') -- fuzzy find all the symbols in your current workspace; similar to document symbols, except searches over your entire project
-  -- map('<leader>st', builtin.lsp_type_definitions, 'type definition') -- jump to the type of the word under your cursor; useful when you're not sure what type a variable is and you want to see the definition of its *type*, not where it was *defined*
+    'Rename symbol under cursor',
+    { expr = true }
+  )
 
   local client = vim.lsp.get_client_by_id(lsp_attach_event.data.client_id)
 
   -- Set keymap to toggle inlay hints if the language server supports them (this may be unwanted, since they displace some of your code)
   if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-    map(
+    buffer_map(
+      'n',
       '<leader>uh',
       function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = lsp_attach_event.buf })) end,
       'Toggle inlay hints'
@@ -153,7 +155,7 @@ return {
       callback = function(event)
         set_lsp_keymaps(event)
         highlight_references_to_cursor_word_in_editor(event)
-        show_active_diagnostics_on_cursor_line() -- NOTE: not necessary with inline text + trouble.nvim list available
+        show_active_diagnostics_on_cursor_line()
         change_diagnostic_signs()
         enable_inlay_hints(event)
         enable_code_lenses(event)
