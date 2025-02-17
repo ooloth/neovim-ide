@@ -1,5 +1,4 @@
--- TODO: https://www.lazyvim.org/extras/lang/markdown
-
+-- Why is this here?
 vim.g.markdown_fenced_languages = {
   'ts=typescript',
 }
@@ -7,11 +6,9 @@ vim.g.markdown_fenced_languages = {
 local is_deno_project = function()
   local handle = io.popen('ls')
   if not handle then return false end
-  vim.notify(vim.inspect(handle))
 
   local result = handle:read('*a')
   handle:close()
-  vim.notify(vim.inspect(result))
 
   local file1 = 'deno.json'
   local file2 = 'deno.lock'
@@ -22,13 +19,6 @@ local is_deno_project = function()
 end
 
 return {
-  -- {
-  --   'williamboman/mason-tool-installer.nvim',
-  --   opts = {
-  --     ensure_installed = {},
-  --   },
-  -- },
-
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
