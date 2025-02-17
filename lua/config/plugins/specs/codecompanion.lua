@@ -20,7 +20,7 @@ return {
       chat = {
         show_settings = false, -- show LLM settings at the top of the chat buffer?
         show_token_count = true, -- show the token count for each response?
-        start_in_insert_mode = true, -- open the chat buffer in insert mode?
+        -- start_in_insert_mode = true, -- open the chat buffer in insert mode?
         window = { width = 0.45 },
       },
     },
