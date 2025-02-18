@@ -144,7 +144,6 @@ return {
     'folke/noice.nvim', -- for 'gh' keymap
     'hrsh7th/cmp-nvim-lsp', -- extend nvim's default lsp capabilities
     'j-hui/fidget.nvim', -- show lsp updates via discrete UI in the bottom right
-    -- 'nvim-telescope/telescope.nvim', -- keymaps: better references, etc
     'smjonas/inc-rename.nvim', -- keymaps: better rename symbol UI
     'stevearc/dressing.nvim', -- keymaps: better vim.ui.select UI (e.g. for code actions)
   },
@@ -162,9 +161,16 @@ return {
       end,
     })
 
-    -- Set up each server configured via nvim-lspconfig's "opts.servers"
-    -- see: https://github.com/williamboman/mason-lspconfig.nvim/tree/main?tab=readme-ov-file#setup
+    -- Ensure all servers configured via nvim-lspconfig's "opts.servers" have been installed
     require('mason').setup()
+    require('mason-tool-installer').setup({
+      -- NOTE: The ruff lsp must be installed via Mason or it won't attach (even though I override the cmd to use the venv executable)
+      -- FIXME: exclude deno?
+      ensure_installed = vim.tbl_keys(opts.servers or {}),
+    })
+
+    -- Set up each server
+    -- see: https://github.com/williamboman/mason-lspconfig.nvim/tree/main?tab=readme-ov-file#setup
     require('mason-lspconfig').setup()
     require('mason-lspconfig').setup_handlers({
       -- Define default handler for every server
