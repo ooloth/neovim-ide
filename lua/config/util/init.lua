@@ -32,7 +32,6 @@ M.require_all_files_in_config_directory = function(dir_rel_path)
     local file_without_extension = file:gsub('%.lua$', '')
     local dir_rel_require_path = dir_rel_path:gsub('/', '.')
     local require_path = 'config.' .. dir_rel_require_path .. '.' .. file_without_extension
-    -- vim.notify(require_path)
     table.insert(all_plugin_configs_in_directory, require(require_path))
   end
 
