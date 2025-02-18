@@ -23,8 +23,8 @@ local python = prefer_venv_executable('python')
 -- see: https://docs.astral.sh/ruff/editors/setup/#neovim
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client == nil then return end
     if client.name == 'ruff' then
       client.server_capabilities.hoverProvider = false -- Disable hover in favor of Pyright
@@ -43,12 +43,7 @@ local get_formatter_options = function(formatter)
 end
 
 local get_linters_in_venv = function(linters)
-  local linters_in_venv = vim.tbl_filter(function(linter)
-    local executable = linter == 'ruff_lint' and 'ruff' or linter
-    return is_installed_in_venv(executable)
-  end, linters)
-
-  return linters_in_venv
+  return vim.tbl_filter(function(linter) return is_installed_in_venv(linter) end, linters)
 end
 
 local get_linter_options = function(linter)
@@ -77,16 +72,6 @@ return {
     -- see: https://www.lazyvim.org/extras/lang/python#nvim-lspconfig
     opts = {
       servers = {
-        -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
-        -- pylsp = {
-        --   settings = {
-        --     pylsp = {
-        --       plugins = {
-        --         autopep8 = { enabled = false },
-        --       },
-        --     },
-        --   },
-        -- },
         -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
         pyright = {
           capabilities = (function()
@@ -132,7 +117,7 @@ return {
     'stevearc/conform.nvim',
     opts = {
       -- NOTE: ruff_format has been replaced by the ruff lsp above
-      formatters_by_ft = { python = { 'isort', 'black', 'yapf' } },
+      formatters_by_ft = { python = { 'isort', 'black', 'yapf' } }, -- ruff formatting included in lsp
       formatters = {
         black = function() return get_formatter_options('black') end,
         isort = function() return get_formatter_options('isort') end,
@@ -146,8 +131,7 @@ return {
     -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
     opts = {
       linters_by_ft = {
-        -- NOTE: ruff_lint has been replaced by the ruff lsp above
-        python = get_linters_in_venv({ 'flake8', 'mypy' }),
+        python = get_linters_in_venv({ 'flake8', 'mypy' }), -- ruff linting included in lsp
       },
       linters = {
         flake8 = function() return get_linter_options('flake8') end,
