@@ -36,9 +36,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- see: https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/black.lua
 local get_formatter_options = function(formatter)
   local formatter_options = require('conform.formatters.' .. formatter)
-  local executable = formatter == 'ruff_format' and 'ruff' or formatter
-  formatter_options.command = prefer_venv_executable(executable)
-  formatter_options.condition = function() return is_installed_in_venv(executable) end
+  formatter_options.command = prefer_venv_executable(formatter)
+  formatter_options.condition = function() return is_installed_in_venv(formatter) end
   return formatter_options
 end
 
@@ -53,13 +52,6 @@ local get_linter_options = function(linter)
 end
 
 return {
-  {
-    'williamboman/mason-tool-installer.nvim',
-    opts = {
-      ensure_installed = { 'mypy', 'ruff' },
-    },
-  },
-
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
@@ -116,7 +108,6 @@ return {
   {
     'stevearc/conform.nvim',
     opts = {
-      -- NOTE: ruff_format has been replaced by the ruff lsp above
       formatters_by_ft = { python = { 'isort', 'black', 'yapf' } }, -- ruff formatting included in lsp
       formatters = {
         black = function() return get_formatter_options('black') end,
@@ -128,7 +119,6 @@ return {
 
   {
     'mfussenegger/nvim-lint',
-    -- see: https://www.lazyvim.org/plugins/linting#nvim-lint
     opts = {
       linters_by_ft = {
         python = get_linters_in_venv({ 'flake8', 'mypy' }), -- ruff linting included in lsp
