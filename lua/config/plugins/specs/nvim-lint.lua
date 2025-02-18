@@ -6,7 +6,7 @@ return {
   opts = {
     linters_by_ft = {
       -- Disable unwanted default linters by filetype
-      -- see: https://github.com/mfussenegger/nvim-lint/blob/debabca63c0905b59ce596a55a8e33eafdf66342/lua/lint.lua#L51
+      -- see: https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint.lua#L35-L46
       -- see: https://github.com/mfussenegger/nvim-lint/issues/411#issuecomment-1763172506
       markdown = {}, -- disable vale
       rst = {}, -- disable vale

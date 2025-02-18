@@ -162,14 +162,9 @@ return {
       end,
     })
 
-    -- Ensure all servers configured via nvim-lspconfig's "opts.servers" have been installed
-    require('mason').setup()
-    require('mason-tool-installer').setup({
-      ensure_installed = vim.tbl_keys(opts.servers or {}), -- FIXME: exclude deno?
-    })
-
-    -- Set up each server
+    -- Set up each server configured via nvim-lspconfig's "opts.servers"
     -- see: https://github.com/williamboman/mason-lspconfig.nvim/tree/main?tab=readme-ov-file#setup
+    require('mason').setup()
     require('mason-lspconfig').setup()
     require('mason-lspconfig').setup_handlers({
       -- Define default handler for every server
