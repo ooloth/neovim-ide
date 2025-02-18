@@ -26,8 +26,10 @@ M.get_venv_executable_path = function(executable_name)
 end
 
 M.get_mason_executable_path = function(executable_name)
-  local mason_registry = require('mason-registry')
-  return mason_registry.get_package(executable_name):get_install_path() .. '/venv/bin/' .. executable_name
+  local success, package = pcall(require('mason-registry').get_package, executable_name)
+  if not success then return '' end
+
+  return package:get_install_path() .. '/venv/bin/' .. executable_name
 end
 
 M.is_installed_in_venv = function(executable_name) return M.get_venv_executable_path(executable_name) ~= '' end
