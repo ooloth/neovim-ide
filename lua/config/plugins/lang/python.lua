@@ -98,11 +98,14 @@ return {
           end)(),
           settings = {
             -- see: https://microsoft.github.io/pyright/#/settings
+            pyright = {
+              disableOrganizeImports = true, -- use ruff for import sorting
+            },
             python = {
               analysis = {
-                ignore = { '*' }, -- ignore all files for analysis to exclusively use Ruff for linting
+                ignore = { '*' }, -- use ruff for linting
+                typeCheckingMode = 'off', -- use mypy for type checking
               },
-              disableOrganizeImports = true, -- use ruff for import sorting
               pythonPath = python, -- point pyright to venv
             },
           },
