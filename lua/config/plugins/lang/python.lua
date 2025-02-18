@@ -112,6 +112,7 @@ return {
         -- see: https://docs.astral.sh/ruff/editors/setup/#neovim
         -- see: Ruff's language server is now written in Rust: https://astral.sh/blog/ruff-v0.4.5
         ruff = {
+          cmd = { prefer_venv_executable('ruff'), 'server' },
           init_options = {
             settings = {
               -- see: https://docs.astral.sh/ruff/editors/settings/
