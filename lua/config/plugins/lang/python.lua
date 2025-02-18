@@ -61,7 +61,7 @@ return {
   {
     'williamboman/mason-tool-installer.nvim',
     opts = {
-      ensure_installed = { 'flake8', 'mypy', 'ruff' },
+      ensure_installed = { 'mypy', 'ruff' },
     },
   },
 
