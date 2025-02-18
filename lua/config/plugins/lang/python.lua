@@ -101,14 +101,9 @@ return {
             python = {
               analysis = {
                 ignore = { '*' }, -- ignore all files for analysis to exclusively use Ruff for linting
-                -- diagnosticMode = 'workspace',
-                -- diagnosticSeverityOverrides = {
-                --   reportUnusedVariable = 'off', -- use ruff or flake8 for linting (diagnostics)
-                -- },
-                -- typeCheckingMode = 'off', -- use mypy for type-checking
-                -- useLibraryCodeForTypes = true,
               },
-              disableOrganizeImports = true, -- use ruff or isort for import sorting
+              disableOrganizeImports = true, -- use ruff for import sorting
+              pythonPath = python, -- point pyright to venv
             },
           },
         },
