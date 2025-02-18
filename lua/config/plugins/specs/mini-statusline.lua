@@ -1,16 +1,38 @@
--- TODO: show attached formatters and linters as well
+-- TODO: show attached formatters as well
 -- TODO: show @recording messages in statusline instead of notify pop-ups? https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
 -- TODO: sort all attached lsp servers, formatters, and linters alphabetically
 
-local get_attached_lsp_servers = function()
-  local current_buffer_servers = vim.lsp.get_clients({ bufnr = vim.fn.bufnr('%') })
-  local server_names = {}
+local get_attached_tools = function()
+  local lsp_servers_attached_to_this_buffer = vim.lsp.get_clients({ bufnr = vim.fn.bufnr('%') })
 
-  for _, value in ipairs(current_buffer_servers) do
-    vim.list_extend(server_names, { value.name })
+  -- NOTE: nvim-lint doesn't provide a way confirm which linters are "attached"; just which are configured
+  -- see: https://github.com/mfussenegger/nvim-lint/issues/559#issuecomment-2010049274
+  local linters_configured_for_this_filetype = require('lint').linters_by_ft[vim.bo.filetype] or {}
+
+  -- Use a table's keys to track unique tool names (to prevent duplicates from accumulating)
+  local unique_tool_names = {}
+
+  -- Add linters to the unique tool names
+  for _, linter in ipairs(linters_configured_for_this_filetype) do
+    unique_tool_names[linter] = true
   end
 
-  return table.concat(server_names, ', ')
+  -- Add LSP clients to the unique tool names
+  for _, lsp_client in ipairs(lsp_servers_attached_to_this_buffer) do
+    unique_tool_names[lsp_client.name] = true
+  end
+
+  -- Convert the keys of the table back into a list
+  local tool_names = {}
+  for tool_name, _ in pairs(unique_tool_names) do
+    table.insert(tool_names, tool_name)
+  end
+
+  -- Sort alphabetically
+  table.sort(tool_names)
+
+  -- Convert into a comma-separated string
+  return table.concat(tool_names, ', ')
 end
 
 local get_active_venv = function()
@@ -41,7 +63,7 @@ return {
         local location = '%2l:%-2v' -- LINE:COLUMN
         -- See: https://github.com/echasnovski/mini.statusline/blob/main/lua/mini/statusline.lua#L433
         -- local location = '%l/%L %2v/%-2{virtcol("$") - 1}' -- LINE/LINES COLUMN/COLUMNS
-        local lsp = get_attached_lsp_servers()
+        local tools_attached_to_buffer = get_attached_tools()
         local search = statusline.section_searchcount({ trunc_width = 75 })
         local venv = get_active_venv()
 
@@ -59,7 +81,7 @@ return {
           '%=', -- End left alignment
           { hl = mode_hl, strings = { search } },
           { hl = 'MiniStatuslineDiagnostics', strings = { diagnostics } },
-          { hl = 'MiniStatuslineLspServers', strings = { lsp } },
+          { hl = 'MiniStatuslineLspServers', strings = { tools_attached_to_buffer } },
           { hl = 'MiniStatuslineFileinfo', strings = { fileinfo, venv } },
           { hl = mode_hl, strings = { location } },
         })
