@@ -1,26 +1,16 @@
--- TODO: folding: Code Folding in Neovim: https://www.youtube.com/watch?v=f_f08KnAJOQ (recommends nvim-ufo over other options like treesitter)
--- TODO: folding: https://github.com/kevinhwang91/nvim-ufo
--- TODO: folding: Configuring nvim-ufo to use LSP with lazy.nvim: https://www.reddit.com/r/neovim/comments/12yomtj/configuring_nvimufo_to_use_lsp_with_lazynvim/
-
+-- Folding defaults (currently overridden as needed by nvim-ufo)
+vim.opt.foldcolumn = '0'
+vim.opt.foldenable = true
 vim.opt.foldlevel = 99
-vim.opt.foldmethod = 'expr'
+vim.opt.foldlevelstart = 99
+vim.opt.foldmethod = 'indent'
 vim.opt.foldtext = ''
+
 vim.opt.mouse = '' -- disable mouse mode (use 'a' to enable)
 vim.opt.sessionoptions = { 'buffers', 'curdir', 'tabpages', 'winsize', 'help', 'globals', 'skiprtp', 'folds' }
 vim.opt.virtualedit = 'block' -- Allow cursor to move where there is no text in visual block mode
 
 local set = vim.keymap.set
-
--- TODO: use this helper instead to eliminate most of the 'n' and '{ desc = ... }' used in the `set` calls?
--- or keep it simple by avoiding creating yet another abstracting to memorize/override, etc?
--- TODO: attach this to _G?
-local map = function(lhs, rhs, desc, opts)
-  -- local map = function(lhs, rhs, desc, mode)
-  local default_opts = { desc = desc, expr = true, silent = true }
-  local combined_opts = vim.tbl_deep_extend('force', default_opts, opts or {})
-
-  vim.keymap.set(mode, lhs, rhs, combined_opts)
-end
 
 -- swap : and ,
 set({ 'n', 'v' }, ',', ':') -- enter command mode with , instead of :
@@ -144,6 +134,7 @@ set('n', '<leader>el', function() open_in_split({ direction = 'right' }) end, { 
 
 return {
   require('config.plugins.specs.mini-files'), -- file system editor + explorer
+  require('config.plugins.specs.nvim-ufo'), -- better folding
   require('config.plugins.specs.persistence'), -- session manager
   require('config.plugins.specs.vim-tmux-navigator'), -- move across vim + tmux windows with c-jkhl
 }
