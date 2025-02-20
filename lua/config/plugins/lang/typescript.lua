@@ -5,14 +5,21 @@
 
 local prefer_node_modules_executable = require('config.util.prefer_node_modules').prefer_node_modules_executable
 
-return {
-  {
-    'williamboman/mason-tool-installer.nvim',
-    opts = {
-      ensure_installed = { 'eslint-lsp', 'js-debug-adapter', 'ts_ls' },
-    },
-  },
+-- see: https://docs.astral.sh/ruff/editors/setup/#neovim
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client == nil then return end
+    -- prefer local typescript version (if available)
+    if client.name == 'ts_ls' then
+      client.config.cmd = { prefer_node_modules_executable('typescript-language-server'), '--stdio' }
+    end
+  end,
+  desc = 'Update TS lsp server command',
+})
 
+return {
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
@@ -43,7 +50,7 @@ return {
         },
         ts_ls = {
           keys = function() return {} end,
-          -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
+          -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls
           -- see: https://github.com/typescript-language-server/typescript-language-server/blob/master/docs/configuration.md#tsserver-options
           settings = {
             completions = {
