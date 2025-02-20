@@ -3,13 +3,6 @@
 --  TODO: dap
 
 return {
-  -- {
-  --   'williamboman/mason-tool-installer.nvim',
-  --   opts = {
-  --     ensure_installed = {},
-  --   },
-  -- },
-
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
@@ -17,7 +10,6 @@ return {
     },
   },
 
-  -- formatting (see: https://github.com/stevearc/conform.nvim#setup)
   {
     'stevearc/conform.nvim',
     opts = {
