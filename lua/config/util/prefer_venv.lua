@@ -25,13 +25,6 @@ M.get_venv_executable_path = function(executable_name)
   })
 end
 
-M.get_mason_executable_path = function(executable_name)
-  local success, package = pcall(require('mason-registry').get_package, executable_name)
-  if not success then return '' end
-
-  return package:get_install_path() .. '/venv/bin/' .. executable_name
-end
-
 M.is_installed_in_venv = function(executable_name) return M.get_venv_executable_path(executable_name) ~= '' end
 
 -- see: https://github.com/fredrikaverpil/dotfiles/blob/main/nvim-lazyvim/lua/plugins/lsp.lua
@@ -47,10 +40,6 @@ M.prefer_venv_executable = function(executable_name)
     -- otherwise, return the output of `which python3` if it exists
     return vim.fn.exepath('python3')
   end
-
-  -- otherwise, get the path to the Mason binary
-  local mason_executable_path = M.get_mason_executable_path(executable_name)
-  if mason_executable_path ~= '' then return mason_executable_path end
 
   -- fall back to the systemwide binary
   local system_executable_path = get_system_executable_path(executable_name)
