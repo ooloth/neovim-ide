@@ -1,4 +1,3 @@
--- Why is this here?
 vim.g.markdown_fenced_languages = {
   'ts=typescript',
 }
@@ -32,12 +31,12 @@ return {
       servers = {
         -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols
         denols = {
-          -- root_dir = { vim.fn.getcwd() .. '/deno.json', vim.fn.getcwd() .. '/deno.lock' },
+          root_dir = function() require('lspconfig.util').root_pattern('deno.json', 'deno.jsonc', 'deno.lock') end,
           settings = {
             deno = {
               -- FIXME: only if there's a deno.json?
               -- see: https://docs.deno.com/runtime/getting_started/setup_your_environment/#neovim-0.6%2B-using-the-built-in-language-server
-              enable = false, -- TODO: unblock when I can get it to only apply to deno projects
+              enable = true, -- TODO: unblock when I can get it to only apply to deno projects
               -- enable = is_deno_project(),
               suggest = {
                 imports = {
