@@ -1,13 +1,6 @@
 -- TODO: https://www.lazyvim.org/extras/lang/vue
 
 return {
-  -- {
-  --   'williamboman/mason-tool-installer.nvim',
-  --   opts = {
-  --     ensure_installed = {},
-  --   },
-  -- },
-
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
