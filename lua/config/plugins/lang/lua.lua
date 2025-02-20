@@ -54,11 +54,8 @@ return {
     opts = {
       library = {
         'lazy.nvim',
-        -- Load the wezterm types when the `wezterm` module is required
-        -- Needs `justinsgithub/wezterm-types` to be installed
-        -- { path = 'wezterm-types', mods = { 'wezterm' } },
         -- Load luvit types when the `vim.uv` word is found
-        -- { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
       },
     },
   },
