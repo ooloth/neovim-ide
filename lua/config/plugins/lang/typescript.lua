@@ -5,6 +5,7 @@
 
 local prefer_node_modules_executable = require('config.util.prefer_node_modules').prefer_node_modules_executable
 
+-- TODO: move this to ts_ls settings?
 -- see: https://docs.astral.sh/ruff/editors/setup/#neovim
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('lsp_attach_disable_ruff_hover', { clear = true }),

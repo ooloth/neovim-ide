@@ -1,21 +1,7 @@
+-- From the denols docs
 vim.g.markdown_fenced_languages = {
   'ts=typescript',
 }
-
-local is_deno_project = function()
-  local handle = io.popen('ls')
-  if not handle then return false end
-
-  local result = handle:read('*a')
-  handle:close()
-
-  local file1 = 'deno.json'
-  local file2 = 'deno.lock'
-
-  if result:find(file1) or result:find(file2) then return true end
-
-  return false
-end
 
 return {
   {

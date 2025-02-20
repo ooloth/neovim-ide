@@ -1,8 +1,5 @@
--- TODO: treesitter
--- TODO: lsp?
--- TODO: linting?
--- TODO: nvim-lint: consider the default linter: json = { "jsonlint" },
 -- TODO: https://www.lazyvim.org/extras/lang/json
+-- TODO: nvim-lint: consider the default linter: json = { "jsonlint" },
 
 local extend = require('config.util').extend
 
