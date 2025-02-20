@@ -4,13 +4,6 @@
 -- TODO: https://www.lazyvim.org/extras/lang/docker
 
 return {
-  -- {
-  --   'williamboman/mason-tool-installer.nvim',
-  --   opts = {
-  --     ensure_installed = {},
-  --   },
-  -- },
-
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
@@ -25,11 +18,4 @@ return {
       dockerls = {},
     },
   },
-
-  -- {
-  --   'stevearc/conform.nvim',
-  --   opts = {
-  --     formatters_by_ft = {},
-  --   },
-  -- },
 }
