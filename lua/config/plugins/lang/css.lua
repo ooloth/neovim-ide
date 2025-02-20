@@ -1,14 +1,6 @@
 --  TODO: linting?
---  TODO: https://www.lazyvim.org/extras/lang/tailwind
 
 return {
-  -- {
-  --   'williamboman/mason-tool-installer.nvim',
-  --   opts = {
-  --     ensure_installed = {},
-  --   },
-  -- },
-
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
@@ -21,6 +13,20 @@ return {
     opts = {
       servers = {
         cssls = {},
+        css_variables = {},
+        -- cssmodules_ls = {},
+        tailwindcss = {},
+      },
+      setup = {
+        -- tailwindcss = function(_, opts)
+        --   local default_filetypes_to_remove = { 'markdown' }
+        --
+        --   -- Remove markdown from tailwindcss filetypes
+        --   opts.filetypes = vim.tbl_filter(
+        --     function(ft) return not vim.tbl_contains(default_filetypes_to_remove, ft) end,
+        --     require('lspconfig.configs.tailwindcss').default_config.filetypes
+        --   )
+        -- end,
       },
     },
   },
