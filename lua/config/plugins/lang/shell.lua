@@ -9,13 +9,6 @@ vim.treesitter.language.register('bash', 'zsh')
 
 return {
   {
-    'williamboman/mason-tool-installer.nvim',
-    opts = {
-      ensure_installed = { 'shellcheck' },
-    },
-  },
-
-  {
     'nvim-treesitter/nvim-treesitter',
     opts = {
       ensure_installed = { 'bash' },
