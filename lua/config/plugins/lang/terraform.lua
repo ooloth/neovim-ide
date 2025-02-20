@@ -2,13 +2,6 @@
 
 return {
   {
-    'williamboman/mason-tool-installer.nvim',
-    opts = {
-      ensure_installed = { 'tflint' },
-    },
-  },
-
-  {
     'nvim-treesitter/nvim-treesitter',
     opts = {
       ensure_installed = { 'hcl', 'terraform' },
