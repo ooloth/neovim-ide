@@ -4,13 +4,6 @@
 vim.g.markdown_recommended_style = 0
 
 return {
-  -- {
-  --   'williamboman/mason-tool-installer.nvim',
-  --   opts = {
-  --     ensure_installed = {},
-  --   },
-  -- },
-
   {
     'nvim-treesitter/nvim-treesitter',
     opts = {
@@ -22,7 +15,7 @@ return {
     'neovim/nvim-lspconfig',
     opts = {
       servers = {
-        -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#marksman
+        -- see: https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#marksman
         marksman = {},
       },
     },
