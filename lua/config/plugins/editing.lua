@@ -35,6 +35,9 @@ set('v', '>', '>gv')
 set('n', 'gco', 'o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Below' })
 set('n', 'gcO', 'O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>', { desc = 'Add Comment Above' })
 
+-- sorting
+set('v', '<leader>rs', ':sort i<cr>', { desc = 'Sort selected lines' })
+
 -- -- Move Lines
 -- set('n', '<A-j>', '<cmd>m .+1<cr>==', { desc = 'Move Down' })
 -- set('n', '<A-k>', '<cmd>m .-2<cr>==', { desc = 'Move Up' })
